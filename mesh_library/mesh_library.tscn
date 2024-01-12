@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://p4fl5tbt4iuq"]
+
+[ext_resource type="PackedScene" uid="uid://w3sj57nhvsat" path="res://mesh_library/models/floor.blend" id="1_bow43"]
+[ext_resource type="PackedScene" uid="uid://dxpq80c8n82sj" path="res://mesh_library/models/wall_corner.blend" id="2_4ls0a"]
+[ext_resource type="PackedScene" uid="uid://c0msx8g4v4il" path="res://mesh_library/models/wall_side.blend" id="3_enijb"]
+
+[node name="MeshLibrary" type="Node3D"]
+
+[node name="floor" parent="." instance=ExtResource("1_bow43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="wall_corner" parent="." instance=ExtResource("2_4ls0a")]
+
+[node name="wall_side" parent="." instance=ExtResource("3_enijb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
