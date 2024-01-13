@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://7db3hg74bni7"]
+[gd_scene load_steps=10 format=3 uid="uid://7db3hg74bni7"]
 
 [ext_resource type="Script" path="res://actors/player.gd" id="1_o3bix"]
 
@@ -19,6 +19,31 @@ cap_bottom = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b318y"]
 size = Vector3(1, 1, 0.53418)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5buoc"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 1.0
+inherit_velocity_ratio = 1.0
+spread = 180.0
+orbit_velocity_min = 0.416
+orbit_velocity_max = 1.445
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+attractor_interaction_enabled = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vvcek"]
+shading_mode = 0
+albedo_color = Color(1, 0.545098, 0, 1)
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_odta2"]
+material = SubResource("StandardMaterial3D_vvcek")
+size = Vector2(0.2, 0.2)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -53,3 +78,13 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CatchArea"]
 shape = SubResource("BoxShape3D_b318y")
+
+[node name="SpinSparkParticles" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.425755, 0)
+lifetime = 0.1
+fixed_fps = 60
+interpolate = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_5buoc")
+draw_pass_1 = SubResource("QuadMesh_odta2")

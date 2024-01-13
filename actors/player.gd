@@ -6,7 +6,8 @@ enum State {
 	CATCHING
 }
 
-const SPEED = 5.0
+var move_speed: float = 5.0
+var move_speed_throwing: float = 1.0
 
 @export var ball: Ball
 
@@ -20,6 +21,7 @@ var throw_accel: float = 10.0
 @onready var ball_held_position: Marker3D = %BallHeldPosition
 @onready var catch_area: Area3D = %CatchArea
 @onready var catcher: CSGBox3D = %Catcher
+@onready var spin_spark_particles: GPUParticles3D = %SpinSparkParticles
 
 @onready var hold_distance: float = Vector3(ball_held_position.position.x, 0, ball_held_position.position.z).length()
 
@@ -39,6 +41,10 @@ func _process(delta: float) -> void:
 		State.THROWING:
 			if Input.is_action_pressed("action"):
 				throw_speed = clampf(throw_speed + delta * throw_accel, 0.0, max_throw_speed)
+				if not spin_spark_particles.emitting and is_equal_approx(throw_speed, max_throw_speed):
+					spin_spark_particles.restart()
+				if spin_spark_particles.emitting and not is_equal_approx(throw_speed, max_throw_speed):
+					spin_spark_particles.emitting = false
 			else:
 				ball.throw(throw_speed * basis.x)
 				throw_speed = 0.0
@@ -60,6 +66,8 @@ func set_state(v: State) -> void:
 	match state:
 		State.CATCHING:
 			deactivate_catcher()
+		State.THROWING:
+			spin_spark_particles.emitting = false
 	
 	state = v
 	
@@ -69,24 +77,33 @@ func set_state(v: State) -> void:
 			activate_catcher()
 
 func _physics_process(delta: float) -> void:
+	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var direction := Vector3(input_dir.x, 0, input_dir.y).normalized()
+	
 	match state:
 		State.NEUTRAL, State.CATCHING:
-			var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-			var direction := Vector3(input_dir.x, 0, input_dir.y).normalized()
 			if direction:
-				velocity.x = direction.x * SPEED
-				velocity.z = direction.z * SPEED
+				velocity.x = direction.x * move_speed
+				velocity.z = direction.z * move_speed
 			else:
-				velocity.x = move_toward(velocity.x, 0, SPEED)
-				velocity.z = move_toward(velocity.z, 0, SPEED)
+				velocity.x = move_toward(velocity.x, 0, move_speed)
+				velocity.z = move_toward(velocity.z, 0, move_speed)
 			
 			rotation.y = Vector3.MODEL_FRONT.signed_angle_to(direction, Vector3.UP)
 			
 			move_and_slide()
-		
 		State.THROWING:
 			rotation.y += delta * throw_speed / hold_distance
 			ball.global_position = ball_held_position.global_position
+			
+			if direction:
+				velocity.x = direction.x * move_speed_throwing
+				velocity.z = direction.z * move_speed_throwing
+			else:
+				velocity.x = move_toward(velocity.x, 0, move_speed)
+				velocity.z = move_toward(velocity.z, 0, move_speed)
+			
+			move_and_slide()
 
 func activate_catcher() -> void:
 	catch_area.monitoring = true
