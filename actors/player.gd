@@ -22,6 +22,7 @@ var throw_accel: float = 10.0
 @onready var catch_area: Area3D = %CatchArea
 @onready var catcher: CSGBox3D = %Catcher
 @onready var spin_spark_particles: GPUParticles3D = %SpinSparkParticles
+@onready var vibrate_timer: Timer = $VibrateTimer
 
 @onready var hold_distance: float = Vector3(ball_held_position.position.x, 0, ball_held_position.position.z).length()
 
@@ -44,11 +45,15 @@ func _process(delta: float) -> void:
 				if not spin_spark_particles.emitting and is_equal_approx(throw_speed, max_throw_speed):
 					spin_spark_particles.restart()
 					Gameplay.instance.set_time_scale(0.3, 0.1)
+					vibrate_timer.start()
 				if spin_spark_particles.emitting and not is_equal_approx(throw_speed, max_throw_speed):
 					spin_spark_particles.emitting = false
 					Gameplay.instance.set_time_scale(1.0, 0.01)
+					vibrate_timer.stop()
 			else:
-				ball.throw(throw_speed * basis.x)
+				# Release!
+				
+				ball.throw(throw_speed * basis.z)
 				throw_speed = 0.0
 				state = State.NEUTRAL
 		State.CATCHING:
@@ -71,6 +76,7 @@ func set_state(v: State) -> void:
 		State.THROWING:
 			spin_spark_particles.emitting = false
 			Gameplay.instance.set_time_scale(1.0, 0.01)
+			vibrate_timer.stop()
 	
 	state = v
 	
@@ -115,3 +121,7 @@ func activate_catcher() -> void:
 func deactivate_catcher() -> void:
 	catch_area.monitoring = false
 	catcher.visible = false
+
+
+func _on_vibrate_timer_timeout() -> void:
+	Gameplay.instance.screen_shake(7.0)

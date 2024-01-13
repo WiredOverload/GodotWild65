@@ -13,6 +13,7 @@ height = 1.0
 height = 1.0
 
 [node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
+motion_mode = 1
 script = ExtResource("1_y0y7r")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

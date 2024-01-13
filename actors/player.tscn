@@ -88,3 +88,8 @@ interpolate = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_5buoc")
 draw_pass_1 = SubResource("QuadMesh_odta2")
+
+[node name="VibrateTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="timeout" from="VibrateTimer" to="." method="_on_vibrate_timer_timeout"]
