@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://7db3hg74bni7"]
+[gd_scene load_steps=7 format=3 uid="uid://7db3hg74bni7"]
 
 [ext_resource type="Script" path="res://actors/player.gd" id="1_o3bix"]
 
@@ -17,6 +17,9 @@ height = 1.0
 radial_segments = 8
 cap_bottom = false
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_b318y"]
+size = Vector3(1, 1, 0.53418)
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 axis_lock_linear_y = true
@@ -28,6 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_5eh5q")
 
 [node name="Catcher" type="CSGBox3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.634534)
 size = Vector3(0.725586, 0.689697, 0.0928955)
 material = SubResource("StandardMaterial3D_j2kbh")
@@ -39,3 +43,13 @@ mesh = SubResource("CylinderMesh_i7xac")
 [node name="BallHeldPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1)
+
+[node name="CatchArea" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.888816)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CatchArea"]
+shape = SubResource("BoxShape3D_b318y")

@@ -12,6 +12,9 @@ var state: State = State.MOVING
 
 var held_marker: Node3D
 
+var is_held: bool:
+	get: return state == State.HELD
+
 func _physics_process(delta: float) -> void:
 	match state:
 		State.HELD:
