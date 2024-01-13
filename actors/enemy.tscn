@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://seeyug3rtuge"]
+
+[ext_resource type="Script" path="res://actors/enemy.gd" id="1_y0y7r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yyx1r"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_g4xah"]
+material = SubResource("StandardMaterial3D_yyx1r")
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_evwnq"]
+height = 1.0
+
+[node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
+script = ExtResource("1_y0y7r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_g4xah")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_evwnq")

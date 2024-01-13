@@ -26,6 +26,8 @@ func _physics_process(delta: float) -> void:
 			while collision:
 				velocity = velocity.bounce(collision.get_normal())
 				motion = collision.get_remainder().bounce(collision.get_normal())
+				if collision.get_collider().is_in_group("Enemy"):
+					collision.get_collider().hit(1)
 				collision = move_and_collide(motion)
 
 func grab(marker: Node3D) -> void:

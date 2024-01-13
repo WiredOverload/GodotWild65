@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0ovdrnefc0u5"]
+[gd_scene load_steps=7 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
 [ext_resource type="MeshLibrary" uid="uid://dgxh36itpnihl" path="res://mesh_library/mesh_library.tres" id="2_axurl"]
 [ext_resource type="PackedScene" uid="uid://7db3hg74bni7" path="res://actors/player.tscn" id="3_mdmmq"]
 [ext_resource type="PackedScene" uid="uid://ckv4dexmjl00r" path="res://actors/ball.tscn" id="4_fr5jj"]
+[ext_resource type="PackedScene" uid="uid://seeyug3rtuge" path="res://actors/enemy.tscn" id="5_admxs"]
 
 [sub_resource type="Environment" id="Environment_u7ddp"]
 background_mode = 1
@@ -38,3 +39,6 @@ ball = NodePath("../Ball")
 
 [node name="Ball" parent="." instance=ExtResource("4_fr5jj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4568, 0, 5.66217)
+
+[node name="Enemy" parent="." instance=ExtResource("5_admxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 11)
