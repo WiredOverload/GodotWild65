@@ -11,6 +11,9 @@ uniform float scanline_sharpness : hint_range(0.0, 1.0) = 0.5;
 uniform float scanline_timescale : hint_range(-10.0, 10.0) = 0.0;
 uniform float scanline_strength : hint_range(0.0, 1.0) = 0.3;
 
+uniform float chroma_strength : hint_range(-0.2, 0.2) = 0.005;
+uniform float chroma_inner_radius : hint_range(0.0, 1.0) = 0.1;
+
 vec2 fisheye(vec2 frag_coord, vec2 pixel_size, vec2 center) {
 	vec2 pixel_coord = frag_coord.xy * pixel_size.x;
 	float aspect_ratio = pixel_size.y / pixel_size.x;
@@ -47,9 +50,26 @@ float scanline(vec2 frag_coord) {
 	return mix(1.0 - scanline_strength, 1.0, t);
 }
 
+void chromatic_aberration(vec2 uv, out vec2 uv_r, out vec2 uv_g, out vec2 uv_b) {
+	vec2 d = (uv - vec2(0.5, 0.5)) * 2.0;
+	vec2 n = normalize(d);
+	float s = chroma_strength * max(length(d) - chroma_inner_radius, 0.0);
+	uv_r = uv - n * s;
+	uv_g = uv;
+	uv_b = uv + n * s;
+}
+
 void fragment() {
 	vec2 uv = fisheye(FRAGCOORD.xy, SCREEN_PIXEL_SIZE, vec2(0.5, 0.5));
-	vec3 fish = texture(SCREEN_TEXTURE, uv).rgb;
+	vec2 uv_r, uv_g, uv_b;
+	chromatic_aberration(uv, uv_r, uv_g, uv_b);
+	
+	vec3 fish = vec3(
+		texture(SCREEN_TEXTURE, uv_r).r,
+		texture(SCREEN_TEXTURE, uv_g).g,
+		texture(SCREEN_TEXTURE, uv_b).b);
+	
 	float scan = scanline(uv / SCREEN_PIXEL_SIZE);
+	
 	COLOR = vec4(fish * scan, 1.0);
 }

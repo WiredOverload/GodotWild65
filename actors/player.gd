@@ -94,11 +94,10 @@ func _physics_process(delta: float) -> void:
 			if direction:
 				velocity.x = direction.x * move_speed
 				velocity.z = direction.z * move_speed
+				rotation.y = Vector3.MODEL_FRONT.signed_angle_to(direction, Vector3.UP)
 			else:
 				velocity.x = move_toward(velocity.x, 0, move_speed)
 				velocity.z = move_toward(velocity.z, 0, move_speed)
-			
-			rotation.y = Vector3.MODEL_FRONT.signed_angle_to(direction, Vector3.UP)
 			
 			move_and_slide()
 		State.THROWING:
