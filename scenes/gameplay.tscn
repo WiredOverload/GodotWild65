@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0ovdrnefc0u5"]
+[gd_scene load_steps=6 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
 [ext_resource type="MeshLibrary" uid="uid://dgxh36itpnihl" path="res://mesh_library/mesh_library.tres" id="2_axurl"]
+[ext_resource type="PackedScene" uid="uid://7db3hg74bni7" path="res://actors/player.tscn" id="3_mdmmq"]
+[ext_resource type="PackedScene" uid="uid://ckv4dexmjl00r" path="res://actors/ball.tscn" id="4_fr5jj"]
 
 [sub_resource type="Environment" id="Environment_u7ddp"]
 background_mode = 1
@@ -27,4 +29,12 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999997, -0.00255211, 0.000383491, 0, 0.148596, 0.988898, -0.00258076, -0.988895, 0.148596, 14.3499, 23.5365, 12.7058)
+transform = Transform3D(1, 0, 0, 0, 0.121869, 0.992546, 0, -0.992546, 0.121869, 14.5, 23.537, 12.706)
+fov = 50.2
+
+[node name="Player" parent="." node_paths=PackedStringArray("ball") instance=ExtResource("3_mdmmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5223, 0, 11.9386)
+ball = NodePath("../Ball")
+
+[node name="Ball" parent="." instance=ExtResource("4_fr5jj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4568, 0, 5.66217)
