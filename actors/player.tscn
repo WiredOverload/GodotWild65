@@ -82,9 +82,11 @@ shape = SubResource("BoxShape3D_b318y")
 [node name="SpinSparkParticles" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.425755, 0)
+emitting = false
 lifetime = 0.1
 fixed_fps = 60
 interpolate = false
+visibility_aabb = AABB(-1.87484, -1.77372, -1.10047, 3.74968, 3.54745, 2.20095)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_5buoc")
 draw_pass_1 = SubResource("QuadMesh_odta2")
