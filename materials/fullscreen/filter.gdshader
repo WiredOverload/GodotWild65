@@ -5,6 +5,12 @@ uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 // Anti fish eye (negative amount) / fish eye (positive)
 uniform float fisheye_power : hint_range(-2.5, 2.5) = 1.0;
 
+uniform float scanline_scale : hint_range(0.01, 10.0) = 4.0;
+uniform float scanline_ratio : hint_range(0.0, 1.0) = 0.5;
+uniform float scanline_sharpness : hint_range(0.0, 1.0) = 0.5;
+uniform float scanline_timescale : hint_range(-10.0, 10.0) = 0.0;
+uniform float scanline_strength : hint_range(0.0, 1.0) = 0.3;
+
 vec2 fisheye(vec2 frag_coord, vec2 pixel_size, vec2 center) {
 	vec2 pixel_coord = frag_coord.xy * pixel_size.x;
 	float aspect_ratio = pixel_size.y / pixel_size.x;
@@ -34,10 +40,11 @@ vec2 fisheye(vec2 frag_coord, vec2 pixel_size, vec2 center) {
 }
 
 float scanline(vec2 frag_coord) {
-	float y = frag_coord.y / 4.0 - TIME;
-	float closest = round(y / 2.0) * 2.0;
-	float t = smoothstep(0.0, 1.0, abs(y - closest));
-	return mix(0.7, 1.0, t);
+	float y = frag_coord.y / scanline_scale - TIME * scanline_timescale;
+	float closest = round(y);
+	float max_edge = scanline_ratio / 2.0;
+	float t = smoothstep(scanline_sharpness * max_edge, max_edge, abs(y - closest));
+	return mix(1.0 - scanline_strength, 1.0, t);
 }
 
 void fragment() {

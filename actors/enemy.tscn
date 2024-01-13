@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://actors/enemy.gd" id="1_y0y7r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yyx1r"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(1.5, 0, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_g4xah"]
 material = SubResource("StandardMaterial3D_yyx1r")
