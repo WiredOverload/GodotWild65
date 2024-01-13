@@ -31,6 +31,7 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.121869, 0.992546, 0, -0.992546, 0.121869, 14.5, 23.537, 12.706)
+current = true
 fov = 50.2
 
 [node name="Player" parent="." node_paths=PackedStringArray("ball") instance=ExtResource("3_mdmmq")]
