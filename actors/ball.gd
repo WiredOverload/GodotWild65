@@ -24,8 +24,10 @@ func _physics_process(delta: float) -> void:
 			var motion := velocity * delta
 			var collision := move_and_collide(motion)
 			while collision:
-				velocity = velocity.bounce(collision.get_normal())
-				motion = collision.get_remainder().bounce(collision.get_normal())
+				var normal := collision.get_normal()
+				Gameplay.instance.screen_shake_vel(-Vector2(normal.x, normal.z).normalized() * velocity.length())
+				velocity = velocity.bounce(normal)
+				motion = collision.get_remainder().bounce(normal)
 				if collision.get_collider().is_in_group("Enemy"):
 					collision.get_collider().hit(1)
 				collision = move_and_collide(motion)

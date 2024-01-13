@@ -43,8 +43,10 @@ func _process(delta: float) -> void:
 				throw_speed = clampf(throw_speed + delta * throw_accel, 0.0, max_throw_speed)
 				if not spin_spark_particles.emitting and is_equal_approx(throw_speed, max_throw_speed):
 					spin_spark_particles.restart()
+					Gameplay.instance.set_time_scale(0.3, 0.1)
 				if spin_spark_particles.emitting and not is_equal_approx(throw_speed, max_throw_speed):
 					spin_spark_particles.emitting = false
+					Gameplay.instance.set_time_scale(1.0, 0.01)
 			else:
 				ball.throw(throw_speed * basis.x)
 				throw_speed = 0.0
@@ -68,6 +70,7 @@ func set_state(v: State) -> void:
 			deactivate_catcher()
 		State.THROWING:
 			spin_spark_particles.emitting = false
+			Gameplay.instance.set_time_scale(1.0, 0.01)
 	
 	state = v
 	

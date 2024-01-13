@@ -27,7 +27,6 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 1.0
 emission_ring_inner_radius = 1.0
-inherit_velocity_ratio = 1.0
 spread = 180.0
 orbit_velocity_min = 0.416
 orbit_velocity_max = 1.445
@@ -82,6 +81,7 @@ shape = SubResource("BoxShape3D_b318y")
 [node name="SpinSparkParticles" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.425755, 0)
+emitting = false
 lifetime = 0.1
 fixed_fps = 60
 interpolate = false
