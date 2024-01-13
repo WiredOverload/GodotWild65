@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0ovdrnefc0u5"]
+[gd_scene load_steps=16 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
 [ext_resource type="MeshLibrary" uid="uid://dgxh36itpnihl" path="res://mesh_library/mesh_library.tres" id="2_axurl"]
@@ -8,6 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://seeyug3rtuge" path="res://actors/enemy.tscn" id="5_admxs"]
 [ext_resource type="Material" uid="uid://bp15ymka1mkep" path="res://materials/fullscreen/filter.tres" id="5_qdwxy"]
 
+[sub_resource type="Gradient" id="Gradient_clipn"]
+offsets = PackedFloat32Array(0.464646, 1)
+colors = PackedColorArray(0, 0, 0, 1, 2, 2, 2, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jyf0f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1t58y"]
+color_ramp = SubResource("Gradient_clipn")
+noise = SubResource("FastNoiseLite_jyf0f")
+
 [sub_resource type="Environment" id="Environment_u7ddp"]
 background_mode = 1
 background_color = Color(0, 0, 0.152941, 1)
@@ -16,7 +26,10 @@ ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 2
 glow_enabled = true
 glow_intensity = 1.5
+glow_bloom = 0.5
 glow_hdr_threshold = 0.9
+glow_map_strength = 1.0
+glow_map = SubResource("NoiseTexture2D_1t58y")
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_heig4"]
 

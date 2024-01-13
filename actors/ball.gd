@@ -28,6 +28,7 @@ func _physics_process(delta: float) -> void:
 			var bounce_count := 0
 			while collision:
 				var normal := collision.get_normal()
+				normal = Vector3(normal.x, 0, normal.z).normalized()
 				Gameplay.instance.screen_shake_vel(-Vector2(normal.x, normal.z).normalized() * velocity.length())
 				velocity = velocity.bounce(normal)
 				motion = collision.get_remainder().bounce(normal)
