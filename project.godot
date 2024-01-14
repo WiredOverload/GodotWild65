@@ -66,6 +66,7 @@ action={
 3d_physics/layer_1="Walls"
 3d_physics/layer_2="PlayerBody"
 3d_physics/layer_3="Ball"
+3d_physics/layer_4="Enemy"
 
 [rendering]
 

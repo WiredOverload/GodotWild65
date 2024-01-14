@@ -37,21 +37,15 @@ alpha_curve = SubResource("CurveTexture_opf3e")
 turbulence_enabled = true
 turbulence_noise_scale = 3.0
 
-[node name="EnemyBook" type="CharacterBody3D"]
+[node name="EnemyBook" type="CharacterBody3D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_cs6ux")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_vit8j")
-
-[node name="PageCough" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.540562, 0)
-explosiveness = 1.0
-visibility_aabb = AABB(-1.76112, -1.85821, -1.79475, 3.52224, 3.71643, 3.58951)
-transform_align = 2
-process_material = SubResource("ParticleProcessMaterial_els87")
-draw_pass_1 = ExtResource("2_3mjw8")
 
 [node name="Book" parent="." instance=ExtResource("1_quin3")]
 
@@ -60,3 +54,34 @@ process_priority = 1
 process_physics_priority = 1
 script = ExtResource("4_dtb3t")
 target_path = NodePath("../..")
+
+[node name="PageCough" type="GPUParticles3D" parent="Book"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.540562, 0)
+emitting = false
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-1.76112, -1.85821, -1.79475, 3.52224, 3.71643, 3.58951)
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_els87")
+draw_pass_1 = ExtResource("2_3mjw8")
+
+[node name="PageDeath" type="GPUParticles3D" parent="."]
+editor_description = "Emitted when the book dies."
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.540562, 0)
+emitting = false
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-1.76112, -1.85821, -1.79475, 3.52224, 3.71643, 3.58951)
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_els87")
+draw_pass_1 = ExtResource("2_3mjw8")
+
+[node name="WanderTurnTimer" type="Timer" parent="."]
+editor_description = "Signals when the wander behavior should make a random turn."
+one_shot = true
+autostart = true
+
+[connection signal="event" from="Book" to="." method="_on_book_event"]
+[connection signal="timeout" from="WanderTurnTimer" to="." method="_on_wander_turn_timer_timeout"]
