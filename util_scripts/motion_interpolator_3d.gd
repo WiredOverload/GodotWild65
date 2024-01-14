@@ -43,9 +43,11 @@ enum ProcessFunc {
 		process_func = v
 		update_configuration_warnings()
 
-@onready var _target: Node3D
 
-var _offset: Vector3
+var offset_transform: Transform3D
+
+
+@onready var _target: Node3D
 
 var _previous_target_xform: Transform3D
 var _current_target_xform: Transform3D
@@ -66,14 +68,14 @@ func _ready():
 		if _target:
 			var parent := get_parent_node_3d()
 			if parent:
-				_offset = parent.global_position - _target.global_position
+				offset_transform = _target.global_transform.inverse() * parent.global_transform
 			else:
 				push_error("Inital offset cannot be calculated: parent not valid.")
 		else:
 			push_error("Inital offset cannot be calculated: target not in tree.")
 	
 	if _target:
-		_current_target_xform = _target.global_transform.translated(_offset)
+		_current_target_xform = _target.global_transform * offset_transform
 		_previous_target_xform = _current_target_xform
 
 func _process(delta:float):
@@ -93,7 +95,7 @@ func _physics_process(delta: float):
 	await get_tree().process_frame
 	
 	_previous_target_xform = _current_target_xform
-	_current_target_xform = _target.global_transform.translated(_offset)
+	_current_target_xform = _target.global_transform * offset_transform
 	
 
 func _process_func(delta: float):
@@ -105,7 +107,7 @@ func _process_func(delta: float):
 	if not parent or not _target:
 		return
 	
-	var target_xform := _target.global_transform.translated(_offset)
+	var target_xform := _target.global_transform * offset_transform
 	
 	match motion_mode:
 		MotionMode.SMOOTH_DAMP:

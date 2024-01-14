@@ -1,5 +1,5 @@
 class_name Ball
-extends CharacterBody3D
+extends BouncingCharacterBody3D
 
 const MAX_BOUNCES := 1
 
@@ -23,22 +23,17 @@ func _physics_process(delta: float) -> void:
 			position = held_marker.global_position
 			return
 		State.MOVING:
-			var motion := velocity * delta
-			var collision := move_and_collide(motion)
-			var bounce_count := 0
-			while collision:
-				var normal := collision.get_normal()
-				normal = Vector3(normal.x, 0, normal.z).normalized()
-				Gameplay.instance.screen_shake_vel(-Vector2(normal.x, normal.z).normalized() * velocity.length())
-				Gameplay.instance.hit_stun()
-				velocity = velocity.bounce(normal).normalized() * current_speed
-				motion = collision.get_remainder().bounce(normal)
-				if collision.get_collider().is_in_group("Enemy"):
-					collision.get_collider().hit(1)
-				bounce_count += 1
-				if bounce_count >= MAX_BOUNCES:
-					break
-				collision = move_and_collide(motion)
+			move_and_bounce()
+
+# called when move_and_bounce() hits something
+func _on_bounce(collision: KinematicCollision3D) -> void:
+	var normal := collision.get_normal()
+	
+	Gameplay.instance.screen_shake_vel(-Vector2(normal.x, normal.z).normalized() * velocity.length())
+	
+	if collision.get_collider().is_in_group("Enemy"):
+		collision.get_collider().hit(1)
+		Gameplay.instance.hit_stun()
 
 func grab(marker: Node3D) -> void:
 	state = State.HELD
