@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckd3tp6ek61ke"]
+
+[ext_resource type="Script" path="res://scenes/3dui_overlay.gd" id="1_pfnl5"]
+[ext_resource type="PackedScene" uid="uid://bedfajom1ucyr" path="res://scenes/3dui.tscn" id="1_urxrw"]
+
+[node name="3DUIOverlay" type="SubViewportContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pfnl5")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4294967294
+render_target_update_mode = 4
+
+[node name="3DUI" parent="SubViewport" instance=ExtResource("1_urxrw")]

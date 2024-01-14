@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 		move_and_bounce()
 	
 	# arbitrary math to slowly turn to face forward
-	rotation.y = move_toward(rotation.y, Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP), delta)
+	rotation.y = rotate_toward(rotation.y, Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP), 3.0 * delta)
 
 func hit(damage : int):
 	if health > 0:
@@ -60,7 +60,9 @@ func hit(damage : int):
 		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		mesh_instance["surface_material_override/0"] = material
 		@warning_ignore("return_value_discarded")
-		create_tween().tween_property(material, "albedo_color", Color(1, 0, 0, 0), 0.5)
+		var tween := create_tween()
+		tween.tween_interval(0.5)
+		tween.tween_property(material, "albedo_color", Color(1, 0, 0, 0), 0.5)
 		
 		# despawn
 		book_anim.play_backwards("Spawn")

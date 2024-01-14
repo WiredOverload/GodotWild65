@@ -29,7 +29,7 @@ enum ProcessFunc {
 		notify_property_list_changed()
 		update_configuration_warnings()
 
-@export var position_keep_initial_offset: bool = false
+@export var keep_initial_offset: bool = true
 
 @export_group("Smoothing", "smoothing")
 @export_range(0.0, 1.0, 0.01) var smoothing_position: float = 0.5
@@ -64,7 +64,7 @@ func _ready():
 	if target_path:
 		_target = get_node(target_path)
 	
-	if position_keep_initial_offset:
+	if keep_initial_offset:
 		if _target:
 			var parent := get_parent_node_3d()
 			if parent:

@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bedfajom1ucyr"]
+
+[ext_resource type="PackedScene" uid="uid://s5d87weld4tl" path="res://character_models/heart.tscn" id="1_cjg7s"]
+
+[sub_resource type="Environment" id="Environment_nask6"]
+ambient_light_source = 2
+ambient_light_color = Color(0.454902, 0.454902, 0.454902, 1)
+
+[node name="3DUI" type="Node3D"]
+top_level = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nask6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38.7652)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 80)
+fov = 20.0
+
+[node name="HeartRoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.405, 11.357, 0)
+
+[node name="heart" parent="HeartRoot" instance=ExtResource("1_cjg7s")]
+
+[node name="heart2" parent="HeartRoot" instance=ExtResource("1_cjg7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="heart3" parent="HeartRoot" instance=ExtResource("1_cjg7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
