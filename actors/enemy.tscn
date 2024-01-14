@@ -16,6 +16,7 @@ height = 1.0
 height = 1.0
 
 [node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_y0y7r")
 

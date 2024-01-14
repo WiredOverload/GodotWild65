@@ -18,11 +18,17 @@ var max_throw_speed: float = 20.0
 
 var throw_accel: float = 10.0
 
+var max_health := 3
+var health := max_health
+
 @onready var ball_held_position: Marker3D = %BallHeldPosition
 @onready var catch_area: Area3D = %CatchArea
 @onready var catcher: CSGBox3D = %Catcher
 @onready var spin_spark_particles: GPUParticles3D = %SpinSparkParticles
 @onready var vibrate_timer: Timer = $VibrateTimer
+@onready var invuln_timer: Timer = $InvulnTimer
+@onready var mesh = $PlayerModel
+
 
 @onready var hold_distance: float = Vector3(ball_held_position.position.x, 0, ball_held_position.position.z).length()
 
@@ -30,6 +36,7 @@ func _ready() -> void:
 	assert(ball)
 	ball.grab(ball_held_position)
 	deactivate_catcher()
+	
 
 func _process(delta: float) -> void:
 	match state:
@@ -113,6 +120,7 @@ func _physics_process(delta: float) -> void:
 			
 			move_and_slide()
 
+
 func activate_catcher() -> void:
 	catch_area.monitoring = true
 	catcher.visible = true
@@ -124,3 +132,16 @@ func deactivate_catcher() -> void:
 
 func _on_vibrate_timer_timeout() -> void:
 	Gameplay.instance.screen_shake(7.0)
+
+func hit(damage):
+	if invuln_timer.is_stopped():
+		print("HIT")
+		invuln_timer.start()
+		health -= damage
+		if health < 1:
+			print("dead")
+			mesh.mesh.surface_get_material(0).albedo_color = Color.DARK_MAGENTA
+
+
+func _on_invuln_timer_timeout() -> void:
+	pass # Replace with function body.
