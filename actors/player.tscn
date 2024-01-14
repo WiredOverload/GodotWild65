@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://7db3hg74bni7"]
+[gd_scene load_steps=11 format=3 uid="uid://7db3hg74bni7"]
 
 [ext_resource type="Script" path="res://actors/player.gd" id="1_o3bix"]
+[ext_resource type="Script" path="res://util_scripts/motion_interpolator_3d.gd" id="2_6uy2u"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5eh5q"]
 height = 0.95
@@ -63,6 +64,12 @@ material = SubResource("StandardMaterial3D_j2kbh")
 [node name="PlayerModel" type="CSGMesh3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("CylinderMesh_i7xac")
+
+[node name="MotionInterpolator3D" type="Node3D" parent="PlayerModel"]
+process_priority = 1
+process_physics_priority = 1
+script = ExtResource("2_6uy2u")
+target_path = NodePath("../..")
 
 [node name="BallHeldPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
