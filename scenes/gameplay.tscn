@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0ovdrnefc0u5"]
+[gd_scene load_steps=19 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
 [ext_resource type="MeshLibrary" uid="uid://dgxh36itpnihl" path="res://mesh_library/mesh_library.tres" id="2_axurl"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://7db3hg74bni7" path="res://actors/player.tscn" id="3_mdmmq"]
 [ext_resource type="PackedScene" uid="uid://ckv4dexmjl00r" path="res://actors/ball.tscn" id="4_fr5jj"]
 [ext_resource type="Script" path="res://util_scripts/motion_interpolator_3d.gd" id="4_ji8ur"]
+[ext_resource type="PackedScene" uid="uid://bvgovep6nafcj" path="res://character_models/heart.tscn" id="5_6141i"]
 [ext_resource type="PackedScene" uid="uid://seeyug3rtuge" path="res://actors/enemy.tscn" id="5_admxs"]
 [ext_resource type="Material" uid="uid://bp15ymka1mkep" path="res://materials/fullscreen/filter.tres" id="5_qdwxy"]
 [ext_resource type="PackedScene" uid="uid://c85soy7nt5pny" path="res://actors/enemy_book.tscn" id="8_k3hhk"]
@@ -90,6 +91,15 @@ process_physics_priority = 1
 transform = Transform3D(1, 0, 0, 0, 0.121869, -0.992546, 0, 0.992546, 0.121869, -14.5, 9.74286, -24.91)
 script = ExtResource("4_ji8ur")
 target_path = NodePath("../../GameplayCameraMarkerGimbal/GameplayCameraMarker")
+
+[node name="heart" parent="GameplayCamera" instance=ExtResource("5_6141i")]
+transform = Transform3D(0.5, 5.82077e-11, 1.74623e-10, 5.82077e-11, 0.482963, -0.12941, 2.91038e-11, 0.129409, 0.482963, -6.795, 4.26999, -6.34999)
+
+[node name="heart2" parent="GameplayCamera" instance=ExtResource("5_6141i")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5.105, 4.27, -6.35)
+
+[node name="heart3" parent="GameplayCamera" instance=ExtResource("5_6141i")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.535, 4.27, -6.35)
 
 [node name="GameplayCameraMarkerGimbal" type="Node3D" parent="."]
 transform = Transform3D(1, 0, -4.36557e-11, 0, 1, 2.98023e-08, 7.27596e-11, -2.98023e-08, 1, 14.5223, 0, 11.9386)

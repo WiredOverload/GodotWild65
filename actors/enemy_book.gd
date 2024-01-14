@@ -7,7 +7,7 @@ var health = max_health
 
 @export var player: Node3D
 
-@onready var book: GenericSignaller = $Book
+@onready var book = $Book
 @onready var book_anim: AnimationPlayer = book.get_node("AnimationPlayer")
 @onready var book_motion_interpolator: MotionInterpolator3D = $Book/MotionInterpolator3D
 @onready var page_cough: GPUParticles3D = $Book/PageCough
