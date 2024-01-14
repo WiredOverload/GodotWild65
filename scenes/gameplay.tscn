@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d0ovdrnefc0u5"]
+[gd_scene load_steps=17 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
 [ext_resource type="MeshLibrary" uid="uid://dgxh36itpnihl" path="res://mesh_library/mesh_library.tres" id="2_axurl"]
@@ -7,9 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://ckv4dexmjl00r" path="res://actors/ball.tscn" id="4_fr5jj"]
 [ext_resource type="PackedScene" uid="uid://seeyug3rtuge" path="res://actors/enemy.tscn" id="5_admxs"]
 [ext_resource type="Material" uid="uid://bp15ymka1mkep" path="res://materials/fullscreen/filter.tres" id="5_qdwxy"]
+[ext_resource type="PackedScene" uid="uid://c85soy7nt5pny" path="res://actors/enemy_book.tscn" id="8_k3hhk"]
 
 [sub_resource type="Gradient" id="Gradient_clipn"]
-offsets = PackedFloat32Array(0.464646, 1)
+offsets = PackedFloat32Array(0.165605, 1)
 colors = PackedColorArray(0, 0, 0, 1, 2, 2, 2, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jyf0f"]
@@ -23,13 +24,14 @@ background_mode = 1
 background_color = Color(0, 0, 0.152941, 1)
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-tonemap_mode = 2
 glow_enabled = true
+glow_normalized = true
 glow_intensity = 1.5
 glow_bloom = 0.5
 glow_hdr_threshold = 0.9
 glow_map_strength = 1.0
 glow_map = SubResource("NoiseTexture2D_1t58y")
+fog_light_energy = 0.09
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_heig4"]
 
@@ -116,3 +118,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7519, -0.00345039, 8.00178)
 
 [node name="Enemy7" parent="." instance=ExtResource("5_admxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.91358, -0.00344658, 3.59272)
+
+[node name="EnemyBook" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_k3hhk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, 9)
+player = NodePath("../Player")

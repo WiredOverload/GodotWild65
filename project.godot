@@ -15,6 +15,12 @@ run/main_scene="res://scenes/gameplay.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
+[debug]
+
+gdscript/warnings/standalone_expression=2
+gdscript/warnings/standalone_ternary=2
+gdscript/warnings/return_value_discarded=1
+
 [display]
 
 window/stretch/mode="viewport"
@@ -60,3 +66,4 @@ action={
 [rendering]
 
 renderer/rendering_method="mobile"
+anti_aliasing/screen_space_roughness_limiter/enabled=false

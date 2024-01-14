@@ -24,6 +24,18 @@ func screen_shake(strength: float) -> void:
 func screen_shake_vel(impulse: Vector2) -> void:
 	gameplay_camera.screen_shake(impulse)
 
+func hit_stun() -> void:
+	if _time_scale_tween:
+		_time_scale_tween.pause()
+	var tmp_tween := create_tween()
+	tmp_tween.tween_property(self, "_engine_time_scale", 0.01, 0.01)
+	_engine_time_scale = 0.0
+	await tmp_tween.finished
+	_engine_time_scale = 1.0
+	_time_scale_tween.play()
+	
+
+
 func _enter_tree() -> void:
 	assert(instance == null)
 	instance = self

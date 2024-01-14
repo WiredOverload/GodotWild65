@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d142m1xpn3ejx"]
+
+[ext_resource type="Texture2D" uid="uid://beluxdy0y71j0" path="res://character_models/textures/book.png" id="1_5bwuv"]
+
+[resource]
+resource_name = "BookPageMaterial"
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_5bwuv")
+roughness = 0.5
+texture_filter = 2

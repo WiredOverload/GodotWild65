@@ -1,2 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
+
+.blend[0-9]
+
+build/
+

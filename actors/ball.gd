@@ -1,7 +1,7 @@
 class_name Ball
 extends CharacterBody3D
 
-const MAX_BOUNCES := 10
+const MAX_BOUNCES := 1
 
 enum State {
 	HELD,
@@ -30,7 +30,8 @@ func _physics_process(delta: float) -> void:
 				var normal := collision.get_normal()
 				normal = Vector3(normal.x, 0, normal.z).normalized()
 				Gameplay.instance.screen_shake_vel(-Vector2(normal.x, normal.z).normalized() * velocity.length())
-				velocity = velocity.bounce(normal)
+				Gameplay.instance.hit_stun()
+				velocity = velocity.bounce(normal).normalized() * current_speed
 				motion = collision.get_remainder().bounce(normal)
 				if collision.get_collider().is_in_group("Enemy"):
 					collision.get_collider().hit(1)
