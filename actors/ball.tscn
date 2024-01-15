@@ -29,4 +29,3 @@ process_priority = 1
 process_physics_priority = 1
 script = ExtResource("2_xbf28")
 target_path = NodePath("../..")
-keep_initial_offset = null

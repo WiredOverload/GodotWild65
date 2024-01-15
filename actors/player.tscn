@@ -70,7 +70,6 @@ process_priority = 1
 process_physics_priority = 1
 script = ExtResource("2_6uy2u")
 target_path = NodePath("../..")
-keep_initial_offset = null
 
 [node name="BallHeldPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
