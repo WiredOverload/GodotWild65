@@ -50,6 +50,23 @@ func _ready() -> void:
 	deactivate_catcher()
 	
 
+func set_state(v: State) -> void:
+	# exiting state
+	match state:
+		State.CATCHING:
+			deactivate_catcher()
+		State.THROWING:
+			spin_spark_particles.emitting = false
+			Gameplay.instance.set_time_scale(1.0, 0.01)
+			vibrate_timer.stop()
+	
+	state = v
+	
+	# entering state
+	match state:
+		State.CATCHING:
+			activate_catcher()
+
 func _process(delta: float) -> void:
 	match state:
 		State.NEUTRAL:
@@ -87,23 +104,6 @@ func _process(delta: float) -> void:
 			else:
 				state = State.NEUTRAL
 
-func set_state(v: State) -> void:
-	# exiting state
-	match state:
-		State.CATCHING:
-			deactivate_catcher()
-		State.THROWING:
-			spin_spark_particles.emitting = false
-			Gameplay.instance.set_time_scale(1.0, 0.01)
-			vibrate_timer.stop()
-	
-	state = v
-	
-	# entering state
-	match state:
-		State.CATCHING:
-			activate_catcher()
-
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction := Vector3(input_dir.x, 0, input_dir.y).normalized()
@@ -119,9 +119,12 @@ func _physics_process(delta: float) -> void:
 				velocity.z = move_toward(velocity.z, 0, move_speed)
 			
 			move_and_slide()
+			
+			if ball.is_held:
+				ball.global_transform = ball_held_position.global_transform
+		
 		State.THROWING:
 			rotation.y += delta * throw_speed / hold_distance
-			ball.global_position = ball_held_position.global_position
 			
 			if direction:
 				velocity.x = direction.x * move_speed_throwing
@@ -131,6 +134,8 @@ func _physics_process(delta: float) -> void:
 				velocity.z = move_toward(velocity.z, 0, move_speed)
 			
 			move_and_slide()
+			
+			ball.global_transform = ball_held_position.global_transform
 
 
 func activate_catcher() -> void:

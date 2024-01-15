@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dxpq80c8n82sj"
-path="res://.godot/imported/wall_corner.blend-5f8384af43374f07113bd29cfde3d002.scn"
+uid="uid://ct7jpvteubghg"
+path="res://.godot/imported/backpack.blend-81f58379c1675fda3c30ebcf0ae2e3bf.scn"
 
 [deps]
 
-source_file="res://mesh_library/models/wall_corner.blend"
-dest_files=["res://.godot/imported/wall_corner.blend-5f8384af43374f07113bd29cfde3d002.scn"]
+source_file="res://character_models/backpack.blend"
+dest_files=["res://.godot/imported/backpack.blend-81f58379c1675fda3c30ebcf0ae2e3bf.scn"]
 
 [params]
 
-nodes/root_type=""
-nodes/root_name=""
+nodes/root_type="GenericSignaller"
+nodes/root_name="BackpackModel"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 meshes/ensure_tangents=true
@@ -30,15 +30,16 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
-"materials": {
-"Material": {
-"use_external/enabled": true,
-"use_external/path": "res://mesh_library/models/materials/DungeonTrimMaterial.tres"
-}
-},
-"nodes": {
-"PATH:WallCorner": {
-"generate/physics": true
+"meshes": {
+"backpack_BackpackMesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://character_models/meshes/backpack_BackpackMesh.res"
 }
 }
 }
@@ -49,7 +50,7 @@ blender/nodes/punctual_lights=true
 blender/nodes/cameras=true
 blender/nodes/custom_properties=true
 blender/nodes/modifiers=1
-blender/meshes/colors=true
+blender/meshes/colors=false
 blender/meshes/uvs=true
 blender/meshes/normals=true
 blender/meshes/tangents=true

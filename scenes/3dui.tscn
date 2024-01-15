@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bedfajom1ucyr"]
 
-[ext_resource type="Script" path="res://UI/HeartRoot.gd" id="1_03bky"]
+[ext_resource type="PackedScene" uid="uid://s5d87weld4tl" path="res://UI/heart.tscn" id="1_cjg7s"]
 
 [sub_resource type="Environment" id="Environment_nask6"]
 ambient_light_source = 2
