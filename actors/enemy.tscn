@@ -29,7 +29,6 @@ process_priority = 1
 process_physics_priority = 1
 script = ExtResource("2_m1u8n")
 target_path = NodePath("../..")
-keep_initial_offset = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
