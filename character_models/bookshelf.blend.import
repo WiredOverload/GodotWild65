@@ -1,61 +1,35 @@
-; Engine configuration file.
-; It's best edited using the editor UI and not directly,
-; since the parameters that go here are not all obvious.
-;
-; Format:
-;   [section] ; section goes between []
-;   param=value ; assign values to parameters
+[remap]
 
-config_version=5
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://bsua44u4xw3x"
+path="res://.godot/imported/bookshelf.blend-58877d1d258e7d979af12810427c0cea.scn"
 
-[application]
+[deps]
 
-config/name="GodotWild65"
-run/main_scene="res://scenes/gameplay.tscn"
-config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://icon.svg"
+source_file="res://character_models/bookshelf.blend"
+dest_files=["res://.godot/imported/bookshelf.blend-58877d1d258e7d979af12810427c0cea.scn"]
 
-[autoload]
+[params]
 
-TestCamera3dManager="res://autoload/test_camera_3d_manager.gd"
-
-[debug]
-
-gdscript/warnings/standalone_expression=2
-gdscript/warnings/standalone_ternary=2
-gdscript/warnings/return_value_discarded=1
-
-[display]
-
-window/stretch/mode="canvas_items"
-
-[editor_plugins]
-
-enabled=PackedStringArray()
-
-[importer_defaults]
-
-texture={
-"compress/channel_pack": 0,
-"compress/hdr_compression": 1,
-"compress/high_quality": false,
-"compress/lossy_quality": 0.7,
-"compress/mode": 0,
-"compress/normal_map": 0,
-"detect_3d/compress_to": 0,
-"mipmaps/generate": true,
-"mipmaps/limit": -1,
-"process/fix_alpha_border": true,
-"process/hdr_as_srgb": false,
-"process/hdr_clamp_exposure": false,
-"process/normal_map_invert_y": false,
-"process/premult_alpha": false,
-"process/size_limit": 0,
-"roughness/mode": 0,
-"roughness/src_normal": ""
-}
-scene={
-"_subresources": {
+nodes/root_type="GenericSignaller"
+nodes/root_name="BookshelfModel"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=false
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
 "animations": {
 "RESET": {
 "save_to_file/enabled": true,
@@ -5458,7 +5432,7 @@ scene={
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://character_models/animations/bookshelf/Walk.res",
-"settings/loop_mode": 0,
+"settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",
@@ -7266,83 +7240,22 @@ scene={
 "save_to_file/path": ""
 }
 }
-},
-"animation/fps": 30,
-"animation/import": true,
-"animation/remove_immutable_tracks": true,
-"animation/trimming": false,
-"blender/animation/always_sample": true,
-"blender/animation/group_tracks": true,
-"blender/animation/limit_playback": true,
-"blender/materials/export_materials": 1,
-"blender/materials/unpack_enabled": true,
-"blender/meshes/colors": false,
-"blender/meshes/export_bones_deforming_mesh_only": false,
-"blender/meshes/normals": true,
-"blender/meshes/skins": 2,
-"blender/meshes/tangents": true,
-"blender/meshes/uvs": true,
-"blender/nodes/cameras": true,
-"blender/nodes/custom_properties": true,
-"blender/nodes/modifiers": 1,
-"blender/nodes/punctual_lights": true,
-"blender/nodes/visible": 0,
-"gltf/embedded_image_handling": 1,
-"gltf/naming_version": 1,
-"import_script/path": "",
-"meshes/create_shadow_meshes": true,
-"meshes/ensure_tangents": true,
-"meshes/force_disable_compression": false,
-"meshes/generate_lods": false,
-"meshes/light_baking": 1,
-"meshes/lightmap_texel_size": 0.2,
-"nodes/apply_root_scale": true,
-"nodes/root_name": "",
-"nodes/root_scale": 1.0,
-"nodes/root_type": "GenericSignaller",
-"skins/use_named_skins": true
 }
-
-[input]
-
-move_left={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194319,"key_label":0,"unicode":0,"echo":false,"script":null)
-]
-}
-move_right={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194321,"key_label":0,"unicode":0,"echo":false,"script":null)
-]
-}
-move_up={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194320,"key_label":0,"unicode":0,"echo":false,"script":null)
-]
-}
-move_down={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194322,"key_label":0,"unicode":0,"echo":false,"script":null)
-]
-}
-action={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
-]
-}
-
-[layer_names]
-
-3d_physics/layer_1="Walls"
-3d_physics/layer_2="PlayerBody"
-3d_physics/layer_3="Ball"
-3d_physics/layer_4="Enemy"
-
-[rendering]
-
-renderer/rendering_method="mobile"
-anti_aliasing/screen_space_roughness_limiter/enabled=false
+gltf/naming_version=1
+gltf/embedded_image_handling=1
+blender/nodes/visible=0
+blender/nodes/punctual_lights=true
+blender/nodes/cameras=true
+blender/nodes/custom_properties=true
+blender/nodes/modifiers=1
+blender/meshes/colors=false
+blender/meshes/uvs=true
+blender/meshes/normals=true
+blender/meshes/tangents=true
+blender/meshes/skins=2
+blender/meshes/export_bones_deforming_mesh_only=false
+blender/materials/unpack_enabled=true
+blender/materials/export_materials=1
+blender/animation/limit_playback=true
+blender/animation/always_sample=true
+blender/animation/group_tracks=true

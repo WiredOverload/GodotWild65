@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d0ovdrnefc0u5"]
+[gd_scene load_steps=16 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
 [ext_resource type="MeshLibrary" uid="uid://dgxh36itpnihl" path="res://mesh_library/mesh_library.tres" id="2_axurl"]
@@ -6,20 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://7db3hg74bni7" path="res://actors/player.tscn" id="3_mdmmq"]
 [ext_resource type="PackedScene" uid="uid://ckv4dexmjl00r" path="res://actors/ball.tscn" id="4_fr5jj"]
 [ext_resource type="Script" path="res://util_scripts/motion_interpolator_3d.gd" id="4_ji8ur"]
-[ext_resource type="PackedScene" uid="uid://seeyug3rtuge" path="res://actors/enemy.tscn" id="5_admxs"]
 [ext_resource type="Material" uid="uid://bp15ymka1mkep" path="res://materials/fullscreen/filter.tres" id="5_qdwxy"]
+[ext_resource type="PackedScene" uid="uid://ds0w34bd1klyc" path="res://actors/enemy_bookshelf.tscn" id="8_4eoky"]
 [ext_resource type="PackedScene" uid="uid://c85soy7nt5pny" path="res://actors/enemy_book.tscn" id="8_k3hhk"]
 [ext_resource type="PackedScene" uid="uid://ckd3tp6ek61ke" path="res://scenes/3dui_overlay.tscn" id="10_bqray"]
-
-[sub_resource type="Gradient" id="Gradient_clipn"]
-offsets = PackedFloat32Array(0.165605, 1)
-colors = PackedColorArray(0, 0, 0, 1, 2, 2, 2, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_jyf0f"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1t58y"]
-color_ramp = SubResource("Gradient_clipn")
-noise = SubResource("FastNoiseLite_jyf0f")
 
 [sub_resource type="Environment" id="Environment_u7ddp"]
 background_mode = 1
@@ -31,8 +21,6 @@ glow_normalized = true
 glow_intensity = 1.5
 glow_bloom = 0.5
 glow_hdr_threshold = 0.9
-glow_map_strength = 1.0
-glow_map = SubResource("NoiseTexture2D_1t58y")
 fog_light_energy = 0.09
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_heig4"]
@@ -47,7 +35,7 @@ fog_light_energy = 0.09
 script = ExtResource("1_cb7s4")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(0.817144, -0.499205, 0.288216, 0, 0.5, 0.866026, -0.576432, -0.707668, 0.408573, 0, 0, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -86,7 +74,7 @@ shape = SubResource("WorldBoundaryShape3D_p5tk3")
 [node name="GameplayCamera" type="Camera3D" parent="."]
 transform = Transform3D(0.999998, 0.00168755, -0.000574348, 0, 0.322195, 0.946673, 0.00178261, -0.946672, 0.322194, 14.5223, 8.809, 14.9916)
 current = true
-fov = 80.0
+fov = 70.0
 script = ExtResource("3_6q44q")
 
 [node name="MotionInterpolator3D" type="Node3D" parent="GameplayCamera"]
@@ -114,29 +102,12 @@ update_scale = false
 [node name="Ball" parent="." instance=ExtResource("4_fr5jj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4568, 0, 5.66217)
 
-[node name="Enemy" parent="." instance=ExtResource("5_admxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 11)
-
-[node name="Enemy2" parent="." instance=ExtResource("5_admxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60198, -0.00345039, 5.8733)
-
-[node name="Enemy3" parent="." instance=ExtResource("5_admxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.03777, -0.00344849, 17.3781)
-
-[node name="Enemy4" parent="." instance=ExtResource("5_admxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.34849, -0.00344849, 16.2235)
-
-[node name="Enemy5" parent="." instance=ExtResource("5_admxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.38553, -0.00344849, 13.5493)
-
-[node name="Enemy6" parent="." instance=ExtResource("5_admxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7519, -0.00345039, 8.00178)
-
-[node name="Enemy7" parent="." instance=ExtResource("5_admxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.91358, -0.00344658, 3.59272)
-
 [node name="EnemyBook" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_k3hhk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, 9)
+player = NodePath("../Player")
+
+[node name="EnemyBookshelf" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_4eoky")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3401, 0, 9.6981)
 player = NodePath("../Player")
 
 [node name="Overlays" type="Control" parent="."]
@@ -161,5 +132,7 @@ layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
+offset_right = 512.0
+offset_bottom = 512.0
 grow_horizontal = 1
 grow_vertical = 1

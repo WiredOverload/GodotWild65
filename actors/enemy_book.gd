@@ -20,10 +20,12 @@ var _spawned: bool = false
 func _ready() -> void:
 	# spawn
 	rotation.y = randf_range(0, TAU)
+	print(rotation.y)
 	book_anim.play("Spawn")
 	await book_anim.animation_finished
 	book_anim.play("Flap")
 	velocity = basis.z
+	print(rotation.y, velocity)
 	_spawned = true
 
 func _process(_delta: float) -> void:
@@ -41,11 +43,10 @@ func _process(_delta: float) -> void:
 		sin(2.5 * Time.get_ticks_msec() / 1000.0)))
 
 func _physics_process(delta: float) -> void:
-	if health > 0:
+	if _spawned and health > 0:
 		move_and_bounce()
-	
-	# arbitrary math to slowly turn to face forward
-	rotation.y = rotate_toward(rotation.y, Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP), 3.0 * delta)
+		# arbitrary math to slowly turn to face forward
+		rotation.y = rotate_toward(rotation.y, Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP), 3.0 * delta)
 
 func hit(damage : int):
 	if health > 0:

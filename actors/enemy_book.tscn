@@ -63,7 +63,6 @@ process_priority = 1
 process_physics_priority = 1
 script = ExtResource("4_dtb3t")
 target_path = NodePath("../..")
-keep_initial_offset = null
 
 [node name="PageDeath" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.540562, 0)
@@ -76,4 +75,10 @@ transform_align = 2
 process_material = SubResource("ParticleProcessMaterial_els87")
 draw_pass_1 = ExtResource("2_3mjw8")
 
+[node name="WanderTurnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
 [connection signal="event" from="Book" to="." method="_on_book_event"]
+[connection signal="timeout" from="WanderTurnTimer" to="." method="_on_wander_turn_timer_timeout"]
