@@ -26,6 +26,7 @@ var state: State = State.SPAWN: set = set_state
 @onready var wander_turn_timer: Timer = $WanderTurnTimer
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var sneeze_timer: Timer = $SneezeTimer
+@onready var page_sneeze: GPUParticles3D = $PageSneeze
 
 func _ready() -> void:
 	# spawn
@@ -94,11 +95,13 @@ func _on_sneeze_timer_timeout() -> void:
 	state = State.SNEEZE
 	
 	bookshelf_anim.play("Sneeze")
-	await bookshelf_anim.animation_finished
+	assert((await bookshelf.event) == &"sneeze")
 	await get_tree().process_frame
 	
 	if state != State.SNEEZE:
 		return
+	
+	page_sneeze.emitting = true
 	
 	var book := ENEMY_BOOK.instantiate()
 	book.player = player
