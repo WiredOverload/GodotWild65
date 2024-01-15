@@ -7,7 +7,7 @@ var heart_index := 0 # the point after which full hearts turn into empty hearts 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(Globals.health):
+	for i in range(Globals.max_health):
 		add_heart()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
