@@ -38,6 +38,23 @@ func _ready() -> void:
 	deactivate_catcher()
 	
 
+func set_state(v: State) -> void:
+	# exiting state
+	match state:
+		State.CATCHING:
+			deactivate_catcher()
+		State.THROWING:
+			spin_spark_particles.emitting = false
+			Gameplay.instance.set_time_scale(1.0, 0.01)
+			vibrate_timer.stop()
+	
+	state = v
+	
+	# entering state
+	match state:
+		State.CATCHING:
+			activate_catcher()
+
 func _process(delta: float) -> void:
 	match state:
 		State.NEUTRAL:
@@ -74,23 +91,6 @@ func _process(delta: float) -> void:
 					ball.grab(ball_held_position)
 			else:
 				state = State.NEUTRAL
-
-func set_state(v: State) -> void:
-	# exiting state
-	match state:
-		State.CATCHING:
-			deactivate_catcher()
-		State.THROWING:
-			spin_spark_particles.emitting = false
-			Gameplay.instance.set_time_scale(1.0, 0.01)
-			vibrate_timer.stop()
-	
-	state = v
-	
-	# entering state
-	match state:
-		State.CATCHING:
-			activate_catcher()
 
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
