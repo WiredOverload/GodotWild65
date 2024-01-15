@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnlic5ymw4djr"]
+
+[ext_resource type="Texture2D" uid="uid://4p5xj8x48tk5" path="res://UI/lose.png" id="1_oem2i"]
+[ext_resource type="Script" path="res://scenes/lose.gd" id="1_wlmvk"]
+
+[node name="Lose" type="Node3D"]
+script = ExtResource("1_wlmvk")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+texture = ExtResource("1_oem2i")
+
+[node name="Buttons" type="BoxContainer" parent="."]
+offset_left = 553.0
+offset_top = 242.0
+offset_right = 603.0
+offset_bottom = 282.0
+
+[node name="Button" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Retry"
+
+[connection signal="pressed" from="Buttons/Button" to="." method="_on_button_pressed"]

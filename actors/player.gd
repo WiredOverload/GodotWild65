@@ -151,14 +151,22 @@ func _on_vibrate_timer_timeout() -> void:
 	Gameplay.instance.screen_shake(7.0)
 
 func hit(damage):
-	if invuln_timer.is_stopped():
+	if invuln_timer.is_stopped() && Globals.health > 0:
 		print("HIT")
-		invuln_timer.start()
 		Globals.health -= damage
 		if Globals.health < 1:
 			print("dead")
 			mesh.mesh.surface_get_material(0).albedo_color = Color.DARK_MAGENTA
+			$DeathTimer.start()
+		else:
+			mesh.mesh.surface_get_material(0).albedo_color = Color.WHITE
+			invuln_timer.start()
 
 
 func _on_invuln_timer_timeout() -> void:
-	pass # Replace with function body.
+	mesh.mesh.surface_get_material(0).albedo_color = Color("ff79ff")
+
+
+func _on_death_timer_timeout() -> void:
+	print("SCENE CHANGE")
+	get_tree().change_scene_to_file("res://scenes/lose.tscn")

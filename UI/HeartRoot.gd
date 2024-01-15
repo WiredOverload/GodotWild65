@@ -34,6 +34,8 @@ func add_heart():
 
 func hurt(amount):
 	for i in range(amount):
+		if heart_index < 1:
+			return
 		hearts[heart_index - 1].empty = true
 		heart_index -= 1
 
