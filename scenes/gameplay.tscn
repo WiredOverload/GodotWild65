@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d0ovdrnefc0u5"]
+[gd_scene load_steps=20 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
 [ext_resource type="MeshLibrary" uid="uid://dgxh36itpnihl" path="res://mesh_library/mesh_library.tres" id="2_axurl"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ds0w34bd1klyc" path="res://actors/enemy_bookshelf.tscn" id="8_4eoky"]
 [ext_resource type="PackedScene" uid="uid://c85soy7nt5pny" path="res://actors/enemy_book.tscn" id="8_k3hhk"]
 [ext_resource type="PackedScene" uid="uid://ckd3tp6ek61ke" path="res://scenes/3dui_overlay.tscn" id="10_bqray"]
+[ext_resource type="Script" path="res://scenes/Gear.gd" id="11_4ok6k"]
 [ext_resource type="PackedScene" uid="uid://seeyug3rtuge" path="res://actors/enemy.tscn" id="11_xp8ag"]
 
 [sub_resource type="Environment" id="Environment_u7ddp"]
@@ -31,6 +32,12 @@ fog_light_energy = 0.09
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_qoosi"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_p5tk3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nyjeg"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_2j7pd"]
+font_size = 40
 
 [node name="Gameplay" type="Node3D"]
 script = ExtResource("1_cb7s4")
@@ -165,6 +172,28 @@ offset_right = 512.0
 offset_bottom = 512.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="GearDisplay" type="Control" parent="Overlays"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Overlays/GearDisplay"]
+layout_mode = 0
+offset_left = 900.0
+offset_right = 1013.0
+offset_bottom = 55.0
+text = "Gear: "
+label_settings = SubResource("LabelSettings_nyjeg")
+
+[node name="Gear" type="Label" parent="Overlays/GearDisplay"]
+layout_mode = 0
+offset_left = 1050.0
+offset_right = 1090.0
+offset_bottom = 55.0
+text = "1"
+label_settings = SubResource("LabelSettings_2j7pd")
+script = ExtResource("11_4ok6k")
 
 [node name="Enemy" parent="." instance=ExtResource("11_xp8ag")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.78762e-08, 0.637733, 11.9371)

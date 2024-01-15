@@ -78,6 +78,7 @@ func _process(delta: float) -> void:
 		State.THROWING:
 			if Input.is_action_pressed("action"):
 				throw_speed = clampf(throw_speed + delta * throw_accel, 0.0, max_throw_speed)
+				Globals.gear = floor(throw_speed / 20)
 				if not spin_spark_particles.emitting and is_equal_approx(throw_speed, max_throw_speed):
 					spin_spark_particles.restart()
 					Gameplay.instance.set_time_scale(0.3, 0.1)
