@@ -18,8 +18,20 @@ var max_throw_speed: float = 20.0
 
 var throw_accel: float = 10.0
 
-var max_health := 3
-var health := max_health
+#@onready var heart_controller = %HeartRoot
+#var max_health := 5:
+	#set(value):
+		#if value > max_health:
+			#heart_controller.add_heart()
+		#max_health = value
+#var health := max_health:
+	#set(value):
+		#if value < health:
+			#heart_controller.hurt(health - value)
+		#else:
+			#heart_controller.heal(value - health)
+		#health = value
+
 
 @onready var ball_held_position: Marker3D = %BallHeldPosition
 @onready var catch_area: Area3D = %CatchArea
@@ -137,8 +149,8 @@ func hit(damage):
 	if invuln_timer.is_stopped():
 		print("HIT")
 		invuln_timer.start()
-		health -= damage
-		if health < 1:
+		Globals.health -= damage
+		if Globals.health < 1:
 			print("dead")
 			mesh.mesh.surface_get_material(0).albedo_color = Color.DARK_MAGENTA
 

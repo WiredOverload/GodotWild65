@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d0ovdrnefc0u5"]
+[gd_scene load_steps=17 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
 [ext_resource type="MeshLibrary" uid="uid://dgxh36itpnihl" path="res://mesh_library/mesh_library.tres" id="2_axurl"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ds0w34bd1klyc" path="res://actors/enemy_bookshelf.tscn" id="8_4eoky"]
 [ext_resource type="PackedScene" uid="uid://c85soy7nt5pny" path="res://actors/enemy_book.tscn" id="8_k3hhk"]
 [ext_resource type="PackedScene" uid="uid://ckd3tp6ek61ke" path="res://scenes/3dui_overlay.tscn" id="10_bqray"]
+[ext_resource type="PackedScene" uid="uid://seeyug3rtuge" path="res://actors/enemy.tscn" id="11_xp8ag"]
 
 [sub_resource type="Environment" id="Environment_u7ddp"]
 background_mode = 1
@@ -136,3 +137,6 @@ offset_right = 512.0
 offset_bottom = 512.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="Enemy" parent="." instance=ExtResource("11_xp8ag")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.78762e-08, 0.637733, 11.9371)

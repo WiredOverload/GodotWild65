@@ -1,20 +1,20 @@
 extends Node3D
 
-#@onready var camera = get_parent()
 @onready var mesh = $Cube
+var full_material := preload("res://materials/heart_full.tres")
+var empty_material := preload("res://materials/heart_empty.tres")
 var time = 0
 var empty : bool = false:
 	set(value):
 		empty = value
-		if value:
-			mesh.mesh.surface_get_material(0).albedo_color = Color.BLACK
+		if value == true:
+			mesh.mesh.surface_set_material(0, empty_material)
 		else:
-			mesh.mesh.surface_get_material(0).albedo_color = Color("ff53ff")
+			mesh.mesh.surface_set_material(0, full_material)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
-	#look_at(camera.position)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
