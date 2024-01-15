@@ -73,7 +73,7 @@ target_path = NodePath("../..")
 
 [node name="BallHeldPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [node name="CatchArea" type="Area3D" parent="."]
 unique_name_in_owner = true

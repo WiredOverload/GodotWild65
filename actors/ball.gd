@@ -8,6 +8,8 @@ enum State {
 	MOVING,
 }
 
+@export var mesh: Mesh = preload("res://character_models/meshes/backpack_BackpackMesh.res")
+
 var current_speed = 15.0
 
 var state: State = State.MOVING
@@ -17,6 +19,11 @@ var held_marker: Node3D
 var is_held: bool:
 	get: return state == State.HELD
 
+@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+
+func _ready() -> void:
+	mesh_instance_3d.mesh = mesh
+
 func _physics_process(delta: float) -> void:
 	match state:
 		State.HELD:
@@ -24,6 +31,7 @@ func _physics_process(delta: float) -> void:
 			return
 		State.MOVING:
 			move_and_bounce()
+			rotation.y = Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP)
 
 # called when move_and_bounce() hits something
 func _on_bounce(collision: KinematicCollision3D) -> void:
