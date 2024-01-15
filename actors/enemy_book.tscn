@@ -12,14 +12,14 @@ height = 1.0
 _data = [Vector2(0.501767, 1), 0.0, -0.034826, 0, 0, Vector2(1, 0), -0.0531125, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_opf3e"]
+[sub_resource type="CurveTexture" id="CurveTexture_vu0n2"]
 curve = SubResource("Curve_10w5o")
 
 [sub_resource type="Curve" id="Curve_bd2n4"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_xa8u0"]
+[sub_resource type="CurveTexture" id="CurveTexture_dgagk"]
 curve = SubResource("Curve_bd2n4")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_els87"]
@@ -30,10 +30,10 @@ initial_velocity_min = 1.0
 initial_velocity_max = 2.0
 gravity = Vector3(0, 0, 0)
 damping_max = 1.0
-damping_curve = SubResource("CurveTexture_xa8u0")
+damping_curve = SubResource("CurveTexture_dgagk")
 scale_min = 0.5
 scale_max = 0.5
-alpha_curve = SubResource("CurveTexture_opf3e")
+alpha_curve = SubResource("CurveTexture_vu0n2")
 turbulence_enabled = true
 turbulence_noise_scale = 3.0
 
@@ -74,3 +74,11 @@ visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
 transform_align = 2
 process_material = SubResource("ParticleProcessMaterial_els87")
 draw_pass_1 = ExtResource("2_3mjw8")
+
+[node name="WanderTurnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="event" from="Book" to="." method="_on_book_event"]
+[connection signal="timeout" from="WanderTurnTimer" to="." method="_on_wander_turn_timer_timeout"]
