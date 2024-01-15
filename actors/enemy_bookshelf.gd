@@ -109,6 +109,11 @@ func _on_sneeze_timer_timeout() -> void:
 	book.position = position + basis.z * 1.0
 	book.rotation.y = rotation.y
 	
+	await bookshelf_anim.animation_finished
+	
+	if state != State.SNEEZE:
+		return
+	
 	velocity = Vector3.MODEL_FRONT.rotated(Vector3.UP, randf_range(0, TAU))
 	
 	sneeze_timer.start(randf_range(3.0, 6.0))
