@@ -4,6 +4,7 @@ const speed = 1.0
 const weight = 5.0
 var max_health = 1
 var health = max_health
+var damage := 1
 
 @export var player: Node3D
 
@@ -82,3 +83,8 @@ func _on_wander_turn_timer_timeout() -> void:
 	# Randomly rotate the direction the book is wandering in discrete angles
 	velocity = velocity.rotated(Vector3.UP, randi_range(-1, 1) * PI / 8.0)
 	wander_turn_timer.start(randf_range(3.0, 5.0))
+
+
+func _on_bounce(collision):
+	if collision.get_collider().is_in_group("Player"):
+		collision.get_collider().hit(damage)

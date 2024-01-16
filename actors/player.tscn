@@ -38,7 +38,7 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_vvcek")
 size = Vector2(0.2, 0.2)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uhsk2"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g488d"]
 _data = {
 "Catch": ExtResource("4_ebhtf"),
 "RESET": ExtResource("4_614sg"),
@@ -179,7 +179,7 @@ one_shot = true
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../PlayerModelTeacher")
 libraries = {
-"": SubResource("AnimationLibrary_uhsk2")
+"": SubResource("AnimationLibrary_g488d")
 }
 tree_root = SubResource("AnimationNodeBlendTree_x644t")
 advance_expression_base_node = NodePath("..")
