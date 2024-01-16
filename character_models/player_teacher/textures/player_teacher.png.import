@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3aytsekqk7fl"
-path="res://.godot/imported/player_teacher.png-8bca25ea88ed29ba2c5d80765caa864b.ctex"
+path="res://.godot/imported/player_teacher.png-206788f82963243941afcf6af5f8de17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character_models/textures/player_teacher.png"
-dest_files=["res://.godot/imported/player_teacher.png-8bca25ea88ed29ba2c5d80765caa864b.ctex"]
+source_file="res://character_models/player_teacher/textures/player_teacher.png"
+dest_files=["res://.godot/imported/player_teacher.png-206788f82963243941afcf6af5f8de17.ctex"]
 
 [params]
 

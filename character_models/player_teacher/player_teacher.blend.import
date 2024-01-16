@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dbbpcvj6kr6fe"
-path="res://.godot/imported/player_teacher.blend-a2652526113bbc940573d6633f4e9c15.scn"
+path="res://.godot/imported/player_teacher.blend-90ef652a62ca81f349c2170762b5307f.scn"
 
 [deps]
 
-source_file="res://character_models/player_teacher.blend"
-dest_files=["res://.godot/imported/player_teacher.blend-a2652526113bbc940573d6633f4e9c15.scn"]
+source_file="res://character_models/player_teacher/player_teacher.blend"
+dest_files=["res://.godot/imported/player_teacher.blend-90ef652a62ca81f349c2170762b5307f.scn"]
 
 [params]
 
@@ -34,7 +34,7 @@ _subresources={
 "Catch": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "res://character_models/animations/player_teacher/Catch.res",
+"save_to_file/path": "res://character_models/player_teacher/animations/Catch.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -1833,7 +1833,7 @@ _subresources={
 "RESET": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "res://character_models/animations/player_teacher/RESET.res",
+"save_to_file/path": "res://character_models/player_teacher/animations/RESET.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -3632,7 +3632,7 @@ _subresources={
 "SpinHold": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "res://character_models/animations/player_teacher/SpinHold.res",
+"save_to_file/path": "res://character_models/player_teacher/animations/SpinHold.res",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -5431,7 +5431,7 @@ _subresources={
 "Walk": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "res://character_models/animations/player_teacher/Walk.res",
+"save_to_file/path": "res://character_models/player_teacher/animations/Walk.res",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -7226,6 +7226,12 @@ _subresources={
 "slice_99/save_to_file/path": "",
 "slice_99/start_frame": 0,
 "slices/amount": 0
+}
+},
+"materials": {
+"PlayerTeacherMaterial": {
+"use_external/enabled": true,
+"use_external/path": "res://character_models/player_teacher/materials/PlayerTeacherMaterial.tres"
 }
 }
 }

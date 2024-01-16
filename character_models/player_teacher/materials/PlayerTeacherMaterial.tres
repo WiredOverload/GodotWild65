@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://do4lpv0b6vgun"]
+
+[ext_resource type="Texture2D" uid="uid://b3aytsekqk7fl" path="res://character_models/player_teacher/textures/player_teacher.png" id="1_3lek1"]
+
+[resource]
+resource_name = "PlayerTeacherMaterial"
+cull_mode = 2
+albedo_texture = ExtResource("1_3lek1")
+metallic_specular = 0.0
+texture_filter = 2
