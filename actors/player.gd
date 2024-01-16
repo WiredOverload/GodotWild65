@@ -38,7 +38,7 @@ var throw_accel: float = 10.0
 @onready var spin_spark_particles: GPUParticles3D = %SpinSparkParticles
 @onready var vibrate_timer: Timer = $VibrateTimer
 @onready var invuln_timer: Timer = $InvulnTimer
-@onready var mesh = $PlayerModel
+@onready var mesh = $PlayerModelTeacher/PlayerArmature/Skeleton3D/Player
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 

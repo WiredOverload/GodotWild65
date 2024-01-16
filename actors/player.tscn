@@ -171,10 +171,6 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[connection signal="timeout" from="VibrateTimer" to="." method="_on_vibrate_timer_timeout"]
-[connection signal="timeout" from="InvulnTimer" to="." method="_on_invuln_timer_timeout"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
-
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../PlayerModelTeacher")
 libraries = {
@@ -189,5 +185,6 @@ parameters/StateMachine/Walk/TimeScale/scale = 2.0
 
 [connection signal="timeout" from="VibrateTimer" to="." method="_on_vibrate_timer_timeout"]
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_invuln_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 
 [editable path="PlayerModelTeacher"]
