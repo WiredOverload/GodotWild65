@@ -38,7 +38,6 @@ turbulence_enabled = true
 turbulence_noise_scale = 3.0
 
 [node name="EnemyBook" type="CharacterBody3D" groups=["Enemy"]]
-collision_mask = 3
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_cs6ux")
@@ -81,4 +80,5 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
+[connection signal="event" from="Book" to="." method="_on_book_event"]
 [connection signal="timeout" from="WanderTurnTimer" to="." method="_on_wander_turn_timer_timeout"]

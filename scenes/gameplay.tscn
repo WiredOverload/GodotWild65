@@ -122,30 +122,6 @@ player = NodePath("../Player")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3401, 0, 9.6981)
 player = NodePath("../Player")
 
-[node name="EnemyBookshelf3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_4eoky")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3401, 0, 9.6981)
-player = NodePath("../Player")
-
-[node name="EnemyBookshelf4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_4eoky")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3401, 0, 9.6981)
-player = NodePath("../Player")
-
-[node name="EnemyBookshelf5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_4eoky")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3401, 0, 9.6981)
-player = NodePath("../Player")
-
-[node name="EnemyBookshelf6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_4eoky")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3401, 0, 9.6981)
-player = NodePath("../Player")
-
-[node name="EnemyBookshelf7" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_4eoky")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3401, 0, 9.6981)
-player = NodePath("../Player")
-
-[node name="EnemyBookshelf8" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_4eoky")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3401, 0, 9.6981)
-player = NodePath("../Player")
-
 [node name="Overlays" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15

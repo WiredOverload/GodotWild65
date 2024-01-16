@@ -48,8 +48,8 @@ var throw_accel: float = 10.0
 @onready var hold_distance: float = Vector3(ball_held_position.position.x, 0, ball_held_position.position.z).length()
 
 func _ready() -> void:
-	assert(ball)
-	ball.grab(ball_back_position)
+	if ball:
+		ball.grab(ball_back_position)
 	deactivate_catcher()
 	
 

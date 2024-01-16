@@ -19,6 +19,7 @@ var damage := 1
 var _spawned: bool = false
 
 func _ready() -> void:
+	assert(page_cough)
 	# spawn
 	rotation.y = randf_range(0, TAU)
 	book_anim.play("Spawn")
