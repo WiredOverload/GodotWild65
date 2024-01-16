@@ -20,12 +20,10 @@ var _spawned: bool = false
 func _ready() -> void:
 	# spawn
 	rotation.y = randf_range(0, TAU)
-	print(rotation.y)
 	book_anim.play("Spawn")
 	await book_anim.animation_finished
 	book_anim.play("Flap")
 	velocity = basis.z
-	print(rotation.y, velocity)
 	_spawned = true
 
 func _process(_delta: float) -> void:

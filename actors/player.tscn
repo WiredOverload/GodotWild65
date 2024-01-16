@@ -1,22 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://7db3hg74bni7"]
+[gd_scene load_steps=27 format=3 uid="uid://7db3hg74bni7"]
 
 [ext_resource type="Script" path="res://actors/player.gd" id="1_o3bix"]
 [ext_resource type="Script" path="res://util_scripts/motion_interpolator_3d.gd" id="2_6uy2u"]
+[ext_resource type="PackedScene" uid="uid://dbbpcvj6kr6fe" path="res://character_models/player_teacher.blend" id="2_hvmtt"]
+[ext_resource type="Animation" uid="uid://b3yl44oddw4kv" path="res://character_models/animations/player_teacher/RESET.res" id="4_614sg"]
+[ext_resource type="Animation" uid="uid://baxgx1j5b45ce" path="res://character_models/animations/player_teacher/Catch.res" id="4_ebhtf"]
+[ext_resource type="Animation" uid="uid://c7gyvsxtvhtyg" path="res://character_models/animations/player_teacher/SpinHold.res" id="5_rpj1w"]
+[ext_resource type="Animation" uid="uid://b4i7h05tqwhx5" path="res://character_models/animations/player_teacher/Walk.res" id="6_72wr6"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5eh5q"]
 height = 0.95
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j2kbh"]
-albedo_color = Color(1, 1, 0.403922, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awl2m"]
-albedo_color = Color(1, 0.47451, 1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_i7xac"]
-material = SubResource("StandardMaterial3D_awl2m")
-height = 1.0
-radial_segments = 8
-cap_bottom = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b318y"]
 size = Vector3(1, 1, 0.53418)
@@ -45,6 +38,78 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_vvcek")
 size = Vector2(0.2, 0.2)
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uhsk2"]
+_data = {
+"Catch": ExtResource("4_ebhtf"),
+"RESET": ExtResource("4_614sg"),
+"SpinHold": ExtResource("5_rpj1w"),
+"Walk": ExtResource("6_72wr6")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k8gr5"]
+animation = &"Catch"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_o8pnq"]
+filter_enabled = true
+filters = ["PlayerArmature/Skeleton3D:Hand.L", "PlayerArmature/Skeleton3D:Hand.R"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5bija"]
+animation = &"SpinHold"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k1nit"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hu7ju"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_e54lv"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_k1nit")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_hu7ju")
+blend_point_1/pos = 1.0
+min_space = 0.0
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_o4ji8"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_20dd6"]
+graph_offset = Vector2(-195, 32)
+nodes/Blend/node = SubResource("AnimationNodeBlendSpace1D_e54lv")
+nodes/Blend/position = Vector2(329.12, 125.84)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_o4ji8")
+nodes/TimeScale/position = Vector2(540, 140)
+nodes/output/position = Vector2(720, 160)
+node_connections = [&"TimeScale", 0, &"Blend", &"output", 0, &"TimeScale"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lt6v2"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_80v6x"]
+advance_mode = 2
+advance_expression = "state == State.THROWING"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_itq6v"]
+advance_mode = 2
+advance_expression = "state != State.THROWING"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_d7jtf"]
+states/SpinHold/node = SubResource("AnimationNodeAnimation_5bija")
+states/SpinHold/position = Vector2(527, 163)
+states/Walk/node = SubResource("AnimationNodeBlendTree_20dd6")
+states/Walk/position = Vector2(527, 74)
+transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_lt6v2"), "Walk", "SpinHold", SubResource("AnimationNodeStateMachineTransition_80v6x"), "SpinHold", "Walk", SubResource("AnimationNodeStateMachineTransition_itq6v")]
+graph_offset = Vector2(11, -42)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_x644t"]
+graph_offset = Vector2(-138.422, -10.719)
+nodes/CatchAnimation/node = SubResource("AnimationNodeAnimation_k8gr5")
+nodes/CatchAnimation/position = Vector2(220, 180)
+nodes/CatchBlend/node = SubResource("AnimationNodeBlend2_o8pnq")
+nodes/CatchBlend/position = Vector2(420, 80)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_d7jtf")
+nodes/StateMachine/position = Vector2(200, 40)
+nodes/output/position = Vector2(620, 140)
+node_connections = [&"CatchBlend", 0, &"StateMachine", &"CatchBlend", 1, &"CatchAnimation", &"output", 0, &"CatchBlend"]
+
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 2
 axis_lock_linear_y = true
@@ -55,17 +120,16 @@ script = ExtResource("1_o3bix")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_5eh5q")
 
-[node name="Catcher" type="CSGBox3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.634534)
-size = Vector3(0.725586, 0.689697, 0.0928955)
-material = SubResource("StandardMaterial3D_j2kbh")
+[node name="PlayerModelTeacher" parent="." instance=ExtResource("2_hvmtt")]
 
-[node name="PlayerModel" type="CSGMesh3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("CylinderMesh_i7xac")
+[node name="Skeleton3D" parent="PlayerModelTeacher/PlayerArmature" index="0"]
+bones/4/rotation = Quaternion(-0.396983, 0.585154, 0.585154, -0.396983)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/rotation = Quaternion(0.396983, 0.585154, 0.585154, 0.396983)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(-0.402164, 0.581605, 0.581605, -0.402164)
 
-[node name="MotionInterpolator3D" type="Node3D" parent="PlayerModel"]
+[node name="MotionInterpolator3D" type="Node3D" parent="PlayerModelTeacher"]
 process_priority = 1
 process_physics_priority = 1
 script = ExtResource("2_6uy2u")
@@ -110,3 +174,20 @@ one_shot = true
 [connection signal="timeout" from="VibrateTimer" to="." method="_on_vibrate_timer_timeout"]
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_invuln_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../PlayerModelTeacher")
+libraries = {
+"": SubResource("AnimationLibrary_uhsk2")
+}
+tree_root = SubResource("AnimationNodeBlendTree_x644t")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../PlayerModelTeacher/AnimationPlayer")
+parameters/CatchBlend/blend_amount = 0.0
+parameters/StateMachine/Walk/Blend/blend_position = 0.0
+parameters/StateMachine/Walk/TimeScale/scale = 2.0
+
+[connection signal="timeout" from="VibrateTimer" to="." method="_on_vibrate_timer_timeout"]
+[connection signal="timeout" from="InvulnTimer" to="." method="_on_invuln_timer_timeout"]
+
+[editable path="PlayerModelTeacher"]

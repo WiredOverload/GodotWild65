@@ -35,12 +35,12 @@ var throw_accel: float = 10.0
 
 @onready var ball_held_position: Marker3D = %BallHeldPosition
 @onready var catch_area: Area3D = %CatchArea
-@onready var catcher: CSGBox3D = %Catcher
 @onready var spin_spark_particles: GPUParticles3D = %SpinSparkParticles
 @onready var vibrate_timer: Timer = $VibrateTimer
 @onready var invuln_timer: Timer = $InvulnTimer
 @onready var mesh = $PlayerModel
 
+@onready var animation_tree: AnimationTree = $AnimationTree
 
 @onready var hold_distance: float = Vector3(ball_held_position.position.x, 0, ball_held_position.position.z).length()
 
@@ -70,6 +70,8 @@ func set_state(v: State) -> void:
 func _process(delta: float) -> void:
 	match state:
 		State.NEUTRAL:
+			_update_walk_animation(delta)
+			
 			if Input.is_action_just_pressed("action"):
 				if ball.is_held:
 					state = State.THROWING
@@ -94,6 +96,8 @@ func _process(delta: float) -> void:
 				throw_speed = 0.0
 				state = State.NEUTRAL
 		State.CATCHING:
+			_update_walk_animation(delta)
+			
 			if Input.is_action_pressed("action"):
 				var ob := catch_area.get_overlapping_bodies()
 				assert(ob.size() < 2)
@@ -139,13 +143,21 @@ func _physics_process(delta: float) -> void:
 			ball.global_transform = ball_held_position.global_transform
 
 
+func _update_walk_animation(delta: float) -> void:
+	var cur_walk_blend: float = animation_tree["parameters/StateMachine/Walk/Blend/blend_position"]
+	cur_walk_blend = move_toward(cur_walk_blend, velocity.length() / move_speed, delta / 0.2)
+	animation_tree["parameters/StateMachine/Walk/Blend/blend_position"] = cur_walk_blend
+	
+	var cur_catch_blend: float = animation_tree["parameters/CatchBlend/blend_amount"]
+	cur_catch_blend = move_toward(cur_catch_blend, 1.0 if state == State.CATCHING else 0.0, delta / 0.02)
+	animation_tree["parameters/CatchBlend/blend_amount"] = cur_catch_blend
+
+
 func activate_catcher() -> void:
 	catch_area.monitoring = true
-	catcher.visible = true
 
 func deactivate_catcher() -> void:
 	catch_area.monitoring = false
-	catcher.visible = false
 
 
 func _on_vibrate_timer_timeout() -> void:

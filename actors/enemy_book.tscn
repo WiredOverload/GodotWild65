@@ -49,7 +49,6 @@ shape = SubResource("CylinderShape3D_vit8j")
 [node name="Book" parent="." instance=ExtResource("1_quin3")]
 
 [node name="PageCough" type="GPUParticles3D" parent="Book"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.540562, 0)
 emitting = false
 lifetime = 0.8
 one_shot = true
