@@ -27,7 +27,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	match state:
 		State.HELD:
-			position = held_marker.global_position
+			global_transform = held_marker.global_transform
 			return
 		State.MOVING:
 			move_and_bounce()

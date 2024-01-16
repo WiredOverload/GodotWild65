@@ -34,6 +34,9 @@ var throw_accel: float = 10.0
 
 
 @onready var ball_held_position: Marker3D = %BallHeldPosition
+@onready var ball_back_position: Marker3D = %BallBackPosition
+
+
 @onready var catch_area: Area3D = %CatchArea
 @onready var spin_spark_particles: GPUParticles3D = %SpinSparkParticles
 @onready var vibrate_timer: Timer = $VibrateTimer
@@ -46,7 +49,7 @@ var throw_accel: float = 10.0
 
 func _ready() -> void:
 	assert(ball)
-	ball.grab(ball_held_position)
+	ball.grab(ball_back_position)
 	deactivate_catcher()
 	
 
@@ -56,6 +59,7 @@ func set_state(v: State) -> void:
 		State.CATCHING:
 			deactivate_catcher()
 		State.THROWING:
+			ball.held_marker = ball_back_position
 			spin_spark_particles.emitting = false
 			Gameplay.instance.set_time_scale(1.0, 0.01)
 			vibrate_timer.stop()
@@ -64,6 +68,8 @@ func set_state(v: State) -> void:
 	
 	# entering state
 	match state:
+		State.THROWING:
+			ball.held_marker = ball_held_position
 		State.CATCHING:
 			activate_catcher()
 
@@ -103,9 +109,9 @@ func _process(delta: float) -> void:
 				assert(ob.size() < 2)
 				if ob.size() == 1:
 					assert(ob[0] == ball)
-					state = State.THROWING
 					throw_speed = ball.current_speed
 					ball.grab(ball_held_position)
+					state = State.THROWING
 			else:
 				state = State.NEUTRAL
 
@@ -124,9 +130,6 @@ func _physics_process(delta: float) -> void:
 				velocity.z = move_toward(velocity.z, 0, move_speed)
 			
 			move_and_slide()
-			
-			if ball.is_held:
-				ball.global_transform = ball_held_position.global_transform
 		
 		State.THROWING:
 			rotation.y += delta * throw_speed / hold_distance
