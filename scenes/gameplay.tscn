@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d0ovdrnefc0u5"]
+[gd_scene load_steps=21 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
 [ext_resource type="MeshLibrary" uid="uid://dgxh36itpnihl" path="res://mesh_library/mesh_library.tres" id="2_axurl"]
@@ -38,6 +38,9 @@ font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_2j7pd"]
 font_size = 40
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yjfx7"]
+size = Vector3(24, 1, 1)
 
 [node name="Gameplay" type="Node3D"]
 script = ExtResource("1_cb7s4")
@@ -99,6 +102,7 @@ transform = Transform3D(1, 0, -4.36557e-11, 0, 1, 2.98023e-08, 7.27596e-11, -2.9
 transform = Transform3D(0.999998, 0.00168755, -0.000574348, -5.31259e-11, 0.322195, 0.946673, 0.00178261, -0.946672, 0.322194, -9.53674e-07, 8.809, 3.053)
 
 [node name="Player" parent="." node_paths=PackedStringArray("ball") instance=ExtResource("3_mdmmq")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5223, 0, 11.9386)
 ball = NodePath("../Ball")
 
@@ -110,9 +114,8 @@ update_scale = false
 [node name="Ball" parent="." instance=ExtResource("4_fr5jj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4568, 0, 5.66217)
 
-[node name="EnemyBook" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_k3hhk")]
+[node name="EnemyBook" parent="." instance=ExtResource("8_k3hhk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, 9)
-player = NodePath("../Player")
 
 [node name="EnemyBookshelf" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_4eoky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3401, 0, 9.6981)
@@ -121,6 +124,9 @@ player = NodePath("../Player")
 [node name="EnemyBookshelf2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_4eoky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3401, 0, 9.6981)
 player = NodePath("../Player")
+
+[node name="Enemy" parent="." instance=ExtResource("11_xp8ag")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 13)
 
 [node name="Overlays" type="Control" parent="."]
 layout_mode = 3
@@ -171,5 +177,11 @@ text = "1"
 label_settings = SubResource("LabelSettings_2j7pd")
 script = ExtResource("11_4ok6k")
 
-[node name="Enemy" parent="." instance=ExtResource("11_xp8ag")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.78762e-08, 0.637733, 11.9371)
+[node name="NextRoomArea" type="Area3D" parent="."]
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NextRoomArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.5, -1)
+shape = SubResource("BoxShape3D_yjfx7")
+
+[connection signal="body_entered" from="NextRoomArea" to="." method="_on_next_room_area_body_entered"]

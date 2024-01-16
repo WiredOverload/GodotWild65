@@ -74,6 +74,10 @@ func set_state(v: State) -> void:
 			activate_catcher()
 
 func _process(delta: float) -> void:
+	if ball == null:
+		ball = get_tree().get_first_node_in_group("Ball")
+		if ball:
+			ball.grab(ball_back_position)
 	match state:
 		State.NEUTRAL:
 			_update_walk_animation(delta)

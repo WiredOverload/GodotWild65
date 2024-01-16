@@ -6,7 +6,8 @@ var max_health = 1
 var health = max_health
 var damage := 1
 
-@export var player: Node3D
+#@export var player: Node3D
+@onready var player := %Player
 
 @onready var book = $Book
 @onready var book_anim: AnimationPlayer = book.get_node("AnimationPlayer")

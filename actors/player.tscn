@@ -50,7 +50,7 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_vvcek")
 size = Vector2(0.2, 0.2)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5fi26"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_im8we"]
 _data = {
 "Catch": ExtResource("4_ebhtf"),
 "RESET": ExtResource("4_614sg"),
@@ -144,7 +144,7 @@ bones/6/scale = Vector3(1, 1, 1)
 bones/7/rotation = Quaternion(-0.402164, 0.581605, 0.581605, -0.402164)
 
 [node name="WiggleBone" type="BoneAttachment3D" parent="PlayerModelTeacher/PlayerArmature/Skeleton3D" index="2"]
-transform = Transform3D(1, 7.10543e-15, 2.38417e-07, -8.60437e-08, -0.932607, 0.360893, 2.2235e-07, -0.360894, -0.932604, 0, 1.2827, -0.454476)
+transform = Transform3D(1, 7.10543e-14, 2.38418e-07, -8.60435e-08, -0.932607, 0.360893, 2.22351e-07, -0.360894, -0.932604, 0, 1.2827, -0.454476)
 bone_name = "Ponytail"
 bone_idx = 4
 override_pose = true
@@ -201,7 +201,7 @@ one_shot = true
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../PlayerModelTeacher")
 libraries = {
-"": SubResource("AnimationLibrary_5fi26")
+"": SubResource("AnimationLibrary_im8we")
 }
 tree_root = SubResource("AnimationNodeBlendTree_x644t")
 advance_expression_base_node = NodePath("..")

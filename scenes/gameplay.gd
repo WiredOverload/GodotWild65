@@ -4,6 +4,17 @@ extends Node3D
 static var instance: Gameplay
 
 @onready var gameplay_camera: Camera3D = $GameplayCamera
+@onready var north_border: CollisionShape3D = $WorldBorder/TopWall
+@onready var grid: GridMap = $GridMap
+@onready var player := $Player
+
+@export var basic_enemy = preload("res://actors/enemy.tscn")
+@export var book_enemy = preload("res://actors/enemy_book.tscn")
+@export var ball = preload("res://actors/ball.tscn")
+
+var room_number := 0
+
+var min_enemies := 3
 
 var _engine_time_scale: float:
 	get: return Engine.time_scale
@@ -51,4 +62,52 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Globals.gear >= 1:
+		north_border.disabled = true
+
+
+func _on_next_room_area_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Ball"):
+		get_tree().call_group("Enemy", "hit", 100)
+		var hitTile := grid.local_to_map(body.position)
+		hitTile.z = 0
+		print(hitTile)
+		grid.set_cell_item(hitTile, 0) # Ideally new broken wall tile
+		var hitTile2 = grid.local_to_map(body.position + Vector3(.5, 0, 0))
+		hitTile2.z = 0
+		if hitTile == hitTile2:
+			hitTile2 = grid.local_to_map(body.position - Vector3(.5, 0, 0))
+			hitTile2.z = 0
+			grid.set_cell_item(hitTile - Vector3i(0, 0, 1), 2,
+				grid.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), -PI/2)))
+			grid.set_cell_item(hitTile2 - Vector3i(0, 0, 1), 2,
+				grid.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), PI/2)))
+		else:
+			grid.set_cell_item(hitTile - Vector3i(0, 0, 1), 2,
+				grid.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), PI/2)))
+			grid.set_cell_item(hitTile2 - Vector3i(0, 0, 1), 2,
+				grid.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), -PI/2)))
+		grid.set_cell_item(hitTile2, 0)
+		body.queue_free()
+	elif body.is_in_group("Player"):
+		Globals.room_reset()
+		next_room()
+
+func next_room():
+	room_number += 1
+	player.position = Vector3(15, 0, 12)
+	spawn_enemies()
+
+func spawn_enemies():
+	var current
+	for i in range(min_enemies + room_number):
+		match randi_range(0, 1):
+			0:
+				current = basic_enemy.instantiate()
+			1:
+				current = book_enemy.instantiate()
+		add_child(current)
+		current.position = Vector3(randf_range(1, 23), 0, randf_range(1, 13))
+	var ball_spawn = ball.instantiate()
+	add_child(ball_spawn)
+	ball_spawn.position = Vector3(randf_range(1, 23), 0, randf_range(1, 13))
