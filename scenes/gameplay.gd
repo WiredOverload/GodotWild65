@@ -3,10 +3,11 @@ extends Node3D
 
 static var instance: Gameplay
 
-@onready var gameplay_camera: Camera3D = $PlayerRoot.camera
-@onready var north_border: CollisionShape3D = $Stage.top_wall
-@onready var grid: GridMap = $Stage.grid_map
-@onready var player = $PlayerRoot.player
+const PLAYER_ROOT_SCENE: PackedScene = preload("res://scenes/player_root.tscn")
+
+const STAGE_SCENES = [
+	{ weight = 1.0, file = "res://scenes/stages/stage.tscn" },
+]
 
 @export var basic_enemy = preload("res://actors/enemy.tscn")
 @export var book_enemy = preload("res://actors/enemy_book.tscn")
@@ -15,6 +16,11 @@ static var instance: Gameplay
 var room_number := 0
 
 var min_enemies := 3
+
+@onready var world: Node3D = $World
+
+var _stage
+var _player_root
 
 var _engine_time_scale: float:
 	get: return Engine.time_scale
@@ -33,7 +39,7 @@ func screen_shake(strength: float) -> void:
 	screen_shake_vel(0.5 * Vector2.from_angle(randf_range(0, TAU)) * strength)
 
 func screen_shake_vel(impulse: Vector2) -> void:
-	gameplay_camera.screen_shake(0.5 * impulse)
+	_player_root.camera.screen_shake(0.5 * impulse)
 
 func hit_stun() -> void:
 	if _time_scale_tween:
@@ -57,8 +63,29 @@ func _exit_tree() -> void:
 	Engine.time_scale = 1.0
 
 func _ready() -> void:
-	pass # Replace with function body.
+	var stage_info := _pick_random_stage()
+	_stage = load(stage_info.file).instantiate()
+	world.add_child(_stage)
+	
+	_player_root = PLAYER_ROOT_SCENE.instantiate()
+	world.add_child(_player_root)
+	_player_root.global_transform = _stage.player_spawn_point.global_transform
+	
+	await _player_root.play_entrance_cutscene()
+	
+	_stage.spawn_enemies()
 
+func _pick_random_stage() -> Dictionary:
+	var total_weight: float = 0.0
+	for s: Dictionary in STAGE_SCENES:
+		total_weight += s.weight
+	var roll := randf_range(0.0, total_weight)
+	for s: Dictionary in STAGE_SCENES:
+		roll -= s.weight
+		if roll <= 0.0:
+			return s
+	assert(false)
+	return STAGE_SCENES[0]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -68,25 +95,25 @@ func _process(delta: float) -> void:
 func _on_next_room_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Ball"):
 		get_tree().call_group("Enemy", "hit", 100)
-		var hitTile := grid.local_to_map(body.position)
+		var hitTile : Vector3i = _stage.grid_map.local_to_map(body.position)
 		hitTile.z = 0
 		print(hitTile)
-		grid.set_cell_item(hitTile, 0) # Ideally new broken wall tile
-		var hitTile2 = grid.local_to_map(body.position + Vector3(.5, 0, 0))
+		_stage.grid_map.set_cell_item(hitTile, 0) # Ideally new broken wall tile
+		var hitTile2 = _stage.grid_map.local_to_map(body.position + Vector3(.5, 0, 0))
 		hitTile2.z = 0
 		if hitTile == hitTile2:
-			hitTile2 = grid.local_to_map(body.position - Vector3(.5, 0, 0))
+			hitTile2 = _stage.grid_map.local_to_map(body.position - Vector3(.5, 0, 0))
 			hitTile2.z = 0
-			grid.set_cell_item(hitTile - Vector3i(0, 0, 1), 2,
-				grid.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), -PI/2)))
-			grid.set_cell_item(hitTile2 - Vector3i(0, 0, 1), 2,
-				grid.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), PI/2)))
+			_stage.grid_map.set_cell_item(hitTile - Vector3i(0, 0, 1), 2,
+				_stage.grid_map.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), -PI/2)))
+			_stage.grid_map.set_cell_item(hitTile2 - Vector3i(0, 0, 1), 2,
+				_stage.grid_map.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), PI/2)))
 		else:
-			grid.set_cell_item(hitTile - Vector3i(0, 0, 1), 2,
-				grid.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), PI/2)))
-			grid.set_cell_item(hitTile2 - Vector3i(0, 0, 1), 2,
-				grid.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), -PI/2)))
-		grid.set_cell_item(hitTile2, 0)
+			_stage.grid_map.set_cell_item(hitTile - Vector3i(0, 0, 1), 2,
+				_stage.grid_map.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), PI/2)))
+			_stage.grid_map.set_cell_item(hitTile2 - Vector3i(0, 0, 1), 2,
+				_stage.grid_map.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), -PI/2)))
+		_stage.grid_map.set_cell_item(hitTile2, 0)
 		body.queue_free()
 	elif body.is_in_group("Player"):
 		next_room()

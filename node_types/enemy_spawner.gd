@@ -26,6 +26,8 @@ const DEFAULT_PREVIEW_MESH := "res://character_models/DO_NOT_SHIP/meshes/enemy_p
 @export var min_difficulty: int = 0
 @export_range(0.01, 1.0, 0.01) var spawn_chance: float = 1.0
 
+@export var spawn_on_ready: bool = false
+
 var _preview_mesh_instance: MeshInstance3D
 
 func _ready() -> void:
@@ -39,9 +41,10 @@ func _ready() -> void:
 	assert(spawn_chance > 0.0)
 	assert(spawn_chance <= 1.0)
 	
-	
-	await get_tree().process_frame
-	
+	if spawn_on_ready:
+		spawn.call_deferred()
+
+func spawn() -> void:
 	queue_free()
 	
 	if Globals.difficulty < min_difficulty:

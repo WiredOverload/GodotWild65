@@ -1,16 +1,14 @@
 extends CharacterBody3D
 
 enum State {
-	NEUTRAL,
-	THROWING,
-	CATCHING,
-	DISABLED,
+	NEUTRAL = 0,
+	THROWING = 1,
+	CATCHING = 2,
+	DISABLED = 3,
 }
 
 var move_speed: float = 5.0
 var move_speed_throwing: float = 1.0
-
-@export var ball: Ball
 
 var state: State = State.NEUTRAL: set = set_state
 
@@ -33,6 +31,7 @@ var throw_accel: float = 10.0
 			#heart_controller.heal(value - health)
 		#health = value
 
+@onready var ball: Ball = get_tree().get_first_node_in_group("Ball")
 
 @onready var ball_held_position: Marker3D = %BallHeldPosition
 @onready var ball_back_position: Marker3D = %BallBackPosition
@@ -64,6 +63,8 @@ func set_state(v: State) -> void:
 			spin_spark_particles.emitting = false
 			Gameplay.instance.set_time_scale(1.0, 0.01)
 			vibrate_timer.stop()
+		State.DISABLED:
+			$CollisionShape3D.disabled = true
 	
 	state = v
 	
@@ -73,12 +74,15 @@ func set_state(v: State) -> void:
 			ball.held_marker = ball_held_position
 		State.CATCHING:
 			activate_catcher()
+		State.DISABLED:
+			$CollisionShape3D.disabled = false
 
 func _process(delta: float) -> void:
 	if ball == null:
 		ball = get_tree().get_first_node_in_group("Ball")
 		if ball:
 			ball.grab(ball_back_position)
+	
 	match state:
 		State.NEUTRAL:
 			_update_walk_animation(delta)
