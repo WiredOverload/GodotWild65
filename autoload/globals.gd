@@ -2,14 +2,16 @@ extends Node
 
 var health := 3
 var max_health := 5
-var gear := 0
 var difficulty := 0
 
+var bag_raw_speed := 0
+var gear: int:
+	get: return floori(bag_raw_speed / 10)
+
 func room_reset():
-	gear = 0
+	bag_raw_speed = 0
 
 func reset():
 	health = 3
 	max_health = 5
-	gear = 0
 	difficulty = 0

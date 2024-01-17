@@ -89,24 +89,24 @@ func _on_next_room_area_body_entered(body: Node3D) -> void:
 		grid.set_cell_item(hitTile2, 0)
 		body.queue_free()
 	elif body.is_in_group("Player"):
-		Globals.room_reset()
 		next_room()
 
 func next_room():
-	room_number += 1
+	Globals.room_reset()
+	Globals.difficulty += 1
 	player.position = Vector3(15, 0, 12)
-	spawn_enemies()
-
-func spawn_enemies():
-	var current
-	for i in range(min_enemies + room_number):
-		match randi_range(0, 1):
-			0:
-				current = basic_enemy.instantiate()
-			1:
-				current = book_enemy.instantiate()
-		add_child(current)
-		current.position = Vector3(randf_range(1, 23), 0, randf_range(1, 13))
-	var ball_spawn = ball.instantiate()
-	add_child(ball_spawn)
-	ball_spawn.position = Vector3(randf_range(1, 23), 0, randf_range(1, 13))
+	#spawn_enemies()
+#
+#func spawn_enemies():
+	#var current
+	#for i in range(min_enemies + room_number):
+		#match randi_range(0, 1):
+			#0:
+				#current = basic_enemy.instantiate()
+			#1:
+				#current = book_enemy.instantiate()
+		#add_child(current)
+		#current.position = Vector3(randf_range(1, 23), 0, randf_range(1, 13))
+	#var ball_spawn = ball.instantiate()
+	#add_child(ball_spawn)
+	#ball_spawn.position = Vector3(randf_range(1, 23), 0, randf_range(1, 13))
