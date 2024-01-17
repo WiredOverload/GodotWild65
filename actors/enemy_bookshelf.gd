@@ -64,7 +64,7 @@ func set_state(v: State) -> void:
 func hit(damage : int):
 	if health > 0:
 		health -= damage # TODO: Actually check this value.
-		player.max_throw_speed += weight
+		Globals.bag_raw_max_speed += weight
 		collision_shape_3d.disabled = true
 		
 		# fade to alpha zero and color to red
@@ -104,7 +104,7 @@ func _on_sneeze_timer_timeout() -> void:
 	page_sneeze.emitting = true
 	
 	var book := ENEMY_BOOK.instantiate()
-	book.player = player
+	#book.player = player
 	get_parent().add_child(book)
 	book.position = position + basis.z * 1.0
 	book.rotation.y = rotation.y

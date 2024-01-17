@@ -6,7 +6,7 @@ var max_health = 1
 var health = max_health
 var damage := 1
 
-@onready var player := get_tree().get_first_node_in_group("Player")
+#@onready var player := get_tree().get_first_node_in_group("Player")
 
 @onready var book = $Book
 @onready var book_anim: AnimationPlayer = book.get_node("AnimationPlayer")
@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 func hit(damage : int):
 	if health > 0:
 		health -= damage # TODO: Actually check this value.
-		player.max_throw_speed += weight
+		Globals.bag_raw_max_speed += weight
 		page_death.emitting = true
 		collision_shape_3d.disabled = true
 		

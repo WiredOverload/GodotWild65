@@ -82,6 +82,7 @@ func _process(delta: float) -> void:
 		ball = get_tree().get_first_node_in_group("Ball")
 		if ball:
 			ball.grab(ball_back_position)
+	max_throw_speed = Globals.bag_raw_max_speed # adjustment needed here if apples doesn't want linear speed
 	
 	match state:
 		State.NEUTRAL:
@@ -94,8 +95,8 @@ func _process(delta: float) -> void:
 					state = State.CATCHING
 		State.THROWING:
 			if Input.is_action_pressed("action"):
-				throw_speed = clampf(throw_speed + delta * throw_accel, 0.0, max_throw_speed)
-				Globals.gear = floor(throw_speed / 20)
+				Globals.bag_raw_speed = clampf(Globals.bag_raw_speed + delta * throw_accel, 0.0, max_throw_speed)
+				throw_speed = Globals.bag_raw_speed # adjustment needed here if apples doesn't want linear speed
 				if not spin_spark_particles.emitting and is_equal_approx(throw_speed, max_throw_speed):
 					spin_spark_particles.restart()
 					Gameplay.instance.set_time_scale(0.3, 0.1)

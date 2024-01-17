@@ -29,4 +29,4 @@ func hit(damage : int):
 	if health > 0:
 		health -= damage
 		mesh.mesh.surface_get_material(0).albedo_color = Color.BLACK
-		player.max_throw_speed += weight
+		Globals.bag_raw_speed_max += weight
