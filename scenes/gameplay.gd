@@ -3,10 +3,10 @@ extends Node3D
 
 static var instance: Gameplay
 
-@onready var gameplay_camera: Camera3D = $GameplayCamera
-@onready var north_border: CollisionShape3D = $WorldBorder/TopWall
-@onready var grid: GridMap = $GridMap
-@onready var player := $Player
+@onready var gameplay_camera: Camera3D = $PlayerRoot.camera
+@onready var north_border: CollisionShape3D = $Stage.top_wall
+@onready var grid: GridMap = $Stage.grid_map
+@onready var player = $PlayerRoot.player
 
 @export var basic_enemy = preload("res://actors/enemy.tscn")
 @export var book_enemy = preload("res://actors/enemy_book.tscn")
@@ -62,8 +62,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Globals.gear >= 1:
-		north_border.disabled = true
+	pass
 
 
 func _on_next_room_area_body_entered(body: Node3D) -> void:

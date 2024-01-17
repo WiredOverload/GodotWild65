@@ -62,6 +62,7 @@ func _ready():
 		return
 	
 	if target_path:
+		print(get_path())
 		_target = get_node(target_path)
 	
 	if keep_initial_offset:

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://w3sj57nhvsat"
-path="res://.godot/imported/floor.blend-06acac7f299964e69d6a169abb1cbd6e.scn"
+uid="uid://bd4jq1d3hbm0j"
+path="res://.godot/imported/enemy_preview.blend-8e948f77c3f8d7c2fab4643abbe8d79f.scn"
 
 [deps]
 
-source_file="res://mesh_library/models/floor.blend"
-dest_files=["res://.godot/imported/floor.blend-06acac7f299964e69d6a169abb1cbd6e.scn"]
+source_file="res://character_models/DO_NOT_SHIP/enemy_preview.blend"
+dest_files=["res://.godot/imported/enemy_preview.blend-8e948f77c3f8d7c2fab4643abbe8d79f.scn"]
 
 [params]
 
@@ -18,7 +18,7 @@ nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 meshes/ensure_tangents=true
-meshes/generate_lods=false
+meshes/generate_lods=true
 meshes/create_shadow_meshes=true
 meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
@@ -31,26 +31,21 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "materials": {
-"Material": {
+"EnemyPreviewMaterial": {
 "use_external/enabled": true,
-"use_external/path": "res://mesh_library/models/materials/DungeonTrimMaterial.tres"
+"use_external/path": "res://character_models/DO_NOT_SHIP/materials/EnemyPreviewMaterial.tres"
 }
 },
 "meshes": {
-"floor_Cube": {
+"enemy_preview_EnemyPreviewMesh": {
 "generate/lightmap_uv": 0,
-"generate/lods": 0,
+"generate/lods": 2,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://mesh_library/models/meshes/floor_Cube.res"
-}
-},
-"nodes": {
-"PATH:Floor": {
-"generate/physics": true
+"save_to_file/path": "res://character_models/DO_NOT_SHIP/meshes/enemy_preview_EnemyPreviewMesh.res"
 }
 }
 }
@@ -61,7 +56,7 @@ blender/nodes/punctual_lights=true
 blender/nodes/cameras=true
 blender/nodes/custom_properties=true
 blender/nodes/modifiers=1
-blender/meshes/colors=true
+blender/meshes/colors=false
 blender/meshes/uvs=true
 blender/meshes/normals=true
 blender/meshes/tangents=true

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://seeyug3rtuge"]
 
 [ext_resource type="Script" path="res://actors/enemy.gd" id="1_y0y7r"]
-[ext_resource type="Script" path="res://util_scripts/motion_interpolator_3d.gd" id="2_m1u8n"]
+[ext_resource type="Script" path="res://node_types/motion_interpolator_3d.gd" id="2_m1u8n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yyx1r"]
 resource_local_to_scene = true

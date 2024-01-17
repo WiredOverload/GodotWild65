@@ -3,7 +3,8 @@ extends CharacterBody3D
 enum State {
 	NEUTRAL,
 	THROWING,
-	CATCHING
+	CATCHING,
+	DISABLED,
 }
 
 var move_speed: float = 5.0

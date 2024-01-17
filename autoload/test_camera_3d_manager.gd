@@ -3,6 +3,8 @@ extends Node
 const TEST_CAMERA_3D = "res://autoload/test_camera_3d/test_camera_3d.tscn"
 
 func _ready():
+	await get_tree().process_frame
+	
 	if get_viewport().get_camera_3d() != null:
 		return
 	

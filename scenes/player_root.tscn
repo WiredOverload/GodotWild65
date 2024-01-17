@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://3cyaieypkc0i"]
+
+[ext_resource type="Script" path="res://scenes/gameplay_camera.gd" id="1_l4wbv"]
+[ext_resource type="Script" path="res://scenes/player_root.gd" id="1_s6u05"]
+[ext_resource type="Script" path="res://node_types/motion_interpolator_3d.gd" id="3_fqwsv"]
+[ext_resource type="PackedScene" uid="uid://7db3hg74bni7" path="res://actors/player.tscn" id="3_jho0s"]
+[ext_resource type="PackedScene" uid="uid://ckv4dexmjl00r" path="res://actors/ball.tscn" id="4_aalgo"]
+
+[node name="PlayerRoot" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5223, 0, 11.9386)
+script = ExtResource("1_s6u05")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(0.999998, 0.00168755, -0.000574348, 1.99132e-11, 0.322195, 0.946673, 0.00178261, -0.946672, 0.322194, -9.53674e-07, 8.809, 3.053)
+current = true
+fov = 70.0
+script = ExtResource("1_l4wbv")
+
+[node name="MotionInterpolator3D" type="Node3D" parent="Camera"]
+process_priority = 1
+process_physics_priority = 1
+transform = Transform3D(1, 0, 0, 0, 0.121869, -0.992546, 0, 0.992546, 0.121869, -14.5, 9.74286, -24.91)
+script = ExtResource("3_fqwsv")
+target_path = NodePath("../../CameraMarkerGimbal/CameraMarker")
+
+[node name="CameraMarkerGimbal" type="Node3D" parent="."]
+transform = Transform3D(1, 0, -4.36557e-11, 0, 1, 2.98023e-08, 7.27596e-11, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="CameraMarker" type="Marker3D" parent="CameraMarkerGimbal"]
+transform = Transform3D(0.999998, 0.00168755, -0.000574348, -5.31259e-11, 0.322195, 0.946673, 0.00178261, -0.946672, 0.322194, -9.53674e-07, 8.809, 3.053)
+
+[node name="Player" parent="." node_paths=PackedStringArray("ball") instance=ExtResource("3_jho0s")]
+unique_name_in_owner = true
+ball = NodePath("../Ball")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
+remote_path = NodePath("../../CameraMarkerGimbal")
+update_rotation = false
+update_scale = false
+
+[node name="Ball" parent="." instance=ExtResource("4_aalgo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.934501, 0, -6.27643)

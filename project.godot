@@ -34,6 +34,13 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/wigglebone/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://actors/": "red",
+"res://scenes/": "green"
+}
+
 [importer_defaults]
 
 texture={

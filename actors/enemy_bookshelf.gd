@@ -12,7 +12,7 @@ enum State {
 	DEATH,
 }
 
-@export var player: Node3D
+@onready var player: Node3D = get_tree().get_first_node_in_group("Player")
 
 var max_health = 1
 var health = max_health
