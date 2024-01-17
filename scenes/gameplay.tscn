@@ -1,8 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0ovdrnefc0u5"]
+[gd_scene load_steps=4 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
-[ext_resource type="PackedScene" uid="uid://cwhxddsw2bs6w" path="res://scenes/stage.tscn" id="2_wsanb"]
-[ext_resource type="PackedScene" uid="uid://3cyaieypkc0i" path="res://scenes/player_root.tscn" id="3_vg0d6"]
 [ext_resource type="PackedScene" uid="uid://dod5y8ldj6mx5" path="res://scenes/overlays.tscn" id="4_6dyfr"]
 
 [sub_resource type="Environment" id="Environment_u7ddp"]
@@ -27,8 +25,6 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u7ddp")
 
-[node name="Stage" parent="." instance=ExtResource("2_wsanb")]
-
-[node name="PlayerRoot" parent="." instance=ExtResource("3_vg0d6")]
+[node name="World" type="Node3D" parent="."]
 
 [node name="Overlays" parent="." instance=ExtResource("4_6dyfr")]
