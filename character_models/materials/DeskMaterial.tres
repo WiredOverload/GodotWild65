@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c56rdcunmgpm"]
+
+[ext_resource type="Texture2D" uid="uid://cvt374e4dwl4d" path="res://character_models/textures/desk.png" id="1_5lcu8"]
+[ext_resource type="Texture2D" uid="uid://buauxcxeoc5vb" path="res://character_models/textures/desk_metallic.png" id="2_g7pmb"]
+
+[resource]
+resource_name = "DeskMaterial"
+cull_mode = 2
+albedo_texture = ExtResource("1_5lcu8")
+metallic = 0.9
+metallic_specular = 0.0
+metallic_texture = ExtResource("2_g7pmb")
+metallic_texture_channel = 2
+roughness = 0.5
+roughness_texture = ExtResource("2_g7pmb")
+roughness_texture_channel = 1
+texture_filter = 2
