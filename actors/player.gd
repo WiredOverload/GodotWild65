@@ -64,7 +64,7 @@ func set_state(v: State) -> void:
 			Gameplay.instance.set_time_scale(1.0, 0.01)
 			vibrate_timer.stop()
 		State.DISABLED:
-			$CollisionShape3D.disabled = true
+			$CollisionShape3D.disabled = false
 	
 	state = v
 	
@@ -75,7 +75,7 @@ func set_state(v: State) -> void:
 		State.CATCHING:
 			activate_catcher()
 		State.DISABLED:
-			$CollisionShape3D.disabled = false
+			$CollisionShape3D.disabled = true
 
 func _process(delta: float) -> void:
 	if ball == null:
@@ -140,7 +140,7 @@ func _physics_process(delta: float) -> void:
 				velocity.z = move_toward(velocity.z, 0, move_speed)
 			
 			if move_and_slide():
-				_handle_collision()
+				_handle_move_and_slide_collision()
 		
 		State.THROWING:
 			rotation.y += delta * throw_speed / hold_distance
@@ -153,7 +153,7 @@ func _physics_process(delta: float) -> void:
 				velocity.z = move_toward(velocity.z, 0, move_speed)
 			
 			if move_and_slide():
-				_handle_collision()
+				_handle_move_and_slide_collision()
 			
 			ball.global_transform = ball_held_position.global_transform
 
@@ -174,10 +174,13 @@ func activate_catcher() -> void:
 func deactivate_catcher() -> void:
 	catch_area.monitoring = false
 
-func _handle_collision() -> void:
-	var other = get_last_slide_collision().get_collider()
-	if other.is_in_group("Enemy") and other.has_method(&"hit_target"):
-		other.hit_target(self)
+func _handle_move_and_slide_collision() -> void:
+	for i: int in range(get_slide_collision_count()):
+		var collision := get_slide_collision(i)
+		if has_method(&"_collision"):
+			call(&"_collision", collision.get_collider())
+		if collision.get_collider().has_method(&"_collision"):
+			collision.get_collider().call(&"_collision", self)
 
 func _on_vibrate_timer_timeout() -> void:
 	Gameplay.instance.screen_shake(7.0)

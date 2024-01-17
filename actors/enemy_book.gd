@@ -86,10 +86,6 @@ func _on_wander_turn_timer_timeout() -> void:
 	wander_turn_timer.start(randf_range(3.0, 5.0))
 
 
-func _on_bounce(collision):
-	if collision.get_collider().is_in_group("Player"):
-		hit_target(collision.get_collider())
-
-
-func hit_target(target):
-	target.hit(damage)
+func _collision(other: PhysicsBody3D) -> void:
+	if other.is_in_group("Player"):
+		other.hit(damage)

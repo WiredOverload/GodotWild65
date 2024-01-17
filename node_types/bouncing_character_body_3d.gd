@@ -17,9 +17,22 @@ func move_and_bounce() -> void:
 		velocity = velocity.bounce(normal)
 		motion = collision.get_remainder().bounce(normal)
 		
+		var stop = false
+		
+		print("Collision: %s -> %s" % [name, collision.get_collider().name])
+		
 		bounce.emit()
+		
 		if has_method(&"_on_bounce"):
-			call(&"_on_bounce", collision)
+			stop = call(&"_on_bounce", collision)
+		
+		if has_method(&"_collision"):
+			call(&"_collision", collision.get_collider())
+		if collision.get_collider().has_method(&"_collision"):
+			collision.get_collider().call(&"_collision", self)
+		
+		if stop:
+			break
 		
 		if bounce_count >= max_bounces:
 			break

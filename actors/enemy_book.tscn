@@ -38,6 +38,8 @@ turbulence_enabled = true
 turbulence_noise_scale = 3.0
 
 [node name="EnemyBook" type="CharacterBody3D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 15
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_cs6ux")

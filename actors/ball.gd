@@ -12,7 +12,7 @@ enum State {
 
 var current_speed = 15.0
 
-var state: State = State.MOVING
+var state: State = State.MOVING: set = set_state
 
 var held_marker: Node3D
 
@@ -36,12 +36,23 @@ func _physics_process(delta: float) -> void:
 # called when move_and_bounce() hits something
 func _on_bounce(collision: KinematicCollision3D) -> void:
 	var normal := collision.get_normal()
-	
 	Gameplay.instance.screen_shake_vel(-Vector2(normal.x, normal.z).normalized() * velocity.length())
-	
-	if collision.get_collider().is_in_group("Enemy"):
-		collision.get_collider().hit(1)
+
+func _collision(other: PhysicsBody3D) -> void:
+	if other.is_in_group("Enemy"):
+		other.hit(1)
 		Gameplay.instance.hit_stun()
+
+func set_state(v: State) -> void:
+	match state:
+		State.HELD:
+			$CollisionShape3D.disabled = false
+	
+	state = v
+	
+	match state:
+		State.HELD:
+			$CollisionShape3D.disabled = true
 
 func grab(marker: Node3D) -> void:
 	state = State.HELD
