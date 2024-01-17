@@ -88,4 +88,8 @@ func _on_wander_turn_timer_timeout() -> void:
 
 func _on_bounce(collision):
 	if collision.get_collider().is_in_group("Player"):
-		collision.get_collider().hit(damage)
+		hit_target(collision.get_collider())
+
+
+func hit_target(target):
+	target.hit(damage)

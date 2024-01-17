@@ -134,7 +134,8 @@ func _physics_process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, move_speed)
 				velocity.z = move_toward(velocity.z, 0, move_speed)
 			
-			move_and_slide()
+			if move_and_slide():
+				_handle_collision()
 		
 		State.THROWING:
 			rotation.y += delta * throw_speed / hold_distance
@@ -146,7 +147,8 @@ func _physics_process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, move_speed)
 				velocity.z = move_toward(velocity.z, 0, move_speed)
 			
-			move_and_slide()
+			if move_and_slide():
+				_handle_collision()
 			
 			ball.global_transform = ball_held_position.global_transform
 
@@ -167,6 +169,10 @@ func activate_catcher() -> void:
 func deactivate_catcher() -> void:
 	catch_area.monitoring = false
 
+func _handle_collision() -> void:
+	var other = get_last_slide_collision().get_collider()
+	if other.is_in_group("Enemy") and other.has_method(&"hit_target"):
+		other.hit_target(self)
 
 func _on_vibrate_timer_timeout() -> void:
 	Gameplay.instance.screen_shake(7.0)

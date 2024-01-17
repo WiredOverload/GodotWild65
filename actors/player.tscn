@@ -50,7 +50,7 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_vvcek")
 size = Vector2(0.2, 0.2)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8u6dm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kll0p"]
 _data = {
 "Catch": ExtResource("4_ebhtf"),
 "RESET": ExtResource("4_614sg"),
@@ -187,7 +187,6 @@ draw_pass_1 = SubResource("QuadMesh_odta2")
 wait_time = 0.05
 
 [node name="InvulnTimer" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true
 
 [node name="DeathTimer" type="Timer" parent="."]
@@ -197,7 +196,7 @@ one_shot = true
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../PlayerModelTeacher")
 libraries = {
-"": SubResource("AnimationLibrary_8u6dm")
+"": SubResource("AnimationLibrary_kll0p")
 }
 tree_root = SubResource("AnimationNodeBlendTree_x644t")
 advance_expression_base_node = NodePath("..")
