@@ -31,7 +31,7 @@ var throw_accel: float = 10.0
 			#heart_controller.heal(value - health)
 		#health = value
 
-@onready var ball: Ball = get_tree().get_first_node_in_group("Ball")
+@onready var ball = get_tree().get_first_node_in_group("Ball")
 
 @onready var ball_held_position: Marker3D = %BallHeldPosition
 @onready var ball_back_position: Marker3D = %BallBackPosition

@@ -1,4 +1,3 @@
-class_name Ball
 extends BouncingCharacterBody3D
 
 const MAX_BOUNCES := 1

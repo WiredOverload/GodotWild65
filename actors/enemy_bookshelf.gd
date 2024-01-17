@@ -1,6 +1,6 @@
 extends BouncingCharacterBody3D
 
-const ENEMY_BOOK = preload("res://actors/enemy_book.tscn")
+const ENEMY_BOOK: PackedScene = preload("res://actors/enemy_book.tscn")
 
 const speed = 1.0
 const weight = 5.0

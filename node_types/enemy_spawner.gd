@@ -8,7 +8,7 @@ enum EnemyType {
 	BOOKSHELF,
 }
 
-const ENEMY_SCENES := [
+var ENEMY_SCENES := [
 	preload("res://actors/enemy.tscn"),
 	preload("res://actors/enemy_book.tscn"),
 	preload("res://actors/enemy_bookshelf.tscn"),
