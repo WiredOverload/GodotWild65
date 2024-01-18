@@ -61,7 +61,7 @@ func set_state(v: State) -> void:
 			wander_turn_timer.paused = false
 			wander_turn_timer.start()
 
-func hit(damage : int):
+func deal_damage(damage : int):
 	if health > 0:
 		health -= damage # TODO: Actually check this value.
 		Globals.add_xp(weight)

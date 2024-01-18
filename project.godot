@@ -24,7 +24,6 @@ Globals="*res://autoload/globals.gd"
 
 gdscript/warnings/standalone_expression=2
 gdscript/warnings/standalone_ternary=2
-gdscript/warnings/return_value_discarded=1
 
 [display]
 

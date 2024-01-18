@@ -1,7 +1,7 @@
 class_name BouncingCharacterBody3D
 extends CharacterBody3D
 
-signal bounce()
+signal bounce(collision: KinematicCollision3D)
 
 @export var max_bounces: int = 16
 
@@ -21,7 +21,7 @@ func move_and_bounce() -> void:
 		
 		print("Collision: %s <-> %s" % [name, collision.get_collider().name])
 		
-		bounce.emit()
+		bounce.emit(collision)
 		
 		if has_method(&"_on_bounce"):
 			stop = call(&"_on_bounce", collision)

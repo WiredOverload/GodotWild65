@@ -79,6 +79,9 @@ func _exit_tree() -> void:
 	Engine.time_scale = 1.0
 
 func _ready() -> void:
+	create_room()
+
+func create_room() -> void:
 	var stage_info := _pick_random_stage()
 	_stage = load(stage_info.file).instantiate()
 	world.add_child(_stage)
@@ -87,9 +90,25 @@ func _ready() -> void:
 	world.add_child(_player_root)
 	_player_root.global_transform = _stage.player_spawn_point.global_transform
 	
+	_stage.ball = _player_root.ball
+	
+	_stage.player_exit.connect(_on_stage_player_exit)
+	
 	await _player_root.play_entrance_cutscene()
 	
 	_stage.spawn_enemies()
+
+func _on_stage_player_exit():
+	Globals.room_reset()
+	Globals.difficulty += 1
+	_stage.queue_free()
+	_player_root.queue_free()
+	
+	world.remove_child(_stage)
+	world.remove_child(_player_root)
+	
+	create_room()
+	
 
 func _pick_random_stage() -> Dictionary:
 	var total_weight: float = 0.0
@@ -110,7 +129,7 @@ func _pick_random_stage() -> Dictionary:
 
 var _last_process_time: float = Time.get_ticks_usec()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var now := Time.get_ticks_usec()
 	var true_delta := (now - _last_process_time) / 1000000.0
 	_last_process_time = now
@@ -119,9 +138,7 @@ func _process(delta: float) -> void:
 		Engine.time_scale = move_toward(Engine.time_scale, _time_scale_targets[0], _time_scale_speeds[0] * true_delta)
 		
 		for i: int in range(_time_scale_targets.size() - 1, -1, -1):
-			var v := _time_scale_targets[i]
 			var d := _time_scale_durations[i]
-			var s := _time_scale_speeds[i]
 			var id := _time_scale_ids[i]
 			
 			if d != -1:

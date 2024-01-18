@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		# arbitrary math to slowly turn to face forward
 		rotation.y = rotate_toward(rotation.y, Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP), 3.0 * delta)
 
-func hit(damage : int):
+func deal_damage(damage : int):
 	if health > 0:
 		health -= damage # TODO: Actually check this value.
 		Globals.add_xp(weight)
@@ -89,4 +89,4 @@ func _on_wander_turn_timer_timeout() -> void:
 
 func _collision(other: PhysicsBody3D) -> void:
 	if other.is_in_group("Player"):
-		other.hit(damage)
+		other.deal_damage(damage)

@@ -23,9 +23,9 @@ func _physics_process(delta: float) -> void:
 	
 	if collision:
 		if collision.get_collider().is_in_group("Player"):
-			collision.get_collider().hit(damage)
+			collision.get_collider().deal_damage(damage)
 
-func hit(damage : int):
+func deal_damage(damage : int):
 	if health > 0:
 		health -= damage
 		mesh.mesh.surface_get_material(0).albedo_color = Color.BLACK

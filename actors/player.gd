@@ -183,7 +183,7 @@ func _handle_move_and_slide_collision() -> void:
 func _on_vibrate_timer_timeout() -> void:
 	Gameplay.instance.screen_shake(7.0)
 
-func hit(damage):
+func deal_damage(damage):
 	if invuln_timer.is_stopped() && Globals.health > 0:
 		print("HIT")
 		Globals.health -= damage

@@ -26,8 +26,8 @@ func reset():
 	ball_power = 0.0
 
 func room_reset():
-	ball_power_max = 0
-	ball_power = 20
+	ball_power_max = 1.0
+	ball_power = 0.0
 
 
 func charge_ball_power(amount: float) -> void:
