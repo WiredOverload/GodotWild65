@@ -38,6 +38,8 @@ func _physics_process(delta: float) -> void:
 func _on_bounce(collision: KinematicCollision3D) -> void:
 	var normal := collision.get_normal()
 	Gameplay.instance.screen_shake_vel(-Vector2(normal.x, normal.z).normalized() * velocity.length())
+	if not collision.get_collider().is_in_group("Player"):
+		Globals.decay_ball_power()
 
 func _collision(other: PhysicsBody3D) -> void:
 	if other.is_in_group("Enemy"):
