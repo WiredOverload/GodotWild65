@@ -40,10 +40,11 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -64.0
-offset_top = 39.0
+offset_top = 38.0
 offset_right = 64.0
-offset_bottom = 167.0
+offset_bottom = 166.0
 grow_horizontal = 2
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="GearDisplay/GearDisplayContainer"]
 own_world_3d = true
