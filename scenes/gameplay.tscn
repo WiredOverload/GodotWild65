@@ -5,9 +5,9 @@
 
 [sub_resource type="Environment" id="Environment_u7ddp"]
 background_mode = 1
-background_color = Color(0, 0, 0.152941, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.196078, 0.196078, 0.196078, 1)
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
 glow_enabled = true
 glow_normalized = true
 glow_intensity = 1.5
@@ -19,7 +19,8 @@ fog_light_energy = 0.09
 script = ExtResource("1_cb7s4")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.817144, -0.499205, 0.288216, 0, 0.5, 0.866026, -0.576432, -0.707668, 0.408573, 0, 0, 0)
+transform = Transform3D(0.999999, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_energy = 0.5
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
