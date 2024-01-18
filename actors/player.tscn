@@ -50,7 +50,7 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_vvcek")
 size = Vector2(0.2, 0.2)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2a1ux"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x2yyw"]
 _data = {
 "Catch": ExtResource("4_ebhtf"),
 "RESET": ExtResource("4_614sg"),
@@ -132,6 +132,8 @@ script = ExtResource("1_o3bix")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_5eh5q")
 
+[node name="ModelTransform" type="Marker3D" parent="."]
+
 [node name="PlayerModelTeacher" parent="." instance=ExtResource("2_hvmtt")]
 
 [node name="Skeleton3D" parent="PlayerModelTeacher/PlayerArmature" index="0"]
@@ -151,7 +153,7 @@ properties = SubResource("Resource_yq5le")
 process_priority = 1
 process_physics_priority = 1
 script = ExtResource("5_h08vo")
-target_path = NodePath("../..")
+target_path = NodePath("../../ModelTransform")
 
 [node name="BallHeldPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
@@ -196,7 +198,7 @@ one_shot = true
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../PlayerModelTeacher")
 libraries = {
-"": SubResource("AnimationLibrary_2a1ux")
+"": SubResource("AnimationLibrary_x2yyw")
 }
 tree_root = SubResource("AnimationNodeBlendTree_x644t")
 advance_expression_base_node = NodePath("..")

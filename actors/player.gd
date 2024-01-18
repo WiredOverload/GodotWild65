@@ -15,6 +15,7 @@ var state: State = State.NEUTRAL: set = set_state
 
 @onready var ball = get_tree().get_first_node_in_group("Ball")
 
+@onready var model_transform: Marker3D = $ModelTransform
 @onready var ball_held_position: Marker3D = %BallHeldPosition
 @onready var ball_back_position: Marker3D = %BallBackPosition
 
@@ -27,7 +28,9 @@ var state: State = State.NEUTRAL: set = set_state
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 
+
 @onready var hold_distance: float = Vector3(ball_held_position.position.x, 0, ball_held_position.position.z).length()
+
 
 var _throw_slomo_id: int = 0
 
@@ -43,7 +46,10 @@ func _ready() -> void:
 func set_state(v: State) -> void:
 	# exiting state
 	match state:
+		State.NEUTRAL:
+			model_transform.basis = Basis.IDENTITY
 		State.CATCHING:
+			model_transform.basis = Basis.IDENTITY
 			deactivate_catcher()
 		State.THROWING:
 			ball.held_marker = ball_back_position
@@ -125,6 +131,9 @@ func _physics_process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, move_speed)
 				velocity.z = move_toward(velocity.z, 0, move_speed)
 			
+			model_transform.global_basis = Basis.from_euler(Vector3(-TAU / 16.0, 0, 0)) * global_basis
+			model_transform.global_position = Vector3(0, 0, 0.25) + global_position
+			
 			if move_and_slide():
 				_handle_move_and_slide_collision()
 		
@@ -137,6 +146,9 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = move_toward(velocity.x, 0, move_speed)
 				velocity.z = move_toward(velocity.z, 0, move_speed)
+			
+			model_transform.global_basis = Basis.from_euler(Vector3(-TAU / 16.0, 0, 0)) * global_basis
+			model_transform.global_position = Vector3(0, 0, 0.25) + global_position
 			
 			if move_and_slide():
 				_handle_move_and_slide_collision()
