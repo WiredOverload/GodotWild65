@@ -28,14 +28,14 @@ var _time_scale_speeds: Array[float] = []
 var _time_scale_ids: Array[int] = []
 var _time_scale_next_id: int = 1
 
-func slow_motion(v: float, s: float = DEFAULT_SLOW_MOTION_SPEED, d: float = -1) -> int:
-	var i: int = _time_scale_targets.bsearch(v)
+func slow_motion(time_scale: float, adjustment_speed: float = DEFAULT_SLOW_MOTION_SPEED, effect_duration: float = -1) -> int:
+	var i: int = _time_scale_targets.bsearch(time_scale)
 	var id := _time_scale_next_id
 	_time_scale_next_id += 1
 	
-	_time_scale_targets.insert(i, v)
-	_time_scale_durations.insert(i, d)
-	_time_scale_speeds.insert(i, s)
+	_time_scale_targets.insert(i, time_scale)
+	_time_scale_durations.insert(i, effect_duration)
+	_time_scale_speeds.insert(i, adjustment_speed)
 	_time_scale_ids.insert(i, id)
 	
 	return id
