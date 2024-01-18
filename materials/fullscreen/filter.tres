@@ -4,11 +4,11 @@
 
 [resource]
 shader = ExtResource("1_h2br8")
-shader_parameter/fisheye_power = 1.0
-shader_parameter/scanline_scale = 7.191
+shader_parameter/fisheye_power = 1.1
+shader_parameter/scanline_scale = 4.0
 shader_parameter/scanline_ratio = 1.0
 shader_parameter/scanline_sharpness = 0.0
 shader_parameter/scanline_timescale = 4.75e-07
-shader_parameter/scanline_strength = 0.0
+shader_parameter/scanline_strength = 0.1
 shader_parameter/chroma_strength = 6.51977e-09
 shader_parameter/chroma_inner_radius = 0.1
