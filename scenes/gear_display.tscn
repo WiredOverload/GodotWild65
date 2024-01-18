@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://oxxn4pmqr8j7"]
+
+[ext_resource type="Script" path="res://scenes/gear_display.gd" id="1_i68v1"]
+[ext_resource type="PackedScene" uid="uid://b4w3cdlqfiomw" path="res://character_models/gear.blend" id="2_8ixcw"]
+[ext_resource type="Material" uid="uid://cmml7t1cukqfy" path="res://materials/fullscreen/rotational_blur.tres" id="3_7antl"]
+
+[sub_resource type="Environment" id="Environment_i0oh0"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
+
+[node name="GearDisplay" type="Node3D"]
+script = ExtResource("1_i68v1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_i0oh0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.944683, -0.0933266, 0.314428, 0.0755099, 0.994796, 0.0684038, -0.319176, -0.0408774, 0.946814, -0.0139158, -0.000277043, 0.00706625)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.84569)
+fov = 45.0
+
+[node name="gear" parent="." instance=ExtResource("2_8ixcw")]
+
+[node name="MotionBlur" type="ColorRect" parent="."]
+material = ExtResource("3_7antl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
