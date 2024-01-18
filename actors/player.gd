@@ -88,11 +88,11 @@ func _process(delta: float) -> void:
 					state = State.CATCHING
 		State.THROWING:
 			if Input.is_action_pressed("action"):
-				Globals.charge_ball_power(delta)
+				Globals.charge_ball_power(delta * Globals.spin_acceleration)
 				
 				if not spin_spark_particles.emitting and Globals.current_gear == Globals.current_max_gear:
 					spin_spark_particles.restart()
-					_throw_slomo_id = Gameplay.instance.slow_motion(0.3, 2.0)
+					_throw_slomo_id = Gameplay.instance.slow_motion(0.3, 2.0 * Globals.spin_slowmo_modifier)
 					vibrate_timer.start()
 				if spin_spark_particles.emitting and Globals.current_gear != Globals.current_max_gear:
 					spin_spark_particles.emitting = false

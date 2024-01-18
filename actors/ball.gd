@@ -43,7 +43,7 @@ func _on_bounce(collision: KinematicCollision3D) -> void:
 
 func _collision(other: PhysicsBody3D) -> void:
 	if other.is_in_group("Enemy"):
-		other.deal_damage(1)
+		other.deal_damage(1 + Globals.damage_bonus)
 		Gameplay.instance.hit_stun()
 
 func set_state(v: State) -> void:

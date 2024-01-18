@@ -5,6 +5,10 @@ signal stat_changed
 # per-run stats
 var health := 3: set = set_health
 var max_health := 5: set = set_max_health
+var spin_acceleration := 1
+var max_stamina := 1
+var damage_bonus := 0
+var spin_slowmo_modifier := 1
 var difficulty := 0: set = set_difficulty
 
 var ball_power_retention: float = 0.5
