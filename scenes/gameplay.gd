@@ -101,6 +101,11 @@ func create_room() -> void:
 func _on_stage_player_exit():
 	Globals.room_reset()
 	Globals.difficulty += 1
+	
+	if Globals.difficulty > 20:
+		get_tree().change_scene_to_file("res://scenes/win.tscn")
+		return
+	
 	_stage.queue_free()
 	_player_root.queue_free()
 	
