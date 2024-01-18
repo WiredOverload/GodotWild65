@@ -11,7 +11,7 @@ func spawn_enemies() -> void:
 		c.spawn()
 
 func _process(delta: float) -> void:
-	if Globals.gear >= 1:
+	if Globals.current_gear >= 1:
 		next_room_area.monitoring = false
 	else:
 		next_room_area.monitoring = true

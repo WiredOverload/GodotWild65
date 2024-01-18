@@ -19,7 +19,7 @@ func move_and_bounce() -> void:
 		
 		var stop = false
 		
-		print("Collision: %s -> %s" % [name, collision.get_collider().name])
+		print("Collision: %s <-> %s" % [name, collision.get_collider().name])
 		
 		bounce.emit()
 		

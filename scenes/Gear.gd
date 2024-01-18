@@ -3,9 +3,9 @@ extends Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Globals.stat_changed.connect(_on_stat_changed)
+	_on_stat_changed()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	text = str(Globals.gear)
+func _on_stat_changed() -> void:
+	text = str(Globals.current_gear)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://s5d87weld4tl"]
 
-[ext_resource type="Script" path="res://character_models/heart.gd" id="1_hjxl6"]
+[ext_resource type="Script" path="res://UI/heart.gd" id="1_0n3ae"]
 [ext_resource type="Material" uid="uid://dmnag4bior6ju" path="res://materials/heart_full.tres" id="2_byxug"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_rx3ik"]
@@ -37,7 +37,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_rx3ik")
 
 [node name="heart" type="Node3D"]
-script = ExtResource("1_hjxl6")
+script = ExtResource("1_0n3ae")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_4l1bm")

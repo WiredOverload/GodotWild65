@@ -9,27 +9,9 @@ enum State {
 
 var move_speed: float = 5.0
 var move_speed_throwing: float = 1.0
-
-var state: State = State.NEUTRAL: set = set_state
-
-var throw_speed: float = 0.0
-var max_throw_speed: float = 20.0
-
 var throw_accel: float = 10.0
 
-#@onready var heart_controller = %HeartRoot
-#var max_health := 5:
-	#set(value):
-		#if value > max_health:
-			#heart_controller.add_heart()
-		#max_health = value
-#var health := max_health:
-	#set(value):
-		#if value < health:
-			#heart_controller.hurt(health - value)
-		#else:
-			#heart_controller.heal(value - health)
-		#health = value
+var state: State = State.NEUTRAL: set = set_state
 
 @onready var ball = get_tree().get_first_node_in_group("Ball")
 
@@ -47,6 +29,11 @@ var throw_accel: float = 10.0
 
 @onready var hold_distance: float = Vector3(ball_held_position.position.x, 0, ball_held_position.position.z).length()
 
+var _throw_slomo_id: int = 0
+
+var _spin_speed: float:
+	get: return Globals.ball_power * 5.0
+
 func _ready() -> void:
 	if ball:
 		ball.grab(ball_back_position)
@@ -61,7 +48,8 @@ func set_state(v: State) -> void:
 		State.THROWING:
 			ball.held_marker = ball_back_position
 			spin_spark_particles.emitting = false
-			Gameplay.instance.set_time_scale(1.0, 0.01)
+			Gameplay.instance.cancel_slow_motion(_throw_slomo_id)
+			_throw_slomo_id = 0
 			vibrate_timer.stop()
 		State.DISABLED:
 			$CollisionShape3D.disabled = false
@@ -82,7 +70,6 @@ func _process(delta: float) -> void:
 		ball = get_tree().get_first_node_in_group("Ball")
 		if ball:
 			ball.grab(ball_back_position)
-	max_throw_speed = Globals.bag_raw_max_speed # adjustment needed here if apples doesn't want linear speed
 	
 	match state:
 		State.NEUTRAL:
@@ -95,21 +82,21 @@ func _process(delta: float) -> void:
 					state = State.CATCHING
 		State.THROWING:
 			if Input.is_action_pressed("action"):
-				Globals.bag_raw_speed = clampf(Globals.bag_raw_speed + delta * throw_accel, 0.0, max_throw_speed)
-				throw_speed = Globals.bag_raw_speed # adjustment needed here if apples doesn't want linear speed
-				if not spin_spark_particles.emitting and is_equal_approx(throw_speed, max_throw_speed):
+				Globals.charge_ball_power(delta)
+				
+				if not spin_spark_particles.emitting and Globals.current_gear == Globals.current_max_gear:
 					spin_spark_particles.restart()
-					Gameplay.instance.set_time_scale(0.3, 0.1)
+					_throw_slomo_id = Gameplay.instance.slow_motion(0.3, 2.0)
 					vibrate_timer.start()
-				if spin_spark_particles.emitting and not is_equal_approx(throw_speed, max_throw_speed):
+				if spin_spark_particles.emitting and Globals.current_gear != Globals.current_max_gear:
 					spin_spark_particles.emitting = false
-					Gameplay.instance.set_time_scale(1.0, 0.01)
+					Gameplay.instance.cancel_slow_motion(_throw_slomo_id)
+					_throw_slomo_id = 0
 					vibrate_timer.stop()
 			else:
 				# Release!
 				
-				ball.throw(throw_speed * basis.z)
-				throw_speed = 0.0
+				ball.throw(basis.z)
 				state = State.NEUTRAL
 		State.CATCHING:
 			_update_walk_animation(delta)
@@ -119,7 +106,6 @@ func _process(delta: float) -> void:
 				assert(ob.size() < 2)
 				if ob.size() == 1:
 					assert(ob[0] == ball)
-					throw_speed = ball.current_speed
 					ball.grab(ball_held_position)
 					state = State.THROWING
 			else:
@@ -143,7 +129,7 @@ func _physics_process(delta: float) -> void:
 				_handle_move_and_slide_collision()
 		
 		State.THROWING:
-			rotation.y += delta * throw_speed / hold_distance
+			rotation.y += delta * _spin_speed / hold_distance
 			
 			if direction:
 				velocity.x = direction.x * move_speed_throwing

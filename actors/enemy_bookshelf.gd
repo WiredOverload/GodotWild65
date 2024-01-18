@@ -64,7 +64,7 @@ func set_state(v: State) -> void:
 func hit(damage : int):
 	if health > 0:
 		health -= damage # TODO: Actually check this value.
-		Globals.bag_raw_max_speed += weight
+		Globals.add_xp(weight)
 		collision_shape_3d.disabled = true
 		
 		# fade to alpha zero and color to red

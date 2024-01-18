@@ -1,7 +1,8 @@
 extends BouncingCharacterBody3D
 
 const speed = 1.0
-const weight = 5.0
+const weight = 1.0
+
 var max_health = 1
 var health = max_health
 var damage := 1
@@ -51,7 +52,7 @@ func _physics_process(delta: float) -> void:
 func hit(damage : int):
 	if health > 0:
 		health -= damage # TODO: Actually check this value.
-		Globals.bag_raw_max_speed += weight
+		Globals.add_xp(weight)
 		page_death.emitting = true
 		collision_shape_3d.disabled = true
 		

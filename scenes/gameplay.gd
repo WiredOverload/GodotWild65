@@ -9,6 +9,10 @@ const STAGE_SCENES = [
 	{ weight = 1.0, file = "res://scenes/stages/stage.tscn" },
 ]
 
+const DEFAULT_SLOW_MOTION_SPEED = 2.0
+
+signal slow_motion_complete(id: int)
+
 var room_number := 0
 
 var min_enemies := 3
@@ -18,17 +22,38 @@ var min_enemies := 3
 var _stage
 var _player_root
 
-var _engine_time_scale: float:
-	get: return Engine.time_scale
-	set(v): Engine.time_scale = v
+var _time_scale_targets: Array[float] = []
+var _time_scale_durations: Array[float] = []
+var _time_scale_speeds: Array[float] = []
+var _time_scale_ids: Array[int] = []
+var _time_scale_next_id: int = 1
 
-var _time_scale_tween: Tween
+func slow_motion(v: float, s: float = DEFAULT_SLOW_MOTION_SPEED, d: float = -1) -> int:
+	var i: int = _time_scale_targets.bsearch(v)
+	var id := _time_scale_next_id
+	_time_scale_next_id += 1
+	
+	_time_scale_targets.insert(i, v)
+	_time_scale_durations.insert(i, d)
+	_time_scale_speeds.insert(i, s)
+	_time_scale_ids.insert(i, id)
+	
+	return id
 
-func set_time_scale(v: float, dur: float) -> void:
-	if _time_scale_tween:
-		_time_scale_tween.kill()
-	_time_scale_tween = create_tween()
-	_time_scale_tween.tween_property(self, "_engine_time_scale", v, dur)
+func cancel_slow_motion(id: int) -> void:
+	var i := _time_scale_ids.find(id)
+	
+	if i == -1:
+		return
+	
+	if i == 0:
+		Engine.time_scale = _time_scale_targets[0]
+	
+	_time_scale_targets.remove_at(i)
+	_time_scale_durations.remove_at(i)
+	_time_scale_speeds.remove_at(i)
+	_time_scale_ids.remove_at(i)
+	slow_motion_complete.emit(id)
 
 
 func screen_shake(strength: float) -> void:
@@ -38,15 +63,10 @@ func screen_shake_vel(impulse: Vector2) -> void:
 	_player_root.camera.screen_shake(0.5 * impulse)
 
 func hit_stun() -> void:
-	if _time_scale_tween:
-		_time_scale_tween.pause()
-	_engine_time_scale = 0.01
-	var s := Time.get_ticks_usec()
-	while Time.get_ticks_usec() - s < 100000:
-		await get_tree().process_frame
-	_engine_time_scale = 1.0
-	_time_scale_tween.play()
-	
+	var id := slow_motion(0.01, 200.0, 0.2)
+	while (await slow_motion_complete) != id:
+		pass
+	slow_motion(1.0, 200.0, 0.2)
 
 
 func _enter_tree() -> void:
@@ -83,6 +103,37 @@ func _pick_random_stage() -> Dictionary:
 	assert(false)
 	return STAGE_SCENES[0]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+#var _time_scale_targets: Array[float] = []
+#var _time_scale_durations: Array[float] = []
+#var _time_scale_speeds: Array[float] = []
+
+
+var _last_process_time: float = Time.get_ticks_usec()
+
 func _process(delta: float) -> void:
-	pass
+	var now := Time.get_ticks_usec()
+	var true_delta := (now - _last_process_time) / 1000000.0
+	_last_process_time = now
+	
+	if not _time_scale_targets.is_empty():
+		Engine.time_scale = move_toward(Engine.time_scale, _time_scale_targets[0], _time_scale_speeds[0] * true_delta)
+		
+		for i: int in range(_time_scale_targets.size() - 1, -1, -1):
+			var v := _time_scale_targets[i]
+			var d := _time_scale_durations[i]
+			var s := _time_scale_speeds[i]
+			var id := _time_scale_ids[i]
+			
+			if d != -1:
+				d -= true_delta
+				
+				if d <= 0.0:
+					_time_scale_targets.remove_at(i)
+					_time_scale_durations.remove_at(i)
+					_time_scale_speeds.remove_at(i)
+					_time_scale_ids.remove_at(i)
+					slow_motion_complete.emit(id)
+				else:
+					_time_scale_durations[i] = d
+	else:
+		Engine.time_scale = move_toward(Engine.time_scale, 1.0, DEFAULT_SLOW_MOTION_SPEED * true_delta)
