@@ -1,12 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dod5y8ldj6mx5"]
+[gd_scene load_steps=4 format=3 uid="uid://dod5y8ldj6mx5"]
 
 [ext_resource type="Material" uid="uid://bp15ymka1mkep" path="res://materials/fullscreen/filter.tres" id="1_40ke6"]
 [ext_resource type="PackedScene" uid="uid://ckd3tp6ek61ke" path="res://scenes/3dui_overlay.tscn" id="2_84jhb"]
-[ext_resource type="Script" path="res://scenes/Gear.gd" id="3_l6g30"]
-[ext_resource type="PackedScene" uid="uid://oxxn4pmqr8j7" path="res://scenes/gear_display.tscn" id="4_uklyp"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_2j7pd"]
-font_size = 40
+[ext_resource type="PackedScene" uid="uid://3gce77lvyps1" path="res://scenes/gear_display_overlay.tscn" id="2_kw3l7"]
 
 [node name="Overlays" type="Control"]
 layout_mode = 3
@@ -26,45 +22,9 @@ offset_bottom = 512.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="GearDisplay" type="Control" parent="."]
+[node name="GearDisplayOverlay" parent="." instance=ExtResource("2_kw3l7")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GearDisplayContainer" type="SubViewportContainer" parent="GearDisplay"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -64.0
-offset_top = 38.0
-offset_right = 64.0
-offset_bottom = 166.0
-grow_horizontal = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="GearDisplay/GearDisplayContainer"]
-own_world_3d = true
-transparent_bg = true
-handle_input_locally = false
-canvas_cull_mask = 4294967294
-size = Vector2i(128, 128)
-render_target_update_mode = 4
-
-[node name="GearDisplay" parent="GearDisplay/GearDisplayContainer/SubViewport" instance=ExtResource("4_uklyp")]
-
-[node name="Gear" type="Label" parent="GearDisplay"]
-layout_mode = 0
-offset_left = 633.0
-offset_top = 113.0
-offset_right = 673.0
-offset_bottom = 168.0
-text = "1"
-label_settings = SubResource("LabelSettings_2j7pd")
-script = ExtResource("3_l6g30")
+offset_top = 46.0
 
 [node name="SceneFilter" type="ColorRect" parent="."]
 material = ExtResource("1_40ke6")

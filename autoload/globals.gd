@@ -44,7 +44,7 @@ func decay_ball_power(amount: float = 1.0 - ball_power_retention) -> void:
 
 
 func add_xp(amount: float) -> void:
-	ball_power_max += amount
+	ball_power_max = clampf(ball_power_max + amount, 0.0, 5.0)
 
 
 func set_health(v: int) -> void:

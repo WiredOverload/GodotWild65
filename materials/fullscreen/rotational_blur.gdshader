@@ -11,8 +11,8 @@ void fragment() {
 		float d = float(i) / float(samples) * strength;
 		vec2 pixel_pos = (SCREEN_UV - vec2(0.5, 0.5)) / SCREEN_PIXEL_SIZE;
 		mat2 rot = mat2(
-			vec2(sin(d), -cos(d)),
-			vec2(cos(d), sin(d)));
+			vec2(cos(d), -sin(d)),
+			vec2(sin(d), cos(d)));
 		pixel_pos = rot * pixel_pos;
 		vec2 uv = (pixel_pos * SCREEN_PIXEL_SIZE) + vec2(0.5, 0.5);
 		vec4 s = texture(SCREEN_TEXTURE, uv);

@@ -24,7 +24,9 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.84569)
 fov = 45.0
 
-[node name="gear" parent="." instance=ExtResource("2_8ixcw")]
+[node name="GearGimbal" type="Node3D" parent="."]
+
+[node name="gear" parent="GearGimbal" instance=ExtResource("2_8ixcw")]
 
 [node name="MotionBlur" type="ColorRect" parent="."]
 material = ExtResource("3_7antl")

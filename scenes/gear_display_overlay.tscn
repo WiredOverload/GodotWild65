@@ -1,0 +1,249 @@
+[gd_scene load_steps=26 format=3 uid="uid://3gce77lvyps1"]
+
+[ext_resource type="PackedScene" uid="uid://dn8odo253q0fx" path="res://scenes/gear_display_container.tscn" id="1_lyse4"]
+[ext_resource type="Script" path="res://scenes/gear_display_overlay.gd" id="1_py657"]
+[ext_resource type="Texture2D" uid="uid://b7uwg7fxdpfoh" path="res://materials/particle_textures/spark.png" id="2_gdlci"]
+[ext_resource type="Texture2D" uid="uid://fmdlp51gtdld" path="res://UI/gear_meter_beam_anim/gear_meter_beam_anim_1.png" id="2_rifl3"]
+[ext_resource type="Texture2D" uid="uid://cud7udu77vqt8" path="res://UI/gear_meter_beam_anim/gear_meter_beam_anim_2.png" id="3_7vaeq"]
+[ext_resource type="Texture2D" uid="uid://csf1bkf8knhsk" path="res://UI/gear_meter_beam_anim/gear_meter_beam_anim_3.png" id="4_yjhbd"]
+[ext_resource type="Texture2D" uid="uid://bvkxobylf7ewe" path="res://UI/gear_meter_beam_anim/gear_meter_beam_anim_4.png" id="5_cp8ww"]
+[ext_resource type="Texture2D" uid="uid://b5ltn4csfrff7" path="res://UI/gear_meter.png" id="5_tp0bs"]
+[ext_resource type="Texture2D" uid="uid://cxi7sltkyc4gi" path="res://UI/gear_meter_beam_anim/gear_meter_beam_anim_5.png" id="6_ahryh"]
+[ext_resource type="Texture2D" uid="uid://cjtl5xnxq6hpl" path="res://UI/gear_meter_beam_anim/gear_meter_beam_anim_6.png" id="7_hhqrm"]
+[ext_resource type="Texture2D" uid="uid://die0idnpyyc1j" path="res://UI/gear_meter_beam_anim/gear_meter_beam_anim_7.png" id="8_i0sfe"]
+[ext_resource type="Texture2D" uid="uid://djw0j4myya21s" path="res://UI/gear_meter_beam_anim/gear_meter_beam_anim_8.png" id="9_obkxx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yeokq"]
+atlas = ExtResource("5_tp0bs")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fxaik"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 8
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ylhb4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.90566, 0), -2.95851, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lulgk"]
+curve = SubResource("Curve_ylhb4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g7umc"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 100.0
+initial_velocity_min = 82.19
+initial_velocity_max = 82.19
+gravity = Vector3(0, 200, 0)
+alpha_curve = SubResource("CurveTexture_lulgk")
+anim_offset_min = 0.2813
+anim_offset_max = 0.3438
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1nqq"]
+atlas = ExtResource("5_tp0bs")
+region = Rect2(112, 32, 16, 32)
+
+[sub_resource type="Curve" id="Curve_3u58p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.73429, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cfutd"]
+curve = SubResource("Curve_3u58p")
+
+[sub_resource type="Gradient" id="Gradient_t7mvi"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0.596078, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fgsrp"]
+gradient = SubResource("Gradient_t7mvi")
+
+[sub_resource type="Curve" id="Curve_unm8m"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_v1xoy"]
+curve = SubResource("Curve_unm8m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kc5fq"]
+particle_flag_disable_z = true
+angle_max = 360.0
+direction = Vector3(-2.5, -1, 0)
+spread = 10.0
+initial_velocity_min = 249.99
+initial_velocity_max = 673.6
+gravity = Vector3(0, 900, 0)
+damping_min = 1000.0
+damping_max = 1000.0
+scale_curve = SubResource("CurveTexture_v1xoy")
+color = Color(1, 0.807843, 0.858824, 1)
+color_ramp = SubResource("GradientTexture1D_fgsrp")
+alpha_curve = SubResource("CurveTexture_cfutd")
+
+[node name="GearDisplayOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_py657")
+charge_beam_flipbook = Array[Texture2D]([ExtResource("2_rifl3"), ExtResource("3_7vaeq"), ExtResource("4_yjhbd"), ExtResource("5_cp8ww"), ExtResource("6_ahryh"), ExtResource("7_hhqrm"), ExtResource("8_i0sfe"), ExtResource("9_obkxx")])
+
+[node name="MeterContainer" type="MarginContainer" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -176.5
+offset_right = 176.5
+offset_bottom = 32.0
+grow_horizontal = 2
+
+[node name="XPContainer" type="MarginContainer" parent="MeterContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="Control" type="Control" parent="MeterContainer/XPContainer"]
+layout_mode = 2
+
+[node name="XPBar" type="NinePatchRect" parent="MeterContainer/XPContainer/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_right = 174.0
+offset_bottom = 16.0
+grow_vertical = 2
+texture = ExtResource("5_tp0bs")
+region_rect = Rect2(8, 32, 16, 32)
+patch_margin_top = 8
+patch_margin_bottom = 8
+
+[node name="Frame" type="NinePatchRect" parent="MeterContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("5_tp0bs")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Divider1" type="NinePatchRect" parent="MeterContainer/Frame"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_right = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_tp0bs")
+region_rect = Rect2(32, 0, 32, 32)
+patch_margin_top = 8
+patch_margin_bottom = 8
+
+[node name="LockContainer" type="Control" parent="MeterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Lock1" type="TextureRect" parent="MeterContainer/LockContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_yeokq")
+
+[node name="Break1" type="GPUParticles2D" parent="MeterContainer/LockContainer"]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_fxaik")
+position = Vector2(208.5, 17)
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_g7umc")
+texture = ExtResource("5_tp0bs")
+one_shot = true
+explosiveness = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MeterContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 4
+
+[node name="ChargeContainer" type="Control" parent="MeterContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Beam" type="TextureRect" parent="MeterContainer/MarginContainer/ChargeContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 75.0
+offset_bottom = 32.0
+texture = ExtResource("2_rifl3")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="BeamHead" type="TextureRect" parent="MeterContainer/MarginContainer/ChargeContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 51.5
+offset_right = 67.5
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_k1nqq")
+
+[node name="GearDisplayContainer" type="MarginContainer" parent="MeterContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="GearContainer" type="Control" parent="MeterContainer/GearDisplayContainer"]
+layout_mode = 2
+
+[node name="GearControl" type="Control" parent="MeterContainer/GearDisplayContainer/GearContainer"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="GearDisplayContainer" parent="MeterContainer/GearDisplayContainer/GearContainer/GearControl" instance=ExtResource("1_lyse4")]
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 1
+
+[node name="Sparks" type="GPUParticles2D" parent="MeterContainer/GearDisplayContainer/GearContainer/GearControl"]
+unique_name_in_owner = true
+position = Vector2(15.5, 30)
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_kc5fq")
+texture = ExtResource("2_gdlci")
+lifetime = 0.3
+explosiveness = 0.3
+trail_enabled = true
+trail_lifetime = 0.2
+
+[node name="GearLabel" type="Label" parent="MeterContainer/GearDisplayContainer/GearContainer/GearControl"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 10.5
+offset_top = 30.0
+offset_right = 20.5
+offset_bottom = 53.0
+text = "5"
+
+[node name="BeamAnimTimer" type="Timer" parent="."]
+wait_time = 0.01
+autostart = true
+
+[connection signal="timeout" from="BeamAnimTimer" to="." method="_on_beam_anim_timer_timeout"]
