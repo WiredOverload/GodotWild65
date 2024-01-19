@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxk5uya6u0nni"]
+
+[ext_resource type="ArrayMesh" uid="uid://cmhgt6pvrvx1p" path="res://character_models/meshes/Icosphere_Icosphere_001.res" id="1_eisbl"]
+
+[node name="Pickup" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_eisbl")
