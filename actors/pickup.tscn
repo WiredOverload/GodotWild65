@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxk5uya6u0nni"]
+[gd_scene load_steps=4 format=3 uid="uid://dxk5uya6u0nni"]
 
 [ext_resource type="ArrayMesh" uid="uid://cmhgt6pvrvx1p" path="res://character_models/meshes/Icosphere_Icosphere_001.res" id="1_eisbl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pcgwj"]
+albedo_color = Color(2, 2, 2, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tjiob"]
+material = SubResource("StandardMaterial3D_pcgwj")
 
 [node name="Pickup" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_eisbl")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_tjiob")
