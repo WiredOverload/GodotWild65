@@ -55,9 +55,27 @@ func _physics_process(delta: float) -> void:
 				velocity.normalized().signed_angle_to(_target.global_position - global_position, Vector3.UP)
 			)
 			move_and_bounce()
-		State.WANDER:					
+		State.WANDER:
 			move_and_bounce()
+			
+			# Check for line of sight
+			if _target:
+				line_of_sight.global_basis = Basis.IDENTITY
+				line_of_sight.target_position = _target.global_position - line_of_sight.global_position
+				line_of_sight.force_raycast_update()
 				
+				if line_of_sight.get_collider() != _target:
+					return
+				
+				state = State.BARK
+				velocity = velocity.rotated(
+						Vector3.UP,
+						velocity.normalized().signed_angle_to(_target.global_position - global_position, Vector3.UP)
+				)
+				rotation.y = Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP)
+				desk_anim.play("Chomp")
+				await Future.all_signals([desk_anim.animation_finished]).done
+				state = State.CHASE
 	# arbitrary math to slowly turn to face forward
 	rotation.y = rotate_toward(rotation.y, Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP), 3.0 * delta)
 
@@ -114,22 +132,7 @@ func _collision(other: PhysicsBody3D) -> void:
 
 func _on_aggro_range_body_entered(body):
 	if body.is_in_group("Player") and _target == null:
-		# Check for line of sight
-#		line_of_sight.target_position = body.global_position
-#		line_of_sight.force_raycast_update()
-#		if line_of_sight.get_collider() != body:
-#			return
-		
-		state = State.BARK
 		_target = body
-		velocity = velocity.rotated(
-				Vector3.UP,
-				velocity.normalized().signed_angle_to(_target.global_position - global_position, Vector3.UP)
-		)
-		rotation.y = Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP)
-		desk_anim.play("Chomp")
-		await Future.all_signals([desk_anim.animation_finished]).done
-		state = State.CHASE
 
 
 func _on_aggro_range_body_exited(body):
