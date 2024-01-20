@@ -5,13 +5,14 @@ signal stat_changed
 # per-run stats
 var health := 3: set = set_health
 var max_health := 5: set = set_max_health
-var spin_acceleration := 1
 var max_stamina := 1
 var damage_bonus := 0
 var spin_slowmo_modifier := 1
 var difficulty := 0: set = set_difficulty
 
 var ball_power_retention: float = 0.5
+var walk_speed_multiplier: float = 1.0
+var charge_speed_multiplier: float = 1.0
 
 # per-room stats
 var ball_power_max: float = 1.0: set = set_ball_power_max
@@ -36,15 +37,23 @@ func room_reset():
 	ball_power = 0.0
 
 
+
 func charge_ball_power(amount: float) -> void:
 	ball_power = clampf(ball_power + amount, 0.0, ball_power_max)
 
 func decay_ball_power(amount: float = 1.0 - ball_power_retention) -> void:
 	ball_power = clampf(ball_power - amount, 0.0, ball_power_max)
 
-
 func add_xp(amount: float) -> void:
 	ball_power_max = clampf(ball_power_max + amount, 0.0, 5.0)
+
+func give_item(item: PickupItem) -> void:
+	match item.type:
+		PickupItem.Type.WALK_SPEED:
+			walk_speed_multiplier += item.stat_value / 100.0
+		PickupItem.Type.CHARGE_SPEED:
+			charge_speed_multiplier += item.stat_value / 100.0
+
 
 
 func set_health(v: int) -> void:

@@ -39,6 +39,7 @@ folder_colors={
 "res://actors/": "red",
 "res://character_models/": "yellow",
 "res://character_models/DO_NOT_SHIP/": "gray",
+"res://reward_items/": "pink",
 "res://scenes/": "green",
 "res://scenes/stages/": "purple"
 }

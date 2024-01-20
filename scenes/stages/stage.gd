@@ -1,5 +1,7 @@
 extends Node
 
+const PICKUP_SCENE: PackedScene = preload("res://actors/pickup.tscn")
+
 signal player_exit
 
 var ball
@@ -9,6 +11,18 @@ var ball
 @onready var top_wall: CollisionShape3D = $GridMap/WorldBorder/TopWall
 @onready var player_spawn_point: Marker3D = $GridMap/PlayerSpawnPoint
 @onready var next_room_area: Area3D = $GridMap/NextRoomArea
+
+@onready var reward_spawns: Array[Node3D] = [
+	$GridMap/RewardPoint1,
+	$GridMap/RewardPoint2,
+]
+
+@onready var possible_rewards: Array[PickupItem] = [
+	preload("res://reward_items/walk_speed_1.tres"),
+]
+
+
+var _rewards: Array[Node3D] = []
 
 func _ready() -> void:
 	next_room_area.body_entered.connect(_on_next_room_area_body_entered)
@@ -31,10 +45,11 @@ func _on_ball_bounce(collision: KinematicCollision3D) -> void:
 	if collision.get_collider_shape() == top_wall:
 		get_tree().call_group("Enemy", "deal_damage", 9999)
 		_punch_hole(collision.get_position())
+		_spawn_rewards()
 		ball.queue_free()
 
 func _on_next_room_area_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Player"):
+	if _rewards.is_empty() and body.is_in_group("Player"):
 		player_exit.emit()
 
 func _punch_hole(where: Vector3) -> void:
@@ -46,18 +61,17 @@ func _punch_hole(where: Vector3) -> void:
 	print("_punch_hole(where: %s) -> %s" % [where, hitTile])
 	
 	grid_map.set_cell_item(hitTile, 0) # Ideally new broken wall tile
-	#var hitTile2 = grid_map.local_to_map(body.position + Vector3(.5, 0, 0))
-	#hitTile2.z = 0
-	#if hitTile == hitTile2:
-		#hitTile2 = grid_map.local_to_map(body.position - Vector3(.5, 0, 0))
-		#hitTile2.z = 0
-		#grid_map.set_cell_item(hitTile - Vector3i(0, 0, 1), 2,
-			#grid_map.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), -PI/2)))
-		#grid_map.set_cell_item(hitTile2 - Vector3i(0, 0, 1), 2,
-			#grid_map.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), PI/2)))
-	#else:
-		#grid_map.set_cell_item(hitTile - Vector3i(0, 0, 1), 2,
-			#grid_map.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), PI/2)))
-		#grid_map.set_cell_item(hitTile2 - Vector3i(0, 0, 1), 2,
-			#grid_map.get_orthogonal_index_from_basis(Basis(Vector3(0, 1, 0), -PI/2)))
-	#grid_map.set_cell_item(hitTile2, 0)
+
+func _spawn_rewards() -> void:
+	for p in reward_spawns:
+		var pickup = PICKUP_SCENE.instantiate()
+		pickup.position = p.global_position
+		pickup.item = possible_rewards.pick_random()
+		pickup.taken.connect(_on_reward_taken)
+		add_child(pickup)
+		_rewards.append(pickup)
+
+func _on_reward_taken():
+	for r in _rewards:
+		r.queue_free()
+	_rewards.clear()
