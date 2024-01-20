@@ -6,7 +6,7 @@ static var instance: Gameplay
 const PLAYER_ROOT_SCENE: PackedScene = preload("res://scenes/player_root.tscn")
 
 const STAGE_SCENES = [
-	{ weight = 1.0, file = "res://scenes/stages/stage.tscn" },
+	{ weight = 1.0, file = "res://scenes/stages/haunted_library.tscn" },
 ]
 
 const DEFAULT_SLOW_MOTION_SPEED = 2.0

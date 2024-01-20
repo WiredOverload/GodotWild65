@@ -1,116 +1,120 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfunrnabkhtpp"]
+[gd_scene load_steps=4 format=3 uid="uid://c0qqtgbukll74"]
 
-[ext_resource type="Script" path="res://scenes/stages/stage.gd" id="1_rkuq8"]
-[ext_resource type="PackedScene" uid="uid://71x1nvfggm0l" path="res://scenes/grid_map_dungeon.tscn" id="2_xfsfs"]
-[ext_resource type="Script" path="res://node_types/enemy_spawner.gd" id="3_es780"]
-[ext_resource type="PackedScene" uid="uid://cuua75lnhxs7" path="res://actors/static_bookshelf.tscn" id="4_vy8ux"]
+[ext_resource type="Script" path="res://scenes/stages/stage.gd" id="1_dtkdf"]
+[ext_resource type="PackedScene" uid="uid://71x1nvfggm0l" path="res://scenes/grid_map_dungeon.tscn" id="2_cm8x0"]
+[ext_resource type="Script" path="res://node_types/enemy_spawner.gd" id="3_pmjbl"]
 
 [node name="Stage" type="Node3D"]
-script = ExtResource("1_rkuq8")
+script = ExtResource("1_dtkdf")
 
-[node name="GridMap" parent="." instance=ExtResource("2_xfsfs")]
+[node name="GridMap" parent="." instance=ExtResource("2_cm8x0")]
 
 [node name="Enemies" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17822, 0, 0)
-
-[node name="EnemySpawner1" type="Marker3D" parent="Enemies"]
-transform = Transform3D(0.00279251, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279251, 8.55631, 0, 7.43039)
-gizmo_extents = 1.0
-script = ExtResource("3_es780")
-enemy_type = 2
 
 [node name="EnemySpawner2" type="Marker3D" parent="Enemies"]
-transform = Transform3D(0.00279251, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279251, 14.1547, 0, 10.338)
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 18.5879, 0, 6.30918)
 gizmo_extents = 1.0
-script = ExtResource("3_es780")
-enemy_type = 2
-
-[node name="EnemySpawner4" type="Marker3D" parent="Enemies"]
-transform = Transform3D(-0.0194068, 0, -0.999812, 0, 1, 0, 0.999812, 0, -0.0194068, 18.6504, 0, 5.99888)
-gizmo_extents = 1.0
-script = ExtResource("3_es780")
-enemy_type = 2
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
 [node name="EnemySpawner3" type="Marker3D" parent="Enemies"]
-transform = Transform3D(0.00279251, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279251, 3.05781, 0, 8.96197)
+transform = Transform3D(-0.334366, 0, -0.942444, 0, 1, 0, 0.942444, 0, -0.334366, 2.93571, -0.536976, 9.15859)
 gizmo_extents = 1.0
-script = ExtResource("3_es780")
-enemy_type = 2
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="Bookshelves" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3988, 0, 8.26963)
+[node name="EnemySpawner4" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 18.5987, 0, 10.7217)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf" parent="Bookshelves" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -0.784991)
+[node name="EnemySpawner5" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 20.7745, 0, 12.3653)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf4" parent="Bookshelves" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
+[node name="EnemySpawner6" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 20.7745, 0, 8.21227)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf3" parent="Bookshelves" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 2.21068)
+[node name="EnemySpawner7" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 22.2782, 0, 2.18545)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="Bookshelves2" type="Node3D" parent="."]
-transform = Transform3D(-0.999999, 0, 0.00132638, 0, 1, 0, -0.00132638, 0, -0.999999, 9.61943, 0, 8.11846)
+[node name="EnemySpawner8" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 6.15973, 0, 10.4423)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf" parent="Bookshelves2" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -0.784991)
+[node name="EnemySpawner9" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 5.25082, 0, 3.13449)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf4" parent="Bookshelves2" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
+[node name="EnemySpawner10" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 8.11906, 0, 3.92525)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf2" parent="Bookshelves2" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 0.702478)
+[node name="EnemySpawner11" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 18.7329, 0, 2.29071)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf3" parent="Bookshelves2" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 2.21068)
+[node name="EnemySpawner12" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 8.3025, 0, 8.44843)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="Bookshelves3" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.96224, 0, 8.26963)
+[node name="EnemySpawner13" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 5.79589, 0, 7.0642)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf4" parent="Bookshelves3" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
+[node name="EnemySpawner14" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 21.0827, 0, 4.36543)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf2" parent="Bookshelves3" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 0.702478)
+[node name="EnemySpawner15" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 8.66956, 0, 11.6888)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf3" parent="Bookshelves3" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 2.21068)
+[node name="EnemySpawner16" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 3.07031, 0, 5.93496)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="Bookshelves4" type="Node3D" parent="."]
-transform = Transform3D(-0.999999, 0, 0.00132638, 0, 1, 0, -0.00132638, 0, -0.999999, 15.1829, 0, 8.11846)
+[node name="EnemySpawner17" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 2.96141, 0, 12.0818)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf" parent="Bookshelves4" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -0.784991)
+[node name="EnemySpawner18" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 22.4593, 0, 9.84916)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
 
-[node name="StaticBookshelf4" parent="Bookshelves4" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
-
-[node name="StaticBookshelf2" parent="Bookshelves4" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 0.702478)
-
-[node name="StaticBookshelf3" parent="Bookshelves4" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 2.21068)
-
-[node name="Bookshelves5" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4427, 0, 8.26963)
-
-[node name="StaticBookshelf" parent="Bookshelves5" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -0.784991)
-
-[node name="StaticBookshelf4" parent="Bookshelves5" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
-
-[node name="StaticBookshelf2" parent="Bookshelves5" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 0.702478)
-
-[node name="Bookshelves6" type="Node3D" parent="."]
-transform = Transform3D(-0.999999, 0, 0.00132638, 0, 1, 0, -0.00132638, 0, -0.999999, 20.6633, 0, 8.11846)
-
-[node name="StaticBookshelf" parent="Bookshelves6" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -0.784991)
-
-[node name="StaticBookshelf4" parent="Bookshelves6" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
-
-[node name="StaticBookshelf2" parent="Bookshelves6" instance=ExtResource("4_vy8ux")]
-transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 0.702478)
+[node name="EnemySpawner19" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 22.4593, 0, 6.11651)
+gizmo_extents = 1.0
+script = ExtResource("3_pmjbl")
+enemy_type = 1
