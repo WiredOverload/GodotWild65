@@ -1,5 +1,7 @@
 extends Node3D
 
+signal entrance_walk_complete
+
 @onready var camera: Camera3D = $Camera
 @onready var player = %Player
 @onready var ball = $Ball

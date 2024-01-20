@@ -94,6 +94,8 @@ func create_room() -> void:
 	
 	_stage.player_exit.connect(_on_stage_player_exit)
 	
+	_player_root.entrance_walk_complete.connect(_stage.close_entrance)
+	
 	await _player_root.play_entrance_cutscene()
 	
 	_stage.spawn_enemies()

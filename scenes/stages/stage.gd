@@ -12,6 +12,7 @@ var ball
 @onready var player_spawn_point: Marker3D = $GridMap/PlayerSpawnPoint
 @onready var next_room_area: Area3D = $GridMap/NextRoomArea
 @onready var go_arrow: Node3D = $GridMap/GoArrow
+@onready var spikes: Node3D = $GridMap/Spikes
 
 @onready var reward_spawns: Array[Node3D] = [
 	$GridMap/RewardPoint1,
@@ -20,6 +21,7 @@ var ball
 
 @onready var possible_rewards: Array[PickupItem] = [
 	preload("res://reward_items/walk_speed_1.tres"),
+	preload("res://reward_items/charge_speed_1.tres"),
 ]
 
 
@@ -35,6 +37,9 @@ func spawn_enemies() -> void:
 	Globals.stat_changed.connect(_on_stat_changed)
 	
 	ball.bounce.connect(_on_ball_bounce)
+
+func close_entrance() -> void:
+	spikes.visible = true
 
 func _on_stat_changed() -> void:
 	pass

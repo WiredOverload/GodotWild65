@@ -124,18 +124,6 @@ shape = SubResource("CylinderShape3D_5eh5q")
 
 [node name="PlayerModelTeacher" parent="." instance=ExtResource("2_hvmtt")]
 
-[node name="Skeleton3D" parent="PlayerModelTeacher/PlayerArmature" index="0"]
-bones/4/rotation = Quaternion(-1.60152e-07, -0.183566, 0.983007, -1.3859e-08)
-bones/4/scale = Vector3(1, 0.999999, 0.999997)
-bones/5/rotation = Quaternion(-0.396983, 0.585154, 0.585154, -0.396983)
-bones/5/scale = Vector3(1, 1, 1)
-bones/6/rotation = Quaternion(0.396983, 0.585154, 0.585154, 0.396983)
-bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(-0.402164, 0.581605, 0.581605, -0.402164)
-
-[node name="WiggleBone_PonytailWiggle" parent="PlayerModelTeacher/PlayerArmature/Skeleton3D" index="2"]
-transform = Transform3D(-1, 2.41584e-13, -8.74221e-08, 3.155e-08, -0.932606, -0.360893, -8.15308e-08, -0.360893, 0.932604, 0, 1.2827, -0.454476)
-
 [node name="MotionInterpolator3D" type="Node3D" parent="PlayerModelTeacher"]
 process_priority = 1
 process_physics_priority = 1
@@ -197,5 +185,3 @@ parameters/StateMachine/Walk/TimeScale/scale = 2.0
 [connection signal="timeout" from="VibrateTimer" to="." method="_on_vibrate_timer_timeout"]
 [connection signal="timeout" from="InvulnTimer" to="." method="_on_invuln_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
-
-[editable path="PlayerModelTeacher"]
