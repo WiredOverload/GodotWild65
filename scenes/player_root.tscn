@@ -331,7 +331,7 @@ script = ExtResource("3_fqwsv")
 target_path = NodePath("../../CameraMarkerGimbal/CameraMarker")
 
 [node name="CameraMarkerGimbal" type="Node3D" parent="."]
-transform = Transform3D(1, 0, -4.36557e-11, 0, 1, 2.98023e-08, 7.27596e-11, -2.98023e-08, 1, 0, 0, 0)
+transform = Transform3D(1, 0, -4.36557e-11, 0, 1, 2.98023e-08, 7.27596e-11, -2.98023e-08, 1, 0, 0, 2)
 
 [node name="CameraMarker" type="Marker3D" parent="CameraMarkerGimbal"]
 transform = Transform3D(0.999998, 0.00168755, -0.000574348, -5.31259e-11, 0.322195, 0.946673, 0.00178261, -0.946672, 0.322194, -9.53674e-07, 8.809, 3.053)

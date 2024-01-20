@@ -100,7 +100,6 @@ transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(11, -42)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_x644t"]
-graph_offset = Vector2(-276.332, -21.2523)
 nodes/CatchAnimation/node = SubResource("AnimationNodeAnimation_k8gr5")
 nodes/CatchAnimation/position = Vector2(220, 180)
 nodes/CatchBlend/node = SubResource("AnimationNodeBlend2_o8pnq")

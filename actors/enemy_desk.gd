@@ -32,6 +32,7 @@ var _target = null
 func _ready() -> void:
 	rotation.y = randf_range(0, TAU)
 	desk_anim.play("Spawn")
+	desk_anim.advance(0.0)
 	await desk_anim.animation_finished
 	desk_anim.play("Walk")
 	velocity = basis.z

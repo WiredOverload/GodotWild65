@@ -24,6 +24,7 @@ func _ready() -> void:
 	# spawn
 	rotation.y = randf_range(0, TAU)
 	book_anim.play("Spawn")
+	book_anim.advance(0.0)
 	await book_anim.animation_finished
 	book_anim.play("Flap")
 	velocity = basis.z

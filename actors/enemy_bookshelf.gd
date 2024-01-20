@@ -32,6 +32,7 @@ func _ready() -> void:
 	# spawn
 	rotation.y = randf_range(0, TAU)
 	bookshelf_anim.play("Spawn")
+	bookshelf_anim.advance(0.0)
 	await bookshelf_anim.animation_finished
 	bookshelf_anim.play("Walk")
 	velocity = basis.z
@@ -78,6 +79,7 @@ func deal_damage(damage : int):
 		tween.tween_property(material, "albedo_color", Color(1, 0, 0, 0), 0.5)
 		
 		# despawn
+		state = State.DEATH
 		bookshelf_anim.play_backwards("Spawn")
 		await bookshelf_anim.animation_finished
 		queue_free()
