@@ -11,6 +11,7 @@ var ball
 @onready var top_wall: CollisionShape3D = $GridMap/WorldBorder/TopWall
 @onready var player_spawn_point: Marker3D = $GridMap/PlayerSpawnPoint
 @onready var next_room_area: Area3D = $GridMap/NextRoomArea
+@onready var go_arrow: Node3D = $GridMap/GoArrow
 
 @onready var reward_spawns: Array[Node3D] = [
 	$GridMap/RewardPoint1,
@@ -57,10 +58,39 @@ func _punch_hole(where: Vector3) -> void:
 	
 	var hitTile: Vector3i = grid_map.local_to_map(where)
 	hitTile.z = 0
+	hitTile.x = clampi(hitTile.x, 1, 22)
 	
 	print("_punch_hole(where: %s) -> %s" % [where, hitTile])
 	
-	grid_map.set_cell_item(hitTile, 0) # Ideally new broken wall tile
+	var clockwise = grid_map.get_orthogonal_index_from_basis(Basis.from_euler(Vector3(0, -TAU / 4.0, 0)))
+	var counter_clockwise = grid_map.get_orthogonal_index_from_basis(Basis.from_euler(Vector3(0, TAU / 4.0, 0)))
+	
+	var floor = grid_map.mesh_library.find_item_by_name("Floor")
+	var wall_side = grid_map.mesh_library.find_item_by_name("WallSide")
+	
+	if hitTile.x == 1:
+		grid_map.set_cell_item(hitTile + Vector3i.LEFT, wall_side, counter_clockwise)
+	else:
+		grid_map.set_cell_item(hitTile + Vector3i.LEFT, floor)
+	
+	grid_map.set_cell_item(hitTile, floor)
+	
+	if hitTile.x == 22:
+		grid_map.set_cell_item(hitTile + Vector3i.RIGHT, wall_side, clockwise)
+	else:
+		grid_map.set_cell_item(hitTile + Vector3i.RIGHT, floor)
+	
+	var tunnel_left = grid_map.mesh_library.find_item_by_name("TunnelLeft")
+	var tunnel_center = grid_map.mesh_library.find_item_by_name("TunnelCenter")
+	var tunnel_right = grid_map.mesh_library.find_item_by_name("TunnelRight")
+	grid_map.set_cell_item(hitTile + Vector3i.FORWARD + Vector3i.LEFT, tunnel_left)
+	grid_map.set_cell_item(hitTile + Vector3i.FORWARD, tunnel_center)
+	grid_map.set_cell_item(hitTile + Vector3i.FORWARD + Vector3i.RIGHT, tunnel_right)
+	
+	
+	var pos := grid_map.map_to_local(hitTile)
+	
+	go_arrow.position = Vector3(pos.x, go_arrow.position.y, pos.z)
 
 func _spawn_rewards() -> void:
 	for p in reward_spawns:
@@ -75,3 +105,5 @@ func _on_reward_taken():
 	for r in _rewards:
 		r.queue_free()
 	_rewards.clear()
+	
+	go_arrow.visible = true

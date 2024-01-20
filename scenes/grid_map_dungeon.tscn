@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://71x1nvfggm0l"]
+[gd_scene load_steps=11 format=3 uid="uid://71x1nvfggm0l"]
 
 [ext_resource type="MeshLibrary" uid="uid://dgxh36itpnihl" path="res://mesh_library/mesh_library.tres" id="1_pryxi"]
+[ext_resource type="Texture2D" uid="uid://dwt3gev6cmlej" path="res://UI/go_arrow.png" id="2_g32h4"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8u7jd"]
 
@@ -12,6 +13,28 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4yyvt"]
 size = Vector3(24, 1, 1.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ji3hl"]
+atlas = ExtResource("2_g32h4")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b44cn"]
+atlas = ExtResource("2_g32h4")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bdgrc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ji3hl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b44cn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="GridMap" type="GridMap"]
 mesh_library = ExtResource("1_pryxi")
@@ -61,3 +84,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 5)
 
 [node name="RewardPoint2" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 5)
+
+[node name="GoArrow" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 11.7048, 0.189083, 3.57978)
+visible = false
+pixel_size = 0.02
+no_depth_test = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_bdgrc")
+autoplay = "default"

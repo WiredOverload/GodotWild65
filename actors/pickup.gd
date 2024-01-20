@@ -25,6 +25,7 @@ func _ready() -> void:
 	inner_spikes_mesh.set_instance_shader_parameter(&"albedo_color", color.lerp(Color.WHITE, 0.5))
 	core_mesh.material_override.albedo_color = color.lerp(Color.WHITE, 0.9)
 	
+	label.text = item.display_name()
 
 
 
