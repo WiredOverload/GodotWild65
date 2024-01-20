@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bcj4bf6pbxytk"]
+
+[ext_resource type="Shader" path="res://materials/shockwave.gdshader" id="1_84w4q"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_84w4q")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/force = 0.05
+shader_parameter/size = 1.0
+shader_parameter/thickness = 0.1

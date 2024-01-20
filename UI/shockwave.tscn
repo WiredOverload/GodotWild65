@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq70dtuxav5l1"]
+
+[ext_resource type="Material" uid="uid://bcj4bf6pbxytk" path="res://materials/shockwaveMaterial.tres" id="1_oupwx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gy4wt"]
+material = ExtResource("1_oupwx")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="ShaderMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_gy4wt")
