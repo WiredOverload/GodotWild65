@@ -68,6 +68,7 @@ func _physics_process(delta: float) -> void:
 					return
 				
 				state = State.BARK
+				
 				velocity = velocity.rotated(
 						Vector3.UP,
 						velocity.normalized().signed_angle_to(_target.global_position - global_position, Vector3.UP)
@@ -76,6 +77,7 @@ func _physics_process(delta: float) -> void:
 				desk_anim.play("Chomp")
 				await Future.all_signals([desk_anim.animation_finished]).done
 				state = State.CHASE
+	
 	# arbitrary math to slowly turn to face forward
 	rotation.y = rotate_toward(rotation.y, Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP), 3.0 * delta)
 

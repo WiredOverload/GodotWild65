@@ -155,7 +155,7 @@ func _update_acceleration(global_bone_pose: Transform3D, delta: float) -> Vector
 			mass_center = Vector3.UP * properties.length
 
 	mass_center = global_bone_pose * mass_center
-	var delta_mass_center := -(_prev_mass_center - mass_center)
+	var delta_mass_center := _prev_mass_center - mass_center
 	_prev_mass_center = mass_center
 
 	if _should_reset:

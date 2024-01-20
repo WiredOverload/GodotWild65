@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://by3eq5w2bqd30"]
+
+[ext_resource type="Shader" path="res://character_models/materials/MimicMaterial.gdshader" id="1_xrs4e"]
+[ext_resource type="Texture2D" uid="uid://c1qad38mfk88e" path="res://character_models/textures/mimic.png" id="2_db0kq"]
+[ext_resource type="NoiseTexture3D" uid="uid://bskfgcsg3tj0q" path="res://materials/cellular_noise_texture_3d.tres" id="3_vk41a"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xrs4e")
+shader_parameter/albedo_texture = ExtResource("2_db0kq")
+shader_parameter/noise_texture = ExtResource("3_vk41a")
