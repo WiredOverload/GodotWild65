@@ -7,6 +7,15 @@ var max_health = 5
 var health = max_health
 var damage := 2
 
+enum State {
+	SPAWN,
+	WANDER,
+	BARK,
+	CHASE,
+	DEATH,
+}
+var state: State = State.SPAWN: set = set_state
+
 #@onready var player := get_tree().get_first_node_in_group("Player")
 
 @onready var desk = $Desk
@@ -24,8 +33,10 @@ func _ready() -> void:
 	rotation.y = randf_range(0, TAU)
 	desk_anim.play("Spawn")
 	await desk_anim.animation_finished
+	desk_anim.play("Walk")
 	velocity = basis.z
 	_spawned = true
+	state = State.WANDER
 
 
 func _process(_delta: float) -> void:
@@ -34,17 +45,38 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if _spawned and health > 0:
-		if _target != null: # Turn towards the aggro target
+	match state:
+		State.DEATH, State.SPAWN:
+			return
+		State.CHASE: 
+			# Turn towards the aggro target
 			velocity = velocity.rotated(
 				Vector3.UP,
 				velocity.normalized().signed_angle_to(_target.global_position - global_position, Vector3.UP)
-			)			
-		move_and_bounce()
-		# arbitrary math to slowly turn to face forward
-		rotation.y = rotate_toward(rotation.y, Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP), 3.0 * delta)
+			)
+			move_and_bounce()
+		State.WANDER:					
+			move_and_bounce()
+				
+	# arbitrary math to slowly turn to face forward
+	rotation.y = rotate_toward(rotation.y, Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP), 3.0 * delta)
 
 
+func set_state(v: State) -> void:
+	match state:
+		State.WANDER, State.CHASE, State.BARK:
+			wander_turn_timer.paused = true
+	
+	state = v
+	
+	match state:
+		State.WANDER:
+			desk_anim.play("Walk")
+			wander_turn_timer.paused = false
+			wander_turn_timer.start()
+		State.CHASE:
+			desk_anim.play("Walk")
+			
 func deal_damage(damage : int):
 	if health > 0:
 		health -= damage # TODO: Actually check this value.
@@ -69,7 +101,7 @@ func deal_damage(damage : int):
 
 func _on_wander_turn_timer_timeout() -> void:
 	# Randomly rotate the direction the book is wandering in discrete angles
-	if _target == null:
+	if state == State.WANDER:
 		velocity = velocity.rotated(Vector3.UP, randi_range(-1, 1) * PI / 8.0)
 	wander_turn_timer.start(randf_range(3.0, 5.0))
 
@@ -87,7 +119,8 @@ func _on_aggro_range_body_entered(body):
 #		line_of_sight.force_raycast_update()
 #		if line_of_sight.get_collider() != body:
 #			return
-			
+		
+		state = State.BARK
 		_target = body
 		velocity = velocity.rotated(
 				Vector3.UP,
@@ -95,8 +128,11 @@ func _on_aggro_range_body_entered(body):
 		)
 		rotation.y = Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP)
 		desk_anim.play("Chomp")
+		await Future.all_signals([desk_anim.animation_finished]).done
+		state = State.CHASE
 
 
 func _on_aggro_range_body_exited(body):
 	if body == _target:
 		_target = null
+		state = State.WANDER
