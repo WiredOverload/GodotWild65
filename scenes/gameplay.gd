@@ -6,7 +6,7 @@ static var instance: Gameplay
 const PLAYER_ROOT_SCENE: PackedScene = preload("res://scenes/player_root.tscn")
 
 const STAGE_SCENES = [
-	{ weight = 1.0, file = "res://scenes/stages/stage.tscn" },
+	{ weight = 1.0, file = "res://scenes/stages/haunted_library.tscn" },
 ]
 
 const DEFAULT_SLOW_MOTION_SPEED = 2.0
@@ -93,6 +93,8 @@ func create_room() -> void:
 	_stage.ball = _player_root.ball
 	
 	_stage.player_exit.connect(_on_stage_player_exit)
+	
+	_player_root.entrance_walk_complete.connect(_stage.close_entrance)
 	
 	await _player_root.play_entrance_cutscene()
 	

@@ -28,7 +28,7 @@ animation/import=true
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
-import_script/path=""
+import_script/path="res://editor_scene_post_import_scripts/mimic_wiggle.gd"
 _subresources={
 "animations": {
 "RESET": {
@@ -7226,6 +7226,16 @@ _subresources={
 "slice_99/save_to_file/path": "",
 "slice_99/start_frame": 0,
 "slices/amount": 0
+}
+},
+"materials": {
+"BookshelfMaterial": {
+"use_external/enabled": true,
+"use_external/path": "res://character_models/materials/BookshelfMaterial.tres"
+},
+"MimicMaterial": {
+"use_external/enabled": true,
+"use_external/path": "res://character_models/materials/MimicMaterial.tres"
 }
 },
 "meshes": {

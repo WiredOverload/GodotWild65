@@ -7,8 +7,10 @@ enum State {
 	DISABLED = 3,
 }
 
-var move_speed: float = 5.0
-var move_speed_throwing: float = 1.0
+signal action_pressed
+
+var base_move_speed: float = 5.0
+var base_move_speed_throwing: float = 1.0
 var throw_accel: float = 10.0
 
 var state: State = State.NEUTRAL: set = set_state
@@ -32,6 +34,12 @@ var state: State = State.NEUTRAL: set = set_state
 @onready var hold_distance: float = Vector3(ball_held_position.position.x, 0, ball_held_position.position.z).length()
 
 
+var move_speed: float:
+	get: return base_move_speed * Globals.walk_speed_multiplier
+
+var move_speed_throwing: float:
+	get: return base_move_speed_throwing * Globals.walk_speed_multiplier
+
 var _throw_slomo_id: int = 0
 
 var _spin_speed: float:
@@ -41,7 +49,12 @@ func _ready() -> void:
 	if ball:
 		ball.grab(ball_back_position)
 	deactivate_catcher()
-	
+
+
+func _exit_tree() -> void:
+	if Gameplay.instance:
+		Gameplay.instance.cancel_slow_motion(_throw_slomo_id)
+
 
 func set_state(v: State) -> void:
 	# exiting state
@@ -82,13 +95,14 @@ func _process(delta: float) -> void:
 			_update_walk_animation(delta)
 			
 			if Input.is_action_just_pressed("action"):
-				if ball.is_held:
+				if ball and ball.is_held:
 					state = State.THROWING
 				else:
+					action_pressed.emit()
 					state = State.CATCHING
 		State.THROWING:
 			if Input.is_action_pressed("action"):
-				Globals.charge_ball_power(delta * Globals.spin_acceleration)
+				Globals.charge_ball_power(delta * Globals.charge_speed_multiplier)
 				
 				if not spin_spark_particles.emitting and Globals.current_gear == Globals.current_max_gear:
 					spin_spark_particles.restart()

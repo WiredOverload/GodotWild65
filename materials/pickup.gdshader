@@ -1,4 +1,8 @@
 shader_type spatial;
+render_mode blend_add, depth_draw_never, unshaded;
+
+instance uniform vec3 albedo_color : source_color = vec3(1, 0, 1);
+instance uniform float a_float = 8.0;
 
 ////float offset = rand_from_seed(VERTEX_ID);
 //float rand_from_seed(inout uint seed) {
@@ -26,15 +30,16 @@ void vertex() {
 	//VERTEX = VERTEX * (1.0 + (pow(sin(TIME + (rand_from_seed(seed) * PI * 2.0)), 5.0) * 1.5));
 	
 	VERTEX = VERTEX * abs(
-		sin(TIME + abs(8.0 + (VERTEX.x * 8.0))) + 
-		sin(TIME + abs(8.0 + (VERTEX.y * 8.0))) + 
-		sin(TIME + abs(8.0 + (VERTEX.z * 8.0))));
+		sin(TIME + abs(8.0 + (VERTEX.x * a_float))) + 
+		sin(TIME + abs(8.0 + (VERTEX.y * a_float))) + 
+		sin(TIME + abs(8.0 + (VERTEX.z * a_float))));
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
 	// Called for every pixel the material is visible on.
-	ALBEDO = vec3(2, 2, 2);
+	ALBEDO = albedo_color;
+	ALPHA = 0.8;
 }
 
 

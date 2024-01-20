@@ -28,7 +28,7 @@ animation/import=true
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
-import_script/path=""
+import_script/path="res://editor_scene_post_import_scripts/mimic_wiggle.gd"
 _subresources={
 "animations": {
 "Chomp": {
@@ -7232,6 +7232,22 @@ _subresources={
 "DeskMaterial": {
 "use_external/enabled": true,
 "use_external/path": "res://character_models/materials/DeskMaterial.tres"
+},
+"MimicMaterial": {
+"use_external/enabled": true,
+"use_external/path": "res://character_models/materials/MimicMaterial.tres"
+}
+},
+"meshes": {
+"desk_DeskMesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://character_models/meshes/desk_DeskMesh.res"
 }
 }
 }

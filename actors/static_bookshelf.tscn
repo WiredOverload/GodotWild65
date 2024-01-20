@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuua75lnhxs7"]
+
+[ext_resource type="ArrayMesh" uid="uid://dktxv3oen3q2g" path="res://character_models/meshes/bookshelf_BookshelfMesh.res" id="1_4l777"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5f01o"]
+size = Vector3(1, 1.25397, 0.621094)
+
+[sub_resource type="Skin" id="Skin_dgovl"]
+resource_name = "Skin"
+bind_count = 5
+bind/0/name = &"Root"
+bind/0/bone = -1
+bind/0/pose = Transform3D(1, 4.36198e-09, -2.38379e-07, -1.46549e-14, 0.999833, 0.0182954, 2.38419e-07, -0.0182955, 0.999833, 0, 0, 0)
+bind/1/name = &"Bottom"
+bind/1/bone = -1
+bind/1/pose = Transform3D(1, 0, -2.38419e-07, -1.46489e-14, 1, -6.14673e-08, 2.38419e-07, 0, 1, 3.86757e-10, -0.0886507, -0.00162218)
+bind/2/name = &"Middle"
+bind/2/bone = -1
+bind/2/pose = Transform3D(1, 0, -2.38419e-07, -1.46489e-14, 1, -6.14673e-08, 2.38419e-07, 0, 1, 3.86757e-10, -0.589413, -0.00162218)
+bind/3/name = &"MimicWiggle.R"
+bind/3/bone = -1
+bind/3/pose = Transform3D(-0.979604, -0.200944, -1.54347e-07, 0.200944, -0.979603, -7.14958e-08, -1.36831e-07, -1.6252e-07, 1, 0.689544, 1.02079, -0.00162192)
+bind/4/name = &"MimicWiggle.L"
+bind/4/bone = -1
+bind/4/pose = Transform3D(-0.979604, 0.200944, 1.54347e-07, -0.200944, -0.979603, -7.14957e-08, 1.3683e-07, -1.6252e-07, 1, -0.689544, 1.02079, -0.00162192)
+
+[sub_resource type="Shader" id="Shader_u5yg1"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode depth_draw_never,unshaded;
+
+
+void vertex() {
+}
+
+void fragment() {
+	ALPHA = 0.0;
+	ALPHA_SCISSOR_THRESHOLD = 0.5;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8lfcb"]
+render_priority = 0
+shader = SubResource("Shader_u5yg1")
+
+[node name="StaticBookshelf" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.610443, 0)
+shape = SubResource("BoxShape3D_5f01o")
+
+[node name="Bookshelf" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_4l777")
+skin = SubResource("Skin_dgovl")
+skeleton = NodePath("")
+surface_material_override/1 = SubResource("ShaderMaterial_8lfcb")

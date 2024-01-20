@@ -1,18 +1,99 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxk5uya6u0nni"]
+[gd_scene load_steps=11 format=3 uid="uid://dxk5uya6u0nni"]
 
 [ext_resource type="ArrayMesh" uid="uid://cmhgt6pvrvx1p" path="res://character_models/meshes/Icosphere_Icosphere_001.res" id="1_eisbl"]
+[ext_resource type="Script" path="res://actors/pickup.gd" id="1_t4dk0"]
+[ext_resource type="Script" path="res://actors/pickup_effect.gd" id="2_0nrh0"]
+[ext_resource type="Texture2D" uid="uid://dacvcghio488i" path="res://UI/button_press.png" id="4_li2hw"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pcgwj"]
-albedo_color = Color(2, 2, 2, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqua3"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_color = Color(1, 0.980392, 0.882353, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_tjiob"]
-material = SubResource("StandardMaterial3D_pcgwj")
+[sub_resource type="SphereMesh" id="SphereMesh_kql42"]
+radius = 0.3
+height = 0.6
+radial_segments = 8
+rings = 4
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sr37t"]
+height = 3.25943
+radius = 2.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrwjl"]
+atlas = ExtResource("4_li2hw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvfli"]
+atlas = ExtResource("4_li2hw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_an5mh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrwjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvfli")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Pickup" type="Node3D"]
+script = ExtResource("1_t4dk0")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="PickupEffect" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_0nrh0")
+
+[node name="CoreMesh" type="MeshInstance3D" parent="PickupEffect"]
+unique_name_in_owner = true
+transform = Transform3D(0.803468, 0, 0, 0, 0.803468, 0, 0, 0, 0.803468, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_vqua3")
+mesh = SubResource("SphereMesh_kql42")
+skeleton = NodePath("../..")
+
+[node name="InnerSpikesMesh" type="MeshInstance3D" parent="PickupEffect"]
+unique_name_in_owner = true
+transform = Transform3D(0.329395, 0, 0, 0, 0.329395, 0, 0, 0, 0.329395, 0, 0, 0)
+instance_shader_parameters/a_float = 8.0
+instance_shader_parameters/albedo_color = Color(1, 1, 1, 1)
 mesh = ExtResource("1_eisbl")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-mesh = SubResource("SphereMesh_tjiob")
+[node name="OuterSpikesMesh" type="MeshInstance3D" parent="PickupEffect"]
+unique_name_in_owner = true
+transform = Transform3D(0.421014, 0, 0, 0, 0.421014, 0, 0, 0, 0.421014, 0, 0, 0)
+instance_shader_parameters/a_float = 8.0
+instance_shader_parameters/albedo_color = Color(0.937255, 0.494118, 0, 1)
+mesh = ExtResource("1_eisbl")
+skeleton = NodePath("../..")
+
+[node name="Detector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detector"]
+shape = SubResource("CylinderShape3D_sr37t")
+
+[node name="Label" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.629751, -1)
+pixel_size = 0.01
+billboard = 1
+text = "A horse, of course!"
+
+[node name="ButtonSprite" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1604, -1.54535)
+visible = false
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_an5mh")
+autoplay = "default"
+
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
+[connection signal="body_exited" from="Detector" to="." method="_on_detector_body_exited"]

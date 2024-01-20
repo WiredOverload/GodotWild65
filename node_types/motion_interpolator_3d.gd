@@ -52,6 +52,24 @@ var offset_transform: Transform3D
 var _previous_target_xform: Transform3D
 var _current_target_xform: Transform3D
 
+
+func teleport() -> void:
+	if not enabled:
+		return
+	
+	var parent := get_parent_node_3d()
+	
+	if not parent or not _target:
+		return
+	
+	_current_target_xform = _target.global_transform * offset_transform
+	_previous_target_xform = _current_target_xform
+	
+	parent.global_position = _current_target_xform.origin
+	parent.global_basis = _current_target_xform.basis
+	
+
+
 func _ready():
 	if process_priority == 0:
 		process_priority = 1

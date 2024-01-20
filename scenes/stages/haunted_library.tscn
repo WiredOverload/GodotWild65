@@ -1,0 +1,116 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfunrnabkhtpp"]
+
+[ext_resource type="Script" path="res://scenes/stages/stage.gd" id="1_oif10"]
+[ext_resource type="PackedScene" uid="uid://71x1nvfggm0l" path="res://scenes/grid_map_dungeon.tscn" id="2_7k8en"]
+[ext_resource type="Script" path="res://node_types/enemy_spawner.gd" id="3_pkd3f"]
+[ext_resource type="PackedScene" uid="uid://cuua75lnhxs7" path="res://actors/static_bookshelf.tscn" id="4_vfxcg"]
+
+[node name="Stage" type="Node3D"]
+script = ExtResource("1_oif10")
+
+[node name="GridMap" parent="." instance=ExtResource("2_7k8en")]
+
+[node name="Enemies" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.633058, 0, 0.42774)
+
+[node name="EnemySpawner1" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279251, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279251, 8.55631, 0, 7.44572)
+gizmo_extents = 1.0
+script = ExtResource("3_pkd3f")
+enemy_type = 2
+
+[node name="EnemySpawner2" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279251, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279251, 14.1547, 0, 10.481)
+gizmo_extents = 1.0
+script = ExtResource("3_pkd3f")
+enemy_type = 2
+
+[node name="EnemySpawner4" type="Marker3D" parent="Enemies"]
+transform = Transform3D(-0.0194068, 0, -0.999812, 0, 1, 0, 0.999812, 0, -0.0194068, 18.6504, 0, 5.99888)
+gizmo_extents = 1.0
+script = ExtResource("3_pkd3f")
+enemy_type = 2
+
+[node name="EnemySpawner3" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279251, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279251, 3.05781, 0, 8.96197)
+gizmo_extents = 1.0
+script = ExtResource("3_pkd3f")
+enemy_type = 2
+
+[node name="Bookshelves" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.85364, 0, 8.69737)
+
+[node name="StaticBookshelf" parent="Bookshelves" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -0.784991)
+
+[node name="StaticBookshelf4" parent="Bookshelves" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
+
+[node name="StaticBookshelf3" parent="Bookshelves" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 2.21068)
+
+[node name="Bookshelves2" type="Node3D" parent="."]
+transform = Transform3D(-0.999999, 0, 0.00132638, 0, 1, 0, -0.00132638, 0, -0.999999, 9.07427, 0, 8.5462)
+
+[node name="StaticBookshelf" parent="Bookshelves2" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -0.784991)
+
+[node name="StaticBookshelf4" parent="Bookshelves2" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
+
+[node name="StaticBookshelf2" parent="Bookshelves2" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 0.702478)
+
+[node name="StaticBookshelf3" parent="Bookshelves2" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 2.21068)
+
+[node name="Bookshelves3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.41708, 0, 8.63751)
+
+[node name="StaticBookshelf4" parent="Bookshelves3" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
+
+[node name="StaticBookshelf2" parent="Bookshelves3" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 0.702478)
+
+[node name="StaticBookshelf3" parent="Bookshelves3" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 2.21068)
+
+[node name="Bookshelves4" type="Node3D" parent="."]
+transform = Transform3D(-0.999999, 0, 0.00132638, 0, 1, 0, -0.00132638, 0, -0.999999, 14.6377, 0, 8.60273)
+
+[node name="StaticBookshelf" parent="Bookshelves4" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -0.784991)
+
+[node name="StaticBookshelf4" parent="Bookshelves4" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
+
+[node name="StaticBookshelf2" parent="Bookshelves4" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 0.702478)
+
+[node name="StaticBookshelf3" parent="Bookshelves4" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 2.21068)
+
+[node name="Bookshelves5" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8975, 0, 8.69737)
+
+[node name="StaticBookshelf" parent="Bookshelves5" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -0.784991)
+
+[node name="StaticBookshelf4" parent="Bookshelves5" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
+
+[node name="StaticBookshelf2" parent="Bookshelves5" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 0.702478)
+
+[node name="Bookshelves6" type="Node3D" parent="."]
+transform = Transform3D(-0.999999, 0, 0.00132638, 0, 1, 0, -0.00132638, 0, -0.999999, 20.1181, 0, 8.5462)
+
+[node name="StaticBookshelf" parent="Bookshelves6" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -0.784991)
+
+[node name="StaticBookshelf4" parent="Bookshelves6" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, -2.29019)
+
+[node name="StaticBookshelf2" parent="Bookshelves6" instance=ExtResource("4_vfxcg")]
+transform = Transform3D(0.00612608, 0, 0.999981, 0, 1, 0, -0.999981, 0, 0.00612608, 0.790428, 0, 0.702478)
