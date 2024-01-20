@@ -6,18 +6,21 @@ enum EnemyType {
 	OBELISK,
 	BOOK,
 	BOOKSHELF,
+	DESK,
 }
 
 var ENEMY_SCENES := [
 	preload("res://actors/enemy.tscn"),
 	preload("res://actors/enemy_book.tscn"),
 	preload("res://actors/enemy_bookshelf.tscn"),
+	preload("res://actors/enemy_desk.tscn"),
 ]
 
 const PREVIEW_MESHES := [
 	null,
 	"res://character_models/meshes/book_BookMesh.res",
 	"res://character_models/meshes/bookshelf_BookshelfMesh.res",
+	"res://character_models/meshes/desk_DeskMesh.res"
 ]
 
 const DEFAULT_PREVIEW_MESH := "res://character_models/DO_NOT_SHIP/meshes/enemy_preview_EnemyPreviewMesh.res"
