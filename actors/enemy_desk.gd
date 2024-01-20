@@ -50,30 +50,14 @@ func _physics_process(delta: float) -> void:
 		State.DEATH, State.SPAWN:
 			return
 		State.CHASE: 
-			# Turn towards the aggro target
-			velocity = velocity.rotated(
-				Vector3.UP,
-				velocity.normalized().signed_angle_to(_target.global_position - global_position, Vector3.UP)
-			)
+			head_towards(_target.global_position)
 			move_and_bounce()
 		State.WANDER:
 			move_and_bounce()
 			
-			# Check for line of sight
-			if _target:
-				line_of_sight.global_basis = Basis.IDENTITY
-				line_of_sight.target_position = _target.global_position - line_of_sight.global_position
-				line_of_sight.force_raycast_update()
-				
-				if line_of_sight.get_collider() != _target:
-					return
-				
+			if _target and check_los_to_body(_target):
 				state = State.BARK
-				
-				velocity = velocity.rotated(
-						Vector3.UP,
-						velocity.normalized().signed_angle_to(_target.global_position - global_position, Vector3.UP)
-				)
+				head_towards(_target.global_position)
 				rotation.y = Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP)
 				desk_anim.play("Chomp")
 				await Future.all_signals([desk_anim.animation_finished]).done
@@ -120,6 +104,20 @@ func deal_damage(damage : int):
 		queue_free()
 
 
+func head_towards(dest: Vector3) -> void:
+	velocity = velocity.rotated(
+		Vector3.UP,
+		velocity.normalized().signed_angle_to(dest - global_position, Vector3.UP)
+	)
+
+
+func check_los_to_body(body) -> bool:
+	line_of_sight.global_basis = Basis.IDENTITY
+	line_of_sight.target_position = body.global_position - line_of_sight.global_position
+	line_of_sight.force_raycast_update()			
+	return line_of_sight.get_collider() != _target
+
+	
 func _on_wander_turn_timer_timeout() -> void:
 	# Randomly rotate the direction the book is wandering in discrete angles
 	if state == State.WANDER:
@@ -133,7 +131,7 @@ func _collision(other: PhysicsBody3D) -> void:
 		other.deal_damage(damage)
 
 
-func _on_aggro_range_body_entered(body):
+func _on_aggro_range_body_entered(body: Node3D):
 	if body.is_in_group("Player") and _target == null:
 		_target = body
 
