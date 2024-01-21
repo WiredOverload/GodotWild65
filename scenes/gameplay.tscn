@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0ovdrnefc0u5"]
+[gd_scene load_steps=5 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
+[ext_resource type="AudioStream" uid="uid://my0c3rvkjsik" path="res://music/HJR-Joyeux-Dungeon.ogg" id="3_nrx2k"]
 [ext_resource type="PackedScene" uid="uid://dod5y8ldj6mx5" path="res://scenes/overlays.tscn" id="4_6dyfr"]
 
 [sub_resource type="Environment" id="Environment_u7ddp"]
@@ -29,3 +30,8 @@ environment = SubResource("Environment_u7ddp")
 [node name="World" type="Node3D" parent="."]
 
 [node name="Overlays" parent="." instance=ExtResource("4_6dyfr")]
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nrx2k")
+autoplay = true
+bus = &"Music"
