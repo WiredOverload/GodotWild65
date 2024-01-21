@@ -126,7 +126,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Player/PlayerModelTeacher/AnimationPlayer:speed_scale")
+tracks/10/path = NodePath("Player/PlayerModel/AnimationPlayer:speed_scale")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -142,7 +142,7 @@ length = 2.0
 tracks/0/type = "animation"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Player/PlayerModelTeacher/AnimationPlayer")
+tracks/0/path = NodePath("Player/PlayerModel/AnimationPlayer")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -266,7 +266,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Player/PlayerModelTeacher/AnimationPlayer:speed_scale")
+tracks/11/path = NodePath("Player/PlayerModel/AnimationPlayer:speed_scale")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -331,7 +331,7 @@ script = ExtResource("3_fqwsv")
 target_path = NodePath("../../CameraMarkerGimbal/CameraMarker")
 
 [node name="CameraMarkerGimbal" type="Node3D" parent="."]
-transform = Transform3D(1, 0, -4.36557e-11, 0, 1, 2.98023e-08, 7.27596e-11, -2.98023e-08, 1, 0, 0, 0)
+transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
 
 [node name="CameraMarker" type="Marker3D" parent="CameraMarkerGimbal"]
 transform = Transform3D(0.999998, 0.00168755, -0.000574348, -5.31259e-11, 0.322195, 0.946673, 0.00178261, -0.946672, 0.322194, -9.53674e-07, 8.809, 3.053)

@@ -4,6 +4,7 @@ extends Node3D
 static var instance: Gameplay
 
 const PLAYER_ROOT_SCENE: PackedScene = preload("res://scenes/player_root.tscn")
+
 const shockwave := preload("res://UI/shockwave.tscn")
 
 const STAGE_SCENES = [
@@ -15,9 +16,9 @@ const DEFAULT_SLOW_MOTION_SPEED = 2.0
 
 signal slow_motion_complete(id: int)
 
-var room_number := 0
+var player_model_name := "WITCH"
 
-var min_enemies := 3
+var room_number := 0
 
 @onready var world: Node3D = $World
 
@@ -94,6 +95,7 @@ func create_room() -> void:
 	world.add_child(_stage)
 	
 	_player_root = PLAYER_ROOT_SCENE.instantiate()
+	_player_root.get_node("Player").model_name = player_model_name
 	world.add_child(_player_root)
 	_player_root.global_transform = _stage.player_spawn_point.global_transform
 	
