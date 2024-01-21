@@ -6,5 +6,5 @@
 resource_name = "PlayerWitchMaterial"
 cull_mode = 2
 albedo_texture = ExtResource("1_twx5q")
-roughness = 0.5
+metallic_specular = 0.0
 texture_filter = 2
