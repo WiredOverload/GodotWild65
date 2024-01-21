@@ -1,10 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckv4dexmjl00r"]
+[gd_scene load_steps=5 format=3 uid="uid://ckv4dexmjl00r"]
 
 [ext_resource type="Script" path="res://actors/ball.gd" id="1_cn60x"]
 [ext_resource type="Script" path="res://node_types/motion_interpolator_3d.gd" id="2_xbf28"]
-[ext_resource type="AudioStream" uid="uid://d1poy131jmsoe" path="res://SFX/chain1hit.wav" id="3_s7jot"]
-[ext_resource type="AudioStream" uid="uid://bbits7inpxsvo" path="res://SFX/chain2hit.wav" id="4_25dr2"]
-[ext_resource type="AudioStream" uid="uid://cbp51kcj3l14c" path="res://SFX/chain3hit.wav" id="5_fihdg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fupv0"]
 
@@ -32,12 +29,3 @@ process_priority = 1
 process_physics_priority = 1
 script = ExtResource("2_xbf28")
 target_path = NodePath("../..")
-
-[node name="HitSound1" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_s7jot")
-
-[node name="HitSound2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_25dr2")
-
-[node name="HitSound3" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_fihdg")
