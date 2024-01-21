@@ -54,7 +54,7 @@ var move_speed_throwing: float:
 var _throw_slomo_id: int = 0
 
 var _spin_speed: float:
-	get: return Globals.ball_power * 5.0 * Globals.charge_speed_multiplier
+	get: return Globals.ball_power * 5.0 * Globals.charge_speed_base * Globals.charge_speed_multiplier
 
 func _ready() -> void:
 	assert(model_name in PLAYER_MODEL_SCENES)
@@ -124,7 +124,7 @@ func _process(delta: float) -> void:
 					state = State.CATCHING
 		State.THROWING:
 			if Input.is_action_pressed("action"):
-				Globals.charge_ball_power(delta * Globals.charge_speed_multiplier)
+				Globals.charge_ball_power(delta * Globals.charge_speed_base * Globals.charge_speed_multiplier)
 				
 				if not spin_spark_particles.emitting and Globals.current_gear == Globals.current_max_gear:
 					spin_spark_particles.restart()

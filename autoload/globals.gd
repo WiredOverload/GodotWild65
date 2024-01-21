@@ -15,6 +15,9 @@ var damage_bonus := 0
 var spin_slowmo_modifier := 1
 var difficulty := 0: set = set_difficulty
 
+var charge_speed_base: float = 1.0
+var ricochets_base: int = 0
+
 var ball_power_retention: float = 0.5
 var walk_speed_multiplier: float = 1.0
 var charge_speed_multiplier: float = 1.0
@@ -37,6 +40,11 @@ func reset():
 	difficulty = 0
 	ball_power_retention = 0.5
 	room_reset()
+	
+	match selected_character:
+		"WITCH":
+			charge_speed_base = 0.5
+			ricochets_base = 2
 
 func room_reset():
 	ball_power_max = 1.0

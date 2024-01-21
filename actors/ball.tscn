@@ -11,7 +11,7 @@ rings = 4
 
 [node name="Ball" type="CharacterBody3D" groups=["Ball"]]
 collision_layer = 4
-collision_mask = 15
+collision_mask = 13
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_cn60x")
