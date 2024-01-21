@@ -8,10 +8,10 @@ signal entrance_walk_complete
 @onready var cutscene_animation_player: AnimationPlayer = $CutsceneAnimationPlayer
 
 func play_entrance_cutscene() -> void:
-	player.get_node("PlayerModelTeacher/MotionInterpolator3D").enabled = false
+	player.get_node("PlayerModel/MotionInterpolator3D").enabled = false
 	cutscene_animation_player.play("RoomEntrance")
 	cutscene_animation_player.advance(0.0)
 	await get_tree().process_frame
-	player.get_node("PlayerModelTeacher/MotionInterpolator3D").teleport()
+	player.get_node("PlayerModel/MotionInterpolator3D").teleport()
 	await cutscene_animation_player.animation_finished
-	player.get_node("PlayerModelTeacher/MotionInterpolator3D").enabled = true
+	player.get_node("PlayerModel/MotionInterpolator3D").enabled = true

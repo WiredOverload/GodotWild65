@@ -15,6 +15,7 @@ script = ExtResource("1_kcfk1")
 
 [node name="EnemyStatus" type="Node" parent="."]
 script = ExtResource("2_ln271")
+max_health = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59906, -0.0985107)

@@ -8,12 +8,16 @@ signal stats_changed
 @export_range(0.0, 1.0, 0.01) var xp_value: float = 0.1: set = set_xp_value
 
 var current_health: int: set = set_current_health
+var invulnerable: bool = false
 
 func _ready() -> void:
 	current_health = max_health
 
 
 func set_current_health(v: int) -> void:
+	if invulnerable:
+		print_rich("[color=yellow]Enemy was invulnerable! No damage taken.[/color]")
+		return
 	if v < current_health:
 		print_rich("[shake][color=red]Enemy damaged:[/color][/shake] %s took [color=red]%s[/color] damage ([color=red]%s[/color]/[color=red]%s[/color] remaining HP)." % [get_parent().name, current_health - v, v, max_health])
 	elif v > current_health:

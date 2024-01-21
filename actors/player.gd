@@ -1,5 +1,10 @@
 extends CharacterBody3D
 
+const PLAYER_MODEL_SCENES: Dictionary = {
+	TEACHER = preload("res://character_models/player_teacher/player_teacher.blend"),
+	WITCH = preload("res://character_models/player_witch/player_witch.blend"),
+}
+
 enum State {
 	NEUTRAL = 0,
 	THROWING = 1,
@@ -8,6 +13,8 @@ enum State {
 }
 
 signal action_pressed
+
+@export_enum("TEACHER", "WITCH") var model_name: String = "TEACHER"
 
 var base_move_speed: float = 5.0
 var base_move_speed_throwing: float = 1.0
@@ -19,6 +26,8 @@ var explosion = preload("res://UI/explosion.tscn")
 
 @onready var ball = get_tree().get_first_node_in_group("Ball")
 
+@onready var player_model = $PlayerModel
+
 @onready var model_transform: Marker3D = $ModelTransform
 @onready var ball_held_position: Marker3D = %BallHeldPosition
 @onready var ball_back_position: Marker3D = %BallBackPosition
@@ -28,13 +37,13 @@ var explosion = preload("res://UI/explosion.tscn")
 @onready var spin_spark_particles: GPUParticles3D = %SpinSparkParticles
 @onready var vibrate_timer: Timer = $VibrateTimer
 @onready var invuln_timer: Timer = $InvulnTimer
-@onready var mesh = $PlayerModelTeacher/PlayerArmature/Skeleton3D/Player
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 
 @onready var hold_distance: float = Vector3(ball_held_position.position.x, 0, ball_held_position.position.z).length()
 
+var mesh
 
 var move_speed: float:
 	get: return base_move_speed * Globals.walk_speed_multiplier
@@ -48,9 +57,20 @@ var _spin_speed: float:
 	get: return Globals.ball_power * 5.0 * Globals.charge_speed_multiplier
 
 func _ready() -> void:
+	assert(model_name in PLAYER_MODEL_SCENES)
+	
+	var placeholder: InstancePlaceholder = player_model
+	var motintp: MotionInterpolator3D = placeholder.get_node("MotionInterpolator3D")
+	player_model = placeholder.create_instance(true, PLAYER_MODEL_SCENES[model_name])
+	motintp.reparent(player_model)
+	
+	mesh = player_model.get_node("PlayerArmature/Skeleton3D/Player")
+	
 	if ball:
 		ball.grab(ball_back_position)
 	deactivate_catcher()
+	
+
 
 
 func _exit_tree() -> void:
@@ -226,3 +246,4 @@ func _on_death_timer_timeout() -> void:
 	mesh.mesh.surface_get_material(0).albedo_color = Color.WHITE
 	print("SCENE CHANGE")
 	get_tree().change_scene_to_file("res://scenes/lose.tscn")
+
