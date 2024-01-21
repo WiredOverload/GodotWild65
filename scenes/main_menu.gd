@@ -69,4 +69,4 @@ func _start_game():
 
 
 func _help():
-	assert(false) # TODO
+	get_tree().change_scene_to_file("res://scenes/help_menu.tscn")

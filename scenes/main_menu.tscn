@@ -19,12 +19,12 @@ glow_hdr_threshold = 0.9
 fog_enabled = true
 fog_light_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2lmka"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svcp6"]
 albedo_texture = ExtResource("2_37tue")
 uv1_scale = Vector3(50, 50, 50)
 
 [sub_resource type="QuadMesh" id="QuadMesh_0w46v"]
-material = SubResource("StandardMaterial3D_2lmka")
+material = SubResource("StandardMaterial3D_svcp6")
 size = Vector2(50, 50)
 
 [sub_resource type="Skin" id="Skin_1spny"]
