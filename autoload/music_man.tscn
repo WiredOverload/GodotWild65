@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://jmulab0xlut2"]
+
+[ext_resource type="Script" path="res://autoload/music_man.gd" id="1_btdnt"]
+[ext_resource type="AudioStream" uid="uid://my0c3rvkjsik" path="res://music/HJR-Joyeux-Dungeon.ogg" id="2_wansg"]
+[ext_resource type="AudioStream" uid="uid://d0grc8b5k0tum" path="res://music/HJR-Joyeux-Menu.ogg" id="3_d1q87"]
+
+[node name="MusicMan" type="Node"]
+script = ExtResource("1_btdnt")
+
+[node name="DungeonBGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_wansg")
+bus = &"Music"
+
+[node name="MenuBGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_d1q87")
+autoplay = true
+bus = &"Music"

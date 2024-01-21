@@ -16,6 +16,7 @@ var _selected := OPTION_NONE
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	MusicMan.play_menu()
 	_select(OPTION_START)
 
 
