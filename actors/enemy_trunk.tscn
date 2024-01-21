@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3i52idudaqsk"]
+
+[ext_resource type="Script" path="res://actors/enemy_trunk.gd" id="1_52w8e"]
+[ext_resource type="Script" path="res://node_types/enemy_status.gd" id="2_rypi6"]
+[ext_resource type="PackedScene" uid="uid://d178w1slhjhx1" path="res://character_models/trunk.blend" id="3_8okqe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hf8xw"]
+size = Vector3(1.00293, 1.03256, 0.993713)
+
+[node name="EnemyTrunk" type="StaticBody3D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 15
+axis_lock_linear_y = true
+script = ExtResource("1_52w8e")
+
+[node name="EnemyStatus" type="Node" parent="."]
+script = ExtResource("2_rypi6")
+
+[node name="TrunkModel" parent="." instance=ExtResource("3_8okqe")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.516281, -0.000152588)
+shape = SubResource("BoxShape3D_hf8xw")
+
+[node name="ActionTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]

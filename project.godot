@@ -104,6 +104,7 @@ action={
 3d_physics/layer_2="PlayerBody"
 3d_physics/layer_3="Ball"
 3d_physics/layer_4="Enemy"
+3d_physics/layer_5="EnemyProjectile"
 
 [rendering]
 
