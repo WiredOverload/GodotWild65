@@ -17,9 +17,11 @@ var state: State = State.SPAWN: set = set_state
 @onready var locker_anim: AnimationPlayer = locker.get_node("AnimationPlayer")
 @onready var action_timer: Timer = $ActionTimer
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+@onready var status = $EnemyStatus
 
 func _ready() -> void:
 	# spawn
+	status.invulnerable = true
 	locker_anim.play("Spawn")
 	locker_anim.advance(0.0)
 	await locker_anim.animation_finished
@@ -72,21 +74,23 @@ func _on_action_timer_timeout() -> void:
 	if state != State.WOBBLE_SHOOT:
 		return
 	
+	status.invulnerable = false
 	locker_anim.play("Open")
 	locker_anim.advance(0.0)
 	await locker_anim.animation_finished
 	if state != State.WOBBLE_SHOOT:
 		return
-	
+
 	var fireball = FIREBALL_SCENE.instantiate()
 	fireball.position = position + basis.z * 1.0
 	fireball.velocity = basis.z * 3.0
 	get_parent().add_child(fireball)
 	
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(2).timeout
 	if state != State.WOBBLE_SHOOT:
 		return
-	
+		
+	status.invulnerable = true
 	locker_anim.play("Close")
 	locker_anim.advance(0.0)
 	await locker_anim.animation_finished
