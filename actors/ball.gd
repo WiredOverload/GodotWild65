@@ -45,6 +45,7 @@ func _collision(other: PhysicsBody3D) -> void:
 	if other.is_in_group("Enemy"):
 		other.deal_damage(1 + Globals.damage_bonus)
 		Gameplay.instance.hit_stun()
+		Gameplay.instance.spawn_shock(global_position)
 
 func set_state(v: State) -> void:
 	match state:

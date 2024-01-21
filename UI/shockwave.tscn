@@ -1,11 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq70dtuxav5l1"]
+[gd_scene load_steps=5 format=3 uid="uid://cq70dtuxav5l1"]
 
-[ext_resource type="Material" uid="uid://bcj4bf6pbxytk" path="res://materials/shockwaveMaterial.tres" id="1_oupwx"]
+[ext_resource type="Script" path="res://UI/shockwave.gd" id="1_ohuao"]
+[ext_resource type="Shader" path="res://materials/shockwave.gdshader" id="3_wuilr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b68cu"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_wuilr")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/force = 0.05
+shader_parameter/size = 1.0
+shader_parameter/thickness = 0.05
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gy4wt"]
-material = ExtResource("1_oupwx")
+material = SubResource("ShaderMaterial_b68cu")
 
-[node name="Node3D" type="Node3D"]
+[node name="Shockwave" type="Node3D"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+script = ExtResource("1_ohuao")
 
 [node name="ShaderMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_gy4wt")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, -4.37114e-09, 0.1, 0, -0.1, -4.37114e-09, 0, 1, 0)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
