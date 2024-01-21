@@ -98,10 +98,13 @@ func _on_sneeze_timer_timeout() -> void:
 	state = State.WANDER
 
 
-func kill() -> void:
+func kill(room_clear: bool = false) -> void:
 	if state == State.DEATH:
 		return
 	state = State.DEATH
+	
+	if not room_clear:
+		$Ouch.play()
 	
 	collision_shape_3d.disabled = true
 	

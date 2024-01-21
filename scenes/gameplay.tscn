@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d0ovdrnefc0u5"]
 
 [ext_resource type="Script" path="res://scenes/gameplay.gd" id="1_cb7s4"]
-[ext_resource type="Environment" uid="uid://cn4y3fvt11t48" path="res://default_environment.tres" id="2_g4jbo"]
+[ext_resource type="Environment" path="res://default_environment.tres" id="2_g4jbo"]
 [ext_resource type="AudioStream" uid="uid://my0c3rvkjsik" path="res://music/HJR-Joyeux-Dungeon.ogg" id="3_nrx2k"]
 [ext_resource type="PackedScene" uid="uid://dod5y8ldj6mx5" path="res://scenes/overlays.tscn" id="4_6dyfr"]
 

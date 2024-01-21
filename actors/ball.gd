@@ -19,11 +19,17 @@ var is_held: bool:
 
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 @onready var motionInterpolator := $MeshInstance3D/MotionInterpolator3D
+@onready var hit_sounds = [
+	$HitSound1,
+	$HitSound2,
+	$HitSound3,
+]
 
 var current_speed: float:
 	get: return Globals.ball_power * 5.0
 
 var remaining_ricochets: int = 0
+var combo_counter: int = 0
 
 func _ready() -> void:
 	mesh_instance_3d.mesh = backpack_mesh if Globals.selected_character == "TEACHER" else cauldron_mesh
@@ -48,6 +54,8 @@ func _physics_process(delta: float) -> void:
 func _on_bounce(collision: KinematicCollision3D) -> void:
 	var normal := collision.get_normal()
 	Gameplay.instance.screen_shake_vel(-Vector2(normal.x, normal.z).normalized() * velocity.length())
+	hit_sounds[clamp(combo_counter, 0, 2)].play()
+	combo_counter += 1
 	if remaining_ricochets > 0:
 		remaining_ricochets -= 1
 	else:
@@ -88,4 +96,5 @@ func throw(direction: Vector3) -> void:
 	state = State.MOVING
 	velocity = direction * current_speed
 	remaining_ricochets = Globals.ricochets_base
+	combo_counter = 0
 	# TODO: sfx yeet

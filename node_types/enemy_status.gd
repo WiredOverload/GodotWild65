@@ -10,9 +10,13 @@ signal stats_changed
 var current_health: int: set = set_current_health
 var invulnerable: bool = false
 
+var _ouch_player = null
+
 func _ready() -> void:
 	current_health = max_health
-
+	_ouch_player = AudioStreamPlayer.new()
+	_ouch_player.stream = preload("res://SFX/genericHit.wav")
+	add_child(_ouch_player)
 
 func set_current_health(v: int) -> void:
 	if invulnerable:

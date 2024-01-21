@@ -22,5 +22,5 @@ func _physics_process(delta: float) -> void:
 		#if collision.get_collider().is_in_group("Player"):
 			#collision.get_collider().deal_damage(damage)
 
-func kill():
+func kill(room_clear: bool = false):
 	mesh.mesh.surface_get_material(0).albedo_color = Color.BLACK

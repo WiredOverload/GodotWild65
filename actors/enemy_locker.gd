@@ -36,7 +36,7 @@ func set_state(v: State) -> void:
 			collision_shape_3d.disabled = true
 			action_timer.stop()
 
-func kill() -> void:
+func kill(room_clear: bool = false) -> void:
 	if state == State.DEATH:
 		return
 	state = State.DEATH

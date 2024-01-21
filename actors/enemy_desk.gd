@@ -77,7 +77,7 @@ func set_state(v: State) -> void:
 		State.CHASE:
 			desk_anim.play("Walk")
 
-func kill() -> void:
+func kill(room_clear: bool = false) -> void:
 	if state == State.DEATH:
 		return
 	state = State.DEATH
