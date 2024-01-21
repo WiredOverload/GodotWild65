@@ -115,7 +115,7 @@ func check_los_to_body(body) -> bool:
 	line_of_sight.global_basis = Basis.IDENTITY
 	line_of_sight.target_position = body.global_position - line_of_sight.global_position
 	line_of_sight.force_raycast_update()			
-	return line_of_sight.get_collider() != _target
+	return line_of_sight.get_collider() == null
 
 	
 func _on_wander_turn_timer_timeout() -> void:

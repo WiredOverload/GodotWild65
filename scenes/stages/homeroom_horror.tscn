@@ -11,20 +11,134 @@ script = ExtResource("1_dfyeo")
 
 [node name="Enemies" type="Node3D" parent="."]
 
-[node name="EnemySpawner" type="Marker3D" parent="Enemies"]
-transform = Transform3D(0.734003, 0, 0.679147, 0, 1, 0, -0.679147, 0, 0.734003, 5.96478, 0, 6.68439)
+[node name="EnemySpawner2" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 15.8342, 0, 8.422)
 gizmo_extents = 1.0
 script = ExtResource("3_hodyh")
-enemy_type = 2
+enemy_type = 1
 
-[node name="EnemySpawner2" type="Marker3D" parent="Enemies"]
-transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 17.7156, 0, 7.19138)
+[node name="EnemySpawner23" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 1.88625, 0, 5.4843)
 gizmo_extents = 1.0
 script = ExtResource("3_hodyh")
 enemy_type = 1
 
 [node name="EnemySpawner3" type="Marker3D" parent="Enemies"]
-transform = Transform3D(0.576903, 0, -0.816813, 0, 1, 0, 0.816813, 0, 0.576903, 11.6923, 0.231728, 6.13432)
+transform = Transform3D(0.788022, 0, 0.615648, 0, 1, 0, -0.615648, 0, 0.788022, 4.08875, 0, 5.10039)
 gizmo_extents = 1.0
 script = ExtResource("3_hodyh")
-enemy_type = 3
+enemy_type = 5
+
+[node name="EnemySpawner4" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.788022, 0, 0.615648, 0, 1, 0, -0.615648, 0, 0.788022, 5.04481, 0, 4.32602)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 4
+
+[node name="EnemySpawner5" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.788022, 0, 0.615648, 0, 1, 0, -0.615648, 0, 0.788022, 5.81968, 0, 5.28269)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner6" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.788022, 0, 0.615648, 0, 1, 0, -0.615648, 0, 0.788022, 4.83438, 0, 6.08075)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner7" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.720866, 0, 0.693075, 0, 1, 0, -0.693075, 0, 0.720866, 19.3729, 0, 5.88973)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner8" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.720866, 0, 0.693075, 0, 1, 0, -0.693075, 0, 0.720866, 18.5347, 0, 5.04799)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner9" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.720866, 0, 0.693075, 0, 1, 0, -0.693075, 0, 0.720866, 19.4018, 0, 4.18449)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 4
+
+[node name="EnemySpawner10" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.720866, 0, 0.693075, 0, 1, 0, -0.693075, 0, 0.720866, 20.2881, 0, 5.07447)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner11" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 19.7853, 0, 10.7183)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner12" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 18.5975, 0, 10.7359)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner13" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 18.5794, 0, 9.51228)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner14" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 19.8353, 0, 9.49371)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner15" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 5.20673, 0, 10.9187)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner16" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 4.01894, 0, 10.9363)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner17" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 4.00085, 0, 9.71269)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner18" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 5.25673, 0, 9.69412)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner19" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 12.569, 0, 9.09316)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 4
+
+[node name="EnemySpawner20" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 11.3812, 0, 9.11072)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5
+
+[node name="EnemySpawner21" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 11.3632, 0, 7.88713)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 4
+
+[node name="EnemySpawner22" type="Marker3D" parent="Enemies"]
+transform = Transform3D(0.00279248, 0, 0.999996, 0, 1, 0, -0.999996, 0, 0.00279248, 12.619, 0, 7.86856)
+gizmo_extents = 1.0
+script = ExtResource("3_hodyh")
+enemy_type = 5

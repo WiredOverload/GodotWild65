@@ -31,9 +31,14 @@ func _ready() -> void:
 	next_room_area.body_entered.connect(_on_next_room_area_body_entered)
 
 func spawn_enemies() -> void:
-	for c in $Enemies.get_children():
-		c.spawn()
-	
+
+	var stack = $Enemies.get_children()
+	while not stack.is_empty():
+		var node = stack.pop_back()
+		if node.has_method(&"spawn"):
+			node.spawn()
+		else:
+			stack.append_array(node.get_children())
 	Globals.stat_changed.connect(_on_stat_changed)
 	
 	ball.bounce.connect(_on_ball_bounce)

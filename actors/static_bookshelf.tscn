@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuua75lnhxs7"]
+[gd_scene load_steps=5 format=3 uid="uid://fk0py5unmuyk"]
 
-[ext_resource type="Script" path="res://actors/static_bookshelf.gd" id="1_3elet"]
-[ext_resource type="PackedScene" uid="uid://bsua44u4xw3x" path="res://character_models/bookshelf.blend" id="1_07ytb"]
+[ext_resource type="Script" path="res://actors/static_bookshelf.gd" id="1_gtr1r"]
+[ext_resource type="PackedScene" uid="uid://bsua44u4xw3x" path="res://character_models/bookshelf.blend" id="2_fnflv"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vit8j"]
 height = 1.0
@@ -13,13 +13,14 @@ alpha_antialiasing_mode = 0
 albedo_color = Color(1, 1, 1, 0)
 
 [node name="StaticBookshelf" type="StaticBody3D"]
-script = ExtResource("1_3elet")
+collision_layer = 11
+script = ExtResource("1_gtr1r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_vit8j")
 
-[node name="BookshelfModel" parent="." instance=ExtResource("1_07ytb")]
+[node name="BookshelfModel" parent="." instance=ExtResource("2_fnflv")]
 
 [node name="Bookshelf" parent="BookshelfModel/BookshelfArmature/Skeleton3D" index="0"]
 surface_material_override/1 = SubResource("StandardMaterial3D_8g03o")
