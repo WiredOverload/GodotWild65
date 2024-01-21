@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dxk5uya6u0nni"]
 
-[ext_resource type="ArrayMesh" uid="uid://cmhgt6pvrvx1p" path="res://character_models/meshes/Icosphere_Icosphere_001.res" id="1_eisbl"]
+[ext_resource type="ArrayMesh" uid="uid://2m4vufji8jgo" path="res://character_models/meshes/Icosphere_Icosphere_001.res" id="1_eisbl"]
 [ext_resource type="Script" path="res://actors/pickup.gd" id="1_t4dk0"]
 [ext_resource type="Script" path="res://actors/pickup_effect.gd" id="2_0nrh0"]
 [ext_resource type="FontFile" uid="uid://bm7apk44q4vli" path="res://fonts/smallburg-Regular.otf" id="4_f88pq"]

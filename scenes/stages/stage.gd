@@ -32,6 +32,11 @@ var ball
 @onready var possible_rewards: Array[PickupItem] = [
 	preload("res://reward_items/walk_speed_1.tres"),
 	preload("res://reward_items/charge_speed_1.tres"),
+	preload("res://reward_items/max_health_1.tres"),
+	preload("res://reward_items/spin_slowmo_1.tres"),
+	preload("res://reward_items/speed_retention_1.tres"),
+	preload("res://reward_items/xp_bonus_1.tres"),
+	preload("res://reward_items/damage_bonus_1.tres"),
 ]
 
 

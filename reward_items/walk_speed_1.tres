@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_27ol3")
 type = 0
-stat_value = 5.0
+stat_value = 10.0

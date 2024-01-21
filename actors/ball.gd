@@ -53,7 +53,7 @@ func _collision(other: PhysicsBody3D) -> void:
 		var status = other.get_node_or_null("EnemyStatus")
 		if status is EnemyStatus:
 			if Globals.current_gear >= status.required_gear_level:
-				status.current_health -= 1 + Globals.damage_bonus
+				status.current_health -= roundf(Globals.current_gear * Globals.damage_bonus)
 				Gameplay.instance.hit_stun()
 				Gameplay.instance.spawn_shock(global_position)
 				# TODO: sfx dong

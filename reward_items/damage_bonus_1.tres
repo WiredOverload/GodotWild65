@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PickupItem" load_steps=2 format=3 uid="uid://cswxugehf0tfc"]
+
+[ext_resource type="Script" path="res://resource_types/pickup_item.gd" id="1_7l5cl"]
+
+[resource]
+script = ExtResource("1_7l5cl")
+type = 4
+stat_value = 10.0
