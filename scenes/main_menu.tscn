@@ -1,0 +1,248 @@
+[gd_scene load_steps=13 format=3 uid="uid://cuf5x1wqip580"]
+
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_x0cps"]
+[ext_resource type="Texture2D" uid="uid://c8wey7psfcr4r" path="res://UI/planks.png" id="2_37tue"]
+[ext_resource type="ArrayMesh" uid="uid://d2d7y138c8bqd" path="res://character_models/meshes/desk_DeskMesh.res" id="3_4dpdg"]
+[ext_resource type="ArrayMesh" uid="uid://7aejyh2esk7k" path="res://character_models/meshes/book_BookMesh.res" id="4_86gid"]
+[ext_resource type="FontFile" uid="uid://bm7apk44q4vli" path="res://fonts/smallburg-Regular.otf" id="5_o0bnm"]
+
+[sub_resource type="Environment" id="Environment_ihvo4"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.0
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.5
+glow_bloom = 0.5
+glow_hdr_threshold = 0.9
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2lmka"]
+albedo_texture = ExtResource("2_37tue")
+uv1_scale = Vector3(50, 50, 50)
+
+[sub_resource type="QuadMesh" id="QuadMesh_0w46v"]
+material = SubResource("StandardMaterial3D_2lmka")
+size = Vector2(50, 50)
+
+[sub_resource type="Skin" id="Skin_1spny"]
+resource_name = "Skin"
+bind_count = 10
+bind/0/name = &"Root"
+bind/0/bone = -1
+bind/0/pose = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bind/1/name = &"Body"
+bind/1/bone = -1
+bind/1/pose = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.126323, 0)
+bind/2/name = &"Hinge"
+bind/2/bone = -1
+bind/2/pose = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.963368, 0.457902)
+bind/3/name = &"UpperTeeth"
+bind/3/bone = -1
+bind/3/pose = Transform3D(4.37114e-08, 0, -1, 0, -1, 0, -1, 0, -4.37114e-08, 0.432029, 0.960332, -0.0494264)
+bind/4/name = &"BottomTeeth"
+bind/4/bone = -1
+bind/4/pose = Transform3D(-0.998751, 0, -0.0499721, 0, 1, 0, 0.0499721, 0, -0.998751, 0.0714203, -0.960332, 0.428996)
+bind/5/name = &"FrontLeg.L"
+bind/5/bone = -1
+bind/5/pose = Transform3D(-0.00763345, 0, -0.999971, 0, -1, 0, -0.999971, 0, 0.00763345, 0.401427, 0.793028, 0.398375)
+bind/6/name = &"BackLeg.L"
+bind/6/bone = -1
+bind/6/pose = Transform3D(-0.0229853, 0, 0.999736, 0, -1, 0, 0.999736, 0, 0.0229853, 0.402954, 0.793028, -0.393796)
+bind/7/name = &"FrontLeg.R"
+bind/7/bone = -1
+bind/7/pose = Transform3D(-0.00763345, 0, 0.999971, 0, -1, 0, 0.999971, 0, 0.00763345, -0.401427, 0.793028, 0.398375)
+bind/8/name = &"BackLeg.R"
+bind/8/bone = -1
+bind/8/pose = Transform3D(-0.0229853, 0, -0.999736, 0, -1, 0, -0.999736, 0, 0.0229853, -0.402954, 0.793028, -0.393796)
+bind/9/name = &"MimicWiggle"
+bind/9/bone = -1
+bind/9/pose = Transform3D(4.37114e-08, 0, -1, 0, -1, 0, -1, 0, -4.37114e-08, 0, 0.785719, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dt6j8"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="Skin" id="Skin_c7bbo"]
+resource_name = "Skin"
+bind_count = 4
+bind/0/name = &"Root"
+bind/0/bone = -1
+bind/0/pose = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+bind/1/name = &"Cover.R"
+bind/1/bone = -1
+bind/1/pose = Transform3D(0, 4.37114e-08, 1, 1, -5.2108e-15, -1.19209e-07, 0, 1, -4.37114e-08, -4.37114e-08, -0.0473705, -1)
+bind/2/name = &"Cover.L"
+bind/2/bone = -1
+bind/2/pose = Transform3D(0, -4.37114e-08, -1, -1, -5.2108e-15, -1.19209e-07, 0, 1, -4.37114e-08, 4.37114e-08, -0.0473705, -1)
+bind/3/name = &"MimicWiggle"
+bind/3/bone = -1
+bind/3/pose = Transform3D(4.37114e-08, 0, -1, 0, -1, 0, -1, 0, -4.37114e-08, 0, 0.99194, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11yk0"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(1, 1, 1, 0)
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_x0cps")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ihvo4")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+layers = 2
+mesh = SubResource("QuadMesh_0w46v")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.74345, 0)
+spot_range = 10.914
+spot_attenuation = 1e-05
+
+[node name="DeskArmature" type="Node3D" parent="."]
+
+[node name="Skeleton3D" type="Skeleton3D" parent="DeskArmature"]
+bones/0/name = "Root"
+bones/0/parent = -1
+bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bones/0/enabled = true
+bones/0/position = Vector3(0, 0, 0)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/name = "Body"
+bones/1/parent = 0
+bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126323, 0)
+bones/1/enabled = true
+bones/1/position = Vector3(0, 0.126323, 0)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/name = "Hinge"
+bones/2/parent = 1
+bones/2/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.837045, -0.457902)
+bones/2/enabled = true
+bones/2/position = Vector3(0, 0.837045, -0.457902)
+bones/2/rotation = Quaternion(0, 0, 0, 1)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/name = "UpperTeeth"
+bones/3/parent = 2
+bones/3/rest = Transform3D(0, 0, -1, 0, -1, 0, -1, 0, 0, -0.0494265, -0.00303572, 0.889931)
+bones/3/enabled = true
+bones/3/position = Vector3(-0.0494265, -0.00303572, 0.889931)
+bones/3/rotation = Quaternion(0.707107, 0, -0.707107, 0)
+bones/3/scale = Vector3(0.000474975, 0.000474975, 0.000474975)
+bones/4/name = "BottomTeeth"
+bones/4/parent = 1
+bones/4/rest = Transform3D(-0.998751, 0, 0.0499721, 0, 1, 0, -0.0499721, 0, -0.998751, 0.0498932, 0.834009, 0.432029)
+bones/4/enabled = true
+bones/4/position = Vector3(0.0498932, 0.834009, 0.432029)
+bones/4/rotation = Quaternion(0, 0.999688, 0, 0.0249939)
+bones/4/scale = Vector3(0.000474975, 0.000474975, 0.000474975)
+bones/5/name = "FrontLeg.L"
+bones/5/parent = 1
+bones/5/rest = Transform3D(-0.00763345, 0, -0.999971, 0, -1, 0, -0.999971, 0, 0.00763339, 0.401427, 0.666705, 0.398375)
+bones/5/enabled = true
+bones/5/position = Vector3(0.401427, 0.666705, 0.398375)
+bones/5/rotation = Quaternion(-0.704403, 0, 0.7098, 0)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/name = "BackLeg.L"
+bones/6/parent = 1
+bones/6/rest = Transform3D(-0.0229852, 0, 0.999736, 0, -1, 0, 0.999736, 0, 0.0229852, 0.402954, 0.666705, -0.393796)
+bones/6/enabled = true
+bones/6/position = Vector3(0.402954, 0.666705, -0.393796)
+bones/6/rotation = Quaternion(0.698933, 0, 0.715187, 0)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/name = "FrontLeg.R"
+bones/7/parent = 1
+bones/7/rest = Transform3D(-0.00763345, 0, 0.999971, 0, -1, 0, 0.999971, 0, 0.00763339, -0.401427, 0.666705, 0.398375)
+bones/7/enabled = true
+bones/7/position = Vector3(-0.401427, 0.666705, 0.398375)
+bones/7/rotation = Quaternion(0.704403, 0, 0.7098, 0)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/name = "BackLeg.R"
+bones/8/parent = 1
+bones/8/rest = Transform3D(-0.0229852, 0, -0.999736, 0, -1, 0, -0.999736, 0, 0.0229852, -0.402954, 0.666705, -0.393796)
+bones/8/enabled = true
+bones/8/position = Vector3(-0.402954, 0.666705, -0.393796)
+bones/8/rotation = Quaternion(-0.698933, 0, 0.715187, 0)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/name = "MimicWiggle"
+bones/9/parent = 1
+bones/9/rest = Transform3D(0, 0, -1, 0, -1, 0, -1, 0, 0, 0, 0.659396, 0)
+bones/9/enabled = true
+bones/9/position = Vector3(0, 0.659396, 0)
+bones/9/rotation = Quaternion(0.707107, 0, -0.707107, 0)
+bones/9/scale = Vector3(1, 1, 1)
+
+[node name="Desk" type="MeshInstance3D" parent="DeskArmature/Skeleton3D"]
+mesh = ExtResource("3_4dpdg")
+skin = SubResource("Skin_1spny")
+surface_material_override/1 = SubResource("StandardMaterial3D_dt6j8")
+
+[node name="BookArmature" type="Node3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 0, -7.57103e-08, -0.866025, -0.5, -4.37114e-08, -0.5, 0.866025, -0.0288649, 2.05414, 0.318941)
+
+[node name="Skeleton3D" type="Skeleton3D" parent="BookArmature"]
+bones/0/name = "Root"
+bones/0/parent = -1
+bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+bones/0/enabled = true
+bones/0/position = Vector3(0, 0.950391, 0)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/name = "Cover.R"
+bones/1/parent = 0
+bones/1/rest = Transform3D(5.96046e-08, 1, -2.98023e-08, 2.98023e-08, 5.96046e-08, 1, 1, -2.98023e-08, 0, 0.0473705, 0, 0)
+bones/1/enabled = true
+bones/1/position = Vector3(0.0473705, 0, 0)
+bones/1/rotation = Quaternion(-0.495842, -0.504124, -0.495842, 0.504124)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/name = "Cover.L"
+bones/2/parent = 0
+bones/2/rest = Transform3D(5.96046e-08, -1, 2.98023e-08, -2.98023e-08, 5.96046e-08, 1, -1, -2.98023e-08, 0, -0.0473705, 0, 0)
+bones/2/enabled = true
+bones/2/position = Vector3(-0.0473705, 0, 0)
+bones/2/rotation = Quaternion(-0.495842, 0.504124, 0.495842, 0.504124)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/name = "MimicWiggle"
+bones/3/parent = 0
+bones/3/rest = Transform3D(0, 0, -1, 0, -1, 0, -1, 0, 0, 0, -0.00806022, 0)
+bones/3/enabled = true
+bones/3/position = Vector3(0, -0.00806022, 0)
+bones/3/rotation = Quaternion(0.707107, 0, -0.707107, 0)
+bones/3/scale = Vector3(0.000474975, 0.000474975, 0.000474975)
+
+[node name="Book" type="MeshInstance3D" parent="BookArmature/Skeleton3D"]
+mesh = ExtResource("4_86gid")
+skin = SubResource("Skin_c7bbo")
+surface_material_override/1 = SubResource("StandardMaterial3D_11yk0")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(0.998784, 0, 0.049303, 0, 1, 0, -0.049303, 0, 0.998784, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, -3.72529e-09, 7.45058e-09, 0, 0.87171, 0.490022, -7.45058e-09, -0.490022, 0.87171, 0, 2.44899, 2.86833)
+h_offset = -2.0
+
+[node name="StartLabel" type="Label3D" parent="CameraPivot/Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, -1.86265e-09, 0, 0, 1, 0, 3.72529e-09, 2.98023e-08, 1, -2.5495, 0.18171, -0.988655)
+pixel_size = 0.002
+billboard = 1
+text = "start game"
+font = ExtResource("5_o0bnm")
+font_size = 64
+
+[node name="HelpLabel" type="Label3D" parent="CameraPivot/Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, -3.72529e-09, 0, 0, 1, 2.98023e-08, 7.45058e-09, 5.96046e-08, 1, -2.5495, -0.196029, -0.988654)
+pixel_size = 0.002
+billboard = 1
+text = "help"
+font = ExtResource("5_o0bnm")
+font_size = 64
