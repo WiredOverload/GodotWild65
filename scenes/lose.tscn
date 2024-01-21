@@ -19,12 +19,12 @@ glow_hdr_threshold = 0.9
 fog_enabled = true
 fog_light_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4s80"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mh3b3"]
 albedo_texture = ExtResource("2_sjxe4")
 uv1_scale = Vector3(50, 50, 50)
 
 [sub_resource type="QuadMesh" id="QuadMesh_hmtee"]
-material = SubResource("StandardMaterial3D_s4s80")
+material = SubResource("StandardMaterial3D_mh3b3")
 size = Vector2(50, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_erigm"]
