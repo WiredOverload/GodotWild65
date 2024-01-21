@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b06rdooafyvuu"]
+[gd_scene load_steps=5 format=3 uid="uid://b06rdooafyvuu"]
 
 [ext_resource type="Script" path="res://actors/enemy_locker.gd" id="1_kcfk1"]
 [ext_resource type="PackedScene" uid="uid://d0ka0dmgnnng2" path="res://character_models/locker.blend" id="2_05u2r"]
+[ext_resource type="Script" path="res://node_types/enemy_status.gd" id="2_ln271"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hf8xw"]
 size = Vector3(0.806885, 1.19812, 0.610596)
@@ -11,6 +12,9 @@ collision_layer = 8
 collision_mask = 15
 axis_lock_linear_y = true
 script = ExtResource("1_kcfk1")
+
+[node name="EnemyStatus" type="Node" parent="."]
+script = ExtResource("2_ln271")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59906, -0.0985107)

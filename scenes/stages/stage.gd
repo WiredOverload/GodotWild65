@@ -54,7 +54,7 @@ func _on_ball_bounce(collision: KinematicCollision3D) -> void:
 		return
 	
 	if collision.get_collider_shape() == top_wall:
-		get_tree().call_group("Enemy", "deal_damage", 9999)
+		get_tree().call_group("Enemy", "kill")
 		_punch_hole(collision.get_position())
 		_spawn_rewards()
 		ball.queue_free()

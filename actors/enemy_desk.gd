@@ -1,11 +1,6 @@
 extends BouncingCharacterBody3D
 
 const speed = 1.0
-const weight = 1.0
-
-var max_health = 5
-var health = max_health
-var damage := 2
 
 enum State {
 	SPAWN,
@@ -81,27 +76,28 @@ func set_state(v: State) -> void:
 			wander_turn_timer.start()
 		State.CHASE:
 			desk_anim.play("Walk")
-			
-func deal_damage(damage : int):
-	if health > 0:
-		health -= damage # TODO: Actually check this value.
-		Globals.add_xp(weight)
-		collision_shape_3d.disabled = true
-		
-		# fade to alpha zero and color to red
-		var mesh_instance: MeshInstance3D = desk.get_node("DeskArmature/Skeleton3D/Desk")
-		var material: BaseMaterial3D = mesh_instance.mesh["surface_0/material"].duplicate()
-		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		mesh_instance["surface_material_override/0"] = material
-		@warning_ignore("return_value_discarded")
-		var tween := create_tween()
-		tween.tween_interval(0.5)
-		tween.tween_property(material, "albedo_color", Color(1, 0, 0, 0), 0.5)
-		
-		# despawn
-		desk_anim.play_backwards("Spawn")
-		await Future.all_signals([desk_anim.animation_finished]).done
-		queue_free()
+
+func kill() -> void:
+	if state == State.DEATH:
+		return
+	state = State.DEATH
+	
+	collision_shape_3d.disabled = true
+	
+	# fade to alpha zero and color to red
+	var mesh_instance: MeshInstance3D = desk.get_node("DeskArmature/Skeleton3D/Desk")
+	var material: BaseMaterial3D = mesh_instance.mesh["surface_0/material"].duplicate()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mesh_instance["surface_material_override/0"] = material
+	@warning_ignore("return_value_discarded")
+	var tween := create_tween()
+	tween.tween_interval(0.5)
+	tween.tween_property(material, "albedo_color", Color(1, 0, 0, 0), 0.5)
+	
+	# despawn
+	desk_anim.play_backwards("Spawn")
+	await Future.all_signals([desk_anim.animation_finished]).done
+	queue_free()
 
 
 func head_towards(dest: Vector3) -> void:
@@ -128,7 +124,7 @@ func _on_wander_turn_timer_timeout() -> void:
 func _collision(other: PhysicsBody3D) -> void:
 	if other.is_in_group("Player"):
 		desk_anim.play("Chomp")
-		other.deal_damage(damage)
+		other.deal_damage(2)
 
 
 func _on_aggro_range_body_entered(body: Node3D):

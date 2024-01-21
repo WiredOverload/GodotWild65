@@ -23,13 +23,13 @@ func move_and_bounce() -> void:
 		
 		bounce.emit(collision)
 		
-		if has_method(&"_on_bounce"):
-			stop = call(&"_on_bounce", collision)
-		
 		if has_method(&"_collision"):
 			call(&"_collision", collision.get_collider())
 		if collision.get_collider().has_method(&"_collision"):
 			collision.get_collider().call(&"_collision", self)
+		
+		if has_method(&"_on_bounce"):
+			stop = call(&"_on_bounce", collision)
 		
 		if stop:
 			break

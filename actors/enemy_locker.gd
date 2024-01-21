@@ -1,7 +1,5 @@
 extends StaticBody3D
 
-const weight = 1.0
-
 enum State {
 	SPAWN,
 	IDLE,
@@ -10,10 +8,6 @@ enum State {
 }
 
 var state: State = State.SPAWN: set = set_state
-
-var max_health = 1
-var health = max_health
-var damage := 1
 
 @onready var locker_model: GenericSignaller = $LockerModel
 
@@ -38,26 +32,25 @@ func set_state(v: State) -> void:
 			collision_shape_3d.disabled = true
 			action_timer.stop()
 
-func deal_damage(damage : int):
-	if health > 0:
-		health -= damage # TODO: Actually check this value.
-		Globals.add_xp(weight)
-		state = State.DEATH
-		
-		# fade to alpha zero and color to red
-		var mesh_instance: MeshInstance3D = locker.get_node("LockerModel/Skeleton3D/Locker")
-		var material: BaseMaterial3D = mesh_instance.mesh["surface_0/material"].duplicate()
-		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		mesh_instance["surface_material_override/0"] = material
-		var tween := create_tween()
-		tween.tween_interval(0.5)
-		tween.tween_property(material, "albedo_color", Color(1, 0, 0, 0), 0.5)
-		
-		# despawn
-		locker_anim.play_backwards("Spawn")
-		await locker_anim.animation_finished
-		
-		queue_free()
+func kill() -> void:
+	if state == State.DEATH:
+		return
+	state = State.DEATH
+	
+	# fade to alpha zero and color to red
+	var mesh_instance: MeshInstance3D = locker.get_node("LockerModel/Skeleton3D/Locker")
+	var material: BaseMaterial3D = mesh_instance.mesh["surface_0/material"].duplicate()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mesh_instance["surface_material_override/0"] = material
+	var tween := create_tween()
+	tween.tween_interval(0.5)
+	tween.tween_property(material, "albedo_color", Color(1, 0, 0, 0), 0.5)
+	
+	# despawn
+	locker_anim.play_backwards("Spawn")
+	await locker_anim.animation_finished
+	
+	queue_free()
 
 
 func _on_action_timer_timeout() -> void:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://ds0w34bd1klyc"]
+[gd_scene load_steps=12 format=3 uid="uid://ds0w34bd1klyc"]
 
 [ext_resource type="Script" path="res://actors/enemy_bookshelf.gd" id="1_fnpbq"]
+[ext_resource type="Script" path="res://node_types/enemy_status.gd" id="2_jjw5r"]
 [ext_resource type="PackedScene" uid="uid://bsua44u4xw3x" path="res://character_models/bookshelf.blend" id="2_q3squ"]
 [ext_resource type="Script" path="res://node_types/motion_interpolator_3d.gd" id="4_gh3lf"]
 [ext_resource type="ArrayMesh" uid="uid://dlfymxsqkt015" path="res://character_models/meshes/book_page_BookPageMesh.res" id="4_o127s"]
@@ -43,6 +44,9 @@ collision_mask = 15
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_fnpbq")
+
+[node name="EnemyStatus" type="Node" parent="."]
+script = ExtResource("2_jjw5r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

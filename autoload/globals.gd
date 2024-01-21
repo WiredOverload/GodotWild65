@@ -2,6 +2,8 @@ extends Node
 
 signal stat_changed
 
+const XP_SNAP = 0.01
+
 # per-run stats
 var health := 3: set = set_health
 var max_health := 5: set = set_max_health
@@ -13,6 +15,7 @@ var difficulty := 0: set = set_difficulty
 var ball_power_retention: float = 0.5
 var walk_speed_multiplier: float = 1.0
 var charge_speed_multiplier: float = 1.0
+var xp_multiplier: float = 1.0
 
 # per-room stats
 var ball_power_max: float = 1.0: set = set_ball_power_max
@@ -45,7 +48,10 @@ func decay_ball_power(amount: float = 1.0 - ball_power_retention) -> void:
 	ball_power = clampf(ball_power - amount, 0.0, ball_power_max)
 
 func add_xp(amount: float) -> void:
-	ball_power_max = clampf(ball_power_max + amount, 0.0, 5.0)
+	if ball_power_max == 5.0:
+		return
+	
+	ball_power_max = snappedf(clampf(ball_power_max + amount, 0.0, 5.0), XP_SNAP)
 
 func give_item(item: PickupItem) -> void:
 	match item.type:

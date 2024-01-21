@@ -43,9 +43,16 @@ func _on_bounce(collision: KinematicCollision3D) -> void:
 
 func _collision(other: PhysicsBody3D) -> void:
 	if other.is_in_group("Enemy"):
-		other.deal_damage(1 + Globals.damage_bonus)
-		Gameplay.instance.hit_stun()
-		Gameplay.instance.spawn_shock(global_position)
+		var status = other.get_node_or_null("EnemyStatus")
+		if status is EnemyStatus:
+			if Globals.current_gear >= status.required_gear_level:
+				status.current_health -= 1 + Globals.damage_bonus
+				Gameplay.instance.hit_stun()
+				Gameplay.instance.spawn_shock(global_position)
+				# TODO: sfx dong
+			else:
+				Gameplay.instance.spawn_shock(global_position) # TODO: make visually sharper like "ping"
+				# TODO: sfx ping
 
 func set_state(v: State) -> void:
 	match state:
@@ -63,7 +70,9 @@ func set_state(v: State) -> void:
 func grab(marker: Node3D) -> void:
 	state = State.HELD
 	held_marker = marker
+	# TODO: sfx tch
 
 func throw(direction: Vector3) -> void:
 	state = State.MOVING
 	velocity = direction * current_speed
+	# TODO: sfx yeet
