@@ -1,5 +1,7 @@
 extends StaticBody3D
 
+const FIREBALL_SCENE: PackedScene = preload("res://actors/fireball.tscn")
+
 enum State {
 	SPAWN,
 	IDLE,
@@ -38,7 +40,7 @@ func kill() -> void:
 	state = State.DEATH
 	
 	# fade to alpha zero and color to red
-	var mesh_instance: MeshInstance3D = locker.get_node("LockerModel/Skeleton3D/Locker")
+	var mesh_instance: MeshInstance3D = locker.get_node("LockerArmature/Skeleton3D/Locker")
 	var material: BaseMaterial3D = mesh_instance.mesh["surface_0/material"].duplicate()
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mesh_instance["surface_material_override/0"] = material
@@ -75,6 +77,11 @@ func _on_action_timer_timeout() -> void:
 	await locker_anim.animation_finished
 	if state != State.WOBBLE_SHOOT:
 		return
+	
+	var fireball = FIREBALL_SCENE.instantiate()
+	fireball.position = position + basis.z * 1.0
+	fireball.velocity = basis.z * 3.0
+	get_parent().add_child(fireball)
 	
 	await get_tree().create_timer(0.5).timeout
 	if state != State.WOBBLE_SHOOT:

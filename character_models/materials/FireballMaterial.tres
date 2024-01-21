@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://2m6oo7yft7nv"]
+
+[ext_resource type="Texture2D" uid="uid://cicdqmejd7gbm" path="res://character_models/textures/fireball.png" id="1_lydyd"]
+
+[resource]
+resource_name = "FireballMaterial"
+cull_mode = 2
+albedo_texture = ExtResource("1_lydyd")
+texture_filter = 2
