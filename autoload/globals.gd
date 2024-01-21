@@ -11,7 +11,7 @@ var selected_character: String = "TEACHER"
 var health := 3: set = set_health
 var max_health := 5: set = set_max_health
 var max_stamina := 1
-var damage_bonus := 0
+var damage_bonus := 1
 var spin_slowmo_modifier := 1
 var difficulty := 0: set = set_difficulty
 
@@ -21,7 +21,7 @@ var ricochets_base: int = 0
 var ball_power_retention: float = 0.5
 var walk_speed_multiplier: float = 1.0
 var charge_speed_multiplier: float = 1.0
-var xp_multiplier: float = 1.0
+var xp_multiplier: float = 2.0
 
 # per-room stats
 var ball_power_max: float = 1.0: set = set_ball_power_max
@@ -49,8 +49,8 @@ func reset():
 func room_reset():
 	ball_power_max = 1.0
 	ball_power = 0.0
-
-
+	xp_multiplier = xp_multiplier * 0.9
+	
 
 func charge_ball_power(amount: float) -> void:
 	ball_power = clampf(ball_power + amount, 0.0, ball_power_max)
