@@ -1,7 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://7db3hg74bni7"]
+[gd_scene load_steps=26 format=3 uid="uid://7db3hg74bni7"]
 
 [ext_resource type="Script" path="res://actors/player.gd" id="1_o3bix"]
-[ext_resource type="PackedScene" uid="uid://dbbpcvj6kr6fe" path="res://character_models/player_teacher/player_teacher.blend" id="2_hvmtt"]
 [ext_resource type="Animation" uid="uid://b3yl44oddw4kv" path="res://character_models/player_teacher/animations/RESET.res" id="4_614sg"]
 [ext_resource type="Animation" uid="uid://baxgx1j5b45ce" path="res://character_models/player_teacher/animations/Catch.res" id="4_ebhtf"]
 [ext_resource type="Script" path="res://node_types/motion_interpolator_3d.gd" id="5_h08vo"]
@@ -38,7 +37,7 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_vvcek")
 size = Vector2(0.2, 0.2)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cxd6q"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wuv6w"]
 _data = {
 "Catch": ExtResource("4_ebhtf"),
 "RESET": ExtResource("4_614sg"),
@@ -121,9 +120,9 @@ shape = SubResource("CylinderShape3D_5eh5q")
 
 [node name="ModelTransform" type="Marker3D" parent="."]
 
-[node name="PlayerModelTeacher" parent="." instance=ExtResource("2_hvmtt")]
+[node name="PlayerModel" parent="." instance_placeholder="res://character_models/player_teacher/player_teacher.blend"]
 
-[node name="MotionInterpolator3D" type="Node3D" parent="PlayerModelTeacher"]
+[node name="MotionInterpolator3D" type="Node3D" parent="PlayerModel"]
 process_priority = 1
 process_physics_priority = 1
 script = ExtResource("5_h08vo")
@@ -170,13 +169,13 @@ wait_time = 2.0
 one_shot = true
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../PlayerModelTeacher")
+root_node = NodePath("../PlayerModel")
 libraries = {
-"": SubResource("AnimationLibrary_cxd6q")
+"": SubResource("AnimationLibrary_wuv6w")
 }
 tree_root = SubResource("AnimationNodeBlendTree_x644t")
 advance_expression_base_node = NodePath("..")
-anim_player = NodePath("../PlayerModelTeacher/AnimationPlayer")
+anim_player = NodePath("../PlayerModel/AnimationPlayer")
 parameters/CatchBlend/blend_amount = 0.0
 parameters/StateMachine/Walk/Blend/blend_position = 0.0
 parameters/StateMachine/Walk/TimeScale/scale = 2.0
