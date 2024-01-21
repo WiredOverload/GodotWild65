@@ -15,6 +15,8 @@ var throw_accel: float = 10.0
 
 var state: State = State.NEUTRAL: set = set_state
 
+var explosion = preload("res://UI/explosion.tscn")
+
 @onready var ball = get_tree().get_first_node_in_group("Ball")
 
 @onready var model_transform: Marker3D = $ModelTransform
@@ -206,17 +208,21 @@ func deal_damage(damage):
 		Globals.health -= damage
 		if Globals.health < 1:
 			print("dead")
-			mesh.mesh.surface_get_material(0).albedo_color = Color.DARK_MAGENTA
+			mesh.mesh.surface_get_material(0).albedo_color = Color.DARK_RED
 			$DeathTimer.start()
+			var explode = explosion.instantiate()
+			add_child(explode)
+			explode.position = Vector3(0, 1.5, 0)
 		else:
-			mesh.mesh.surface_get_material(0).albedo_color = Color.WHITE
+			mesh.mesh.surface_get_material(0).albedo_color = Color.RED * 1.5
 			invuln_timer.start()
 
 
 func _on_invuln_timer_timeout() -> void:
-	mesh.mesh.surface_get_material(0).albedo_color = Color("ff79ff")
+	mesh.mesh.surface_get_material(0).albedo_color = Color.WHITE
 
 
 func _on_death_timer_timeout() -> void:
+	mesh.mesh.surface_get_material(0).albedo_color = Color.WHITE
 	print("SCENE CHANGE")
 	get_tree().change_scene_to_file("res://scenes/lose.tscn")

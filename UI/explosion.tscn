@@ -1,0 +1,150 @@
+[gd_scene load_steps=22 format=3 uid="uid://bvachwr6rjo5d"]
+
+[ext_resource type="Script" path="res://UI/explosion.gd" id="1_0klw7"]
+[ext_resource type="Texture2D" uid="uid://x0yk2j3uvafh" path="res://UI/toby_explosion.png" id="1_6ncin"]
+[ext_resource type="AudioStream" uid="uid://25t7d1lcbwsp" path="res://SFX/toby_explosion.wav" id="3_vc74b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0qwc"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(0, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfkr2"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(65, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_by7ad"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(130, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkhk2"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(195, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cib1k"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(260, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oibm3"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(325, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8aic"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(390, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0cbk"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(455, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxni5"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(520, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4va1b"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(585, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6tmd"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(650, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajl2w"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(715, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mggki"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(780, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aipgo"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(845, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4k7h0"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(910, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myayt"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(975, 0, 65, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iy8h5"]
+atlas = ExtResource("1_6ncin")
+region = Rect2(1040, 0, 65, 98)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4nokh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0qwc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfkr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_by7ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkhk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cib1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oibm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8aic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0cbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxni5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4va1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6tmd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajl2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mggki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aipgo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4k7h0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myayt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iy8h5")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Explosion" type="Node3D"]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+script = ExtResource("1_0klw7")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_4nokh")
+autoplay = "default"
+frame = 16
+frame_progress = 1.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vc74b")
+autoplay = true
+
+[connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
