@@ -43,7 +43,7 @@ var move_speed_throwing: float:
 var _throw_slomo_id: int = 0
 
 var _spin_speed: float:
-	get: return Globals.ball_power * 5.0
+	get: return Globals.ball_power * 5.0 * Globals.charge_speed_multiplier
 
 func _ready() -> void:
 	if ball:
@@ -106,7 +106,7 @@ func _process(delta: float) -> void:
 				
 				if not spin_spark_particles.emitting and Globals.current_gear == Globals.current_max_gear:
 					spin_spark_particles.restart()
-					_throw_slomo_id = Gameplay.instance.slow_motion(0.3, 2.0 * Globals.spin_slowmo_modifier)
+					_throw_slomo_id = Gameplay.instance.slow_motion(0.3 * Globals.spin_slowmo_modifier, 2.0)
 					vibrate_timer.start()
 				if spin_spark_particles.emitting and Globals.current_gear != Globals.current_max_gear:
 					spin_spark_particles.emitting = false
@@ -152,7 +152,10 @@ func _physics_process(delta: float) -> void:
 				_handle_move_and_slide_collision()
 		
 		State.THROWING:
-			rotation.y += delta * _spin_speed / hold_distance
+			if Globals.current_gear == Globals.current_max_gear:
+				rotation.y += delta * 5.0 / hold_distance
+			else:
+				rotation.y += delta * _spin_speed / hold_distance
 			
 			if direction:
 				velocity.x = direction.x * move_speed_throwing
