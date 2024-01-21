@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c1ohv7yb1142k"]
+
+[ext_resource type="Texture2D" uid="uid://bxm7dfyi41q4j" path="res://meshlib_books/library_trim.png" id="1_epewd"]
+
+[resource]
+resource_name = "Material"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_epewd")
+metallic_specular = 0.0
+roughness = 0.5
+texture_filter = 2

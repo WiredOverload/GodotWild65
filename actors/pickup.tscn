@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dxk5uya6u0nni"]
+[gd_scene load_steps=12 format=3 uid="uid://dxk5uya6u0nni"]
 
 [ext_resource type="ArrayMesh" uid="uid://cmhgt6pvrvx1p" path="res://character_models/meshes/Icosphere_Icosphere_001.res" id="1_eisbl"]
 [ext_resource type="Script" path="res://actors/pickup.gd" id="1_t4dk0"]
 [ext_resource type="Script" path="res://actors/pickup_effect.gd" id="2_0nrh0"]
+[ext_resource type="FontFile" uid="uid://bm7apk44q4vli" path="res://fonts/smallburg-Regular.otf" id="4_f88pq"]
 [ext_resource type="Texture2D" uid="uid://dacvcghio488i" path="res://UI/button_press.png" id="4_li2hw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqua3"]
@@ -83,9 +84,10 @@ shape = SubResource("CylinderShape3D_sr37t")
 [node name="Label" type="Label3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.629751, -1)
-pixel_size = 0.01
 billboard = 1
 text = "A horse, of course!"
+font = ExtResource("4_f88pq")
+font_size = 64
 
 [node name="ButtonSprite" type="AnimatedSprite3D" parent="."]
 unique_name_in_owner = true

@@ -1,10 +1,11 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bcbnfmsux1ijp"]
 
-[ext_resource type="Texture2D" uid="uid://kp3m3mhdlwpi" path="res://mesh_library/models/textures/dungeon_trim.png" id="1_i1f5l"]
+[ext_resource type="Texture2D" uid="uid://kp3m3mhdlwpi" path="res://meshlib_dungeon/textures/dungeon_trim.png" id="1_i1f5l"]
 
 [resource]
 resource_name = "Material"
 cull_mode = 2
+vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("1_i1f5l")
 metallic_specular = 0.0
 texture_filter = 2

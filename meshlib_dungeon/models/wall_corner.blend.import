@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://byoa7na5fa7x1"
-path="res://.godot/imported/tunnel_right.blend-48cac3a775cfc5045f960064f5e1862d.scn"
+uid="uid://dxpq80c8n82sj"
+path="res://.godot/imported/wall_corner.blend-e8b7ac56be31e1705159967a350ca055.scn"
 
 [deps]
 
-source_file="res://mesh_library/models/tunnel_right.blend"
-dest_files=["res://.godot/imported/tunnel_right.blend-48cac3a775cfc5045f960064f5e1862d.scn"]
+source_file="res://meshlib_dungeon/models/wall_corner.blend"
+dest_files=["res://.godot/imported/wall_corner.blend-e8b7ac56be31e1705159967a350ca055.scn"]
 
 [params]
 
@@ -18,7 +18,7 @@ nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 meshes/ensure_tangents=true
-meshes/generate_lods=true
+meshes/generate_lods=false
 meshes/create_shadow_meshes=true
 meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
@@ -33,7 +33,24 @@ _subresources={
 "materials": {
 "Material": {
 "use_external/enabled": true,
-"use_external/path": "res://mesh_library/models/materials/DungeonTrimMaterial.tres"
+"use_external/path": "res://meshlib_dungeon/materials/DungeonTrimMaterial.tres"
+}
+},
+"meshes": {
+"wall_corner_Cube": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": false,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://mesh_library/models/meshes/wall_corner_Cube.res"
+}
+},
+"nodes": {
+"PATH:WallCorner": {
+"generate/physics": true
 }
 }
 }
@@ -44,7 +61,7 @@ blender/nodes/punctual_lights=true
 blender/nodes/cameras=true
 blender/nodes/custom_properties=true
 blender/nodes/modifiers=1
-blender/meshes/colors=false
+blender/meshes/colors=true
 blender/meshes/uvs=true
 blender/meshes/normals=true
 blender/meshes/tangents=true
