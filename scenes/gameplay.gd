@@ -8,13 +8,14 @@ const PLAYER_ROOT_SCENE: PackedScene = preload("res://scenes/player_root.tscn")
 const shockwave := preload("res://UI/shockwave.tscn")
 
 const STAGE_SCENES = [
-	{ weight = 5.0, file = "res://scenes/stages/book_swarm.tscn" },
+	{ weight = 2.0, file = "res://scenes/stages/book_swarm.tscn" },
 	{ weight = 1.0, file = "res://scenes/stages/homeroom_horror.tscn" },
 	{ weight = 1.0, file = "res://scenes/stages/haunted_library.tscn" },
 	{ weight = 1.0, file = "res://scenes/stages/lockerroom_lockdown.tscn" },
 	
 	{ weight = 1.0, file = "res://scenes/stages/donut_disaster.tscn" },
 	{ weight = 1.0, file = "res://scenes/stages/picnic_panic.tscn" },
+	{ weight = 1.0, file = "res://scenes/stages/trunk_trouble.tscn" },
 	
 ]
 
