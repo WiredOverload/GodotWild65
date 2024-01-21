@@ -4,7 +4,7 @@ extends Node3D
 var full_material := preload("res://materials/heart_full.tres")
 var empty_material := preload("res://materials/heart_empty.tres")
 var time = 0
-var empty : bool = false:
+var empty : bool = true:
 	set(value):
 		empty = value
 		if value == true:

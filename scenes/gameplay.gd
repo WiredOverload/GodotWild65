@@ -12,6 +12,10 @@ const STAGE_SCENES = [
 	{ weight = 1.0, file = "res://scenes/stages/homeroom_horror.tscn" },
 	{ weight = 1.0, file = "res://scenes/stages/haunted_library.tscn" },
 	{ weight = 1.0, file = "res://scenes/stages/lockerroom_lockdown.tscn" },
+	
+	{ weight = 1.0, file = "res://scenes/stages/donut_disaster.tscn" },
+	{ weight = 1.0, file = "res://scenes/stages/picnic_panic.tscn" },
+	
 ]
 
 const DEFAULT_SLOW_MOTION_SPEED = 2.0

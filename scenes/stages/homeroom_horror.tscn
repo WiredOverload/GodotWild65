@@ -1,14 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://tevllu0lay0u"]
+[gd_scene load_steps=5 format=3 uid="uid://tevllu0lay0u"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage.gd" id="1_dfyeo"]
 [ext_resource type="PackedScene" uid="uid://71x1nvfggm0l" path="res://scenes/grid_map_dungeon.tscn" id="2_5q2vs"]
+[ext_resource type="MeshLibrary" uid="uid://qx3th66whga1" path="res://meshlib_books/meshlib_library.meshlib" id="3_6pcin"]
 [ext_resource type="Script" path="res://node_types/enemy_spawner.gd" id="3_hodyh"]
 
 [node name="Stage" type="Node3D"]
 script = ExtResource("1_dfyeo")
-chain_locks = 5
+chain_locks = 2
 
 [node name="GridMap" parent="." instance=ExtResource("2_5q2vs")]
+mesh_library = ExtResource("3_6pcin")
 
 [node name="Enemies" type="Node3D" parent="."]
 
