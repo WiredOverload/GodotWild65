@@ -37,6 +37,8 @@ var ball
 	preload("res://reward_items/speed_retention_1.tres"),
 	preload("res://reward_items/xp_bonus_1.tres"),
 	preload("res://reward_items/damage_bonus_1.tres"),
+	preload("res://reward_items/healing_1.tres"),
+	preload("res://reward_items/healing_1.tres"),
 ]
 
 
@@ -140,6 +142,8 @@ func _spawn_rewards() -> void:
 		var pickup = PICKUP_SCENE.instantiate()
 		pickup.position = p.global_position
 		pickup.item = possible_rewards.pick_random()
+		if _rewards.size() > 0 && _rewards[0].item == pickup.item:
+			pickup.item = possible_rewards.pick_random()
 		pickup.taken.connect(_on_reward_taken)
 		add_child(pickup)
 		_rewards.append(pickup)

@@ -64,6 +64,7 @@ func give_item(item: PickupItem) -> void:
 			charge_speed_multiplier += item.stat_value / 100.0
 		PickupItem.Type.MAX_HEALTH:
 			max_health += item.stat_value
+			health += item.stat_value
 		PickupItem.Type.SPIN_SLOWMO:
 			spin_slowmo_modifier += item.stat_value / 100.0
 		PickupItem.Type.SPEED_RETENTION:
@@ -72,6 +73,8 @@ func give_item(item: PickupItem) -> void:
 			damage_bonus += item.stat_value / 100.0
 		PickupItem.Type.XP_BONUS:
 			xp_multiplier += item.stat_value / 100.0
+		PickupItem.Type.HEAL:
+			health += item.stat_value
 
 
 

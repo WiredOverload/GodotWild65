@@ -9,6 +9,7 @@ enum Type {
 	DAMAGE_BONUS,
 	SPEED_RETENTION,
 	XP_BONUS,
+	HEAL,
 }
 
 static var COLOR_RED = Color.from_ok_hsl(25.0/360.0, 1.0, 0.4)
@@ -18,6 +19,7 @@ static var COLOR_GREEN = Color.from_ok_hsl(140.0/360.0, 1.0, 0.4)
 static var COLOR_AQUA = Color.from_ok_hsl(200.0/360.0, 1.0, 0.4)
 static var COLOR_BLUE = Color.from_ok_hsl(260.0/360.0, 1.0, 0.4)
 static var COLOR_PURPLE = Color.from_ok_hsl(315.0/360.0, 1.0, 0.4)
+static var COLOR_PINK = Color.from_ok_hsl(340.0/360.0, 1.0, 0.6)
 
 
 @export var type: Type
@@ -39,6 +41,8 @@ func display_name() -> String:
 			return "Bounce Efficiency %+d%%" % stat_value
 		Type.XP_BONUS:
 			return "XP %+d%%" % stat_value
+		Type.HEAL:
+			return "Heal For %d" % stat_value
 	assert(false)
 	return "Unknown"
 
@@ -59,5 +63,7 @@ func display_color() -> Color:
 			return COLOR_YELLOW
 		Type.XP_BONUS:
 			return COLOR_PURPLE
+		Type.HEAL:
+			return COLOR_PINK
 	assert(false)
 	return Color.MAGENTA
