@@ -19,7 +19,7 @@ script = ExtResource("3_pmjbl")
 enemy_type = 1
 
 [node name="EnemySpawner3" type="Marker3D" parent="Enemies"]
-transform = Transform3D(-0.334366, 0, -0.942444, 0, 1, 0, 0.942444, 0, -0.334366, 2.93571, -0.536976, 9.15859)
+transform = Transform3D(-0.334366, 0, -0.942444, 0, 1, 0, 0.942444, 0, -0.334366, 2.936, 0, 9.159)
 gizmo_extents = 1.0
 script = ExtResource("3_pmjbl")
 enemy_type = 1

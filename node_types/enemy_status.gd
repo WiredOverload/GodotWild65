@@ -23,6 +23,8 @@ func set_current_health(v: int) -> void:
 		print_rich("[color=yellow]Enemy was invulnerable! No damage taken.[/color]")
 		return
 	if v < current_health:
+		if v != 0:
+			_ouch_player.play()
 		print_rich("[shake][color=red]Enemy damaged:[/color][/shake] %s took [color=red]%s[/color] damage ([color=red]%s[/color]/[color=red]%s[/color] remaining HP)." % [get_parent().name, current_health - v, v, max_health])
 	elif v > current_health:
 		print_rich("[color=cyan]Enemy healed:[/color] %s was healed for [color=cyan]%s[/color] HP ([color=red]%s[/color]/[color=red]%s[/color] remaining HP)." % [get_parent().name, v - current_health, v, max_health])
