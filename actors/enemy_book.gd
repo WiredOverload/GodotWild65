@@ -77,11 +77,13 @@ func _collision(other: PhysicsBody3D) -> void:
 		other.deal_damage(1)
 
 
-func kill() -> void:
+func kill(room_clear: bool = false) -> void:
 	if state == State.DEATH:
 		return
 	state = State.DEATH
 	
+	if not room_clear:
+		$Ouch.play()
 	page_death.emitting = true
 	collision_shape_3d.disabled = true
 	
