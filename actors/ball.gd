@@ -7,7 +7,8 @@ enum State {
 	MOVING,
 }
 
-@export var mesh: Mesh = preload("res://character_models/meshes/backpack_BackpackMesh.res")
+const backpack_mesh: Mesh = preload("res://character_models/meshes/backpack_BackpackMesh.res")
+const cauldron_mesh: Mesh = preload("res://character_models/meshes/cauldron_CauldronMesh.res")
 
 var state: State = State.MOVING: set = set_state
 
@@ -23,7 +24,7 @@ var current_speed: float:
 	get: return Globals.ball_power * 5.0
 
 func _ready() -> void:
-	mesh_instance_3d.mesh = mesh
+	mesh_instance_3d.mesh = backpack_mesh if Globals.selected_character == "TEACHER" else cauldron_mesh
 
 func _physics_process(delta: float) -> void:
 	match state:
