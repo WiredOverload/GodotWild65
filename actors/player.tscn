@@ -38,6 +38,7 @@ material = SubResource("StandardMaterial3D_vvcek")
 size = Vector2(0.2, 0.2)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bsdda"]
+
 _data = {
 "Catch": ExtResource("4_ebhtf"),
 "RESET": ExtResource("4_614sg"),

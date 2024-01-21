@@ -1,0 +1,166 @@
+[gd_scene load_steps=11 format=3 uid="uid://cb2vl0eyol7q"]
+
+[ext_resource type="Script" path="res://scenes/help_menu.gd" id="1_0both"]
+[ext_resource type="Texture2D" uid="uid://c8wey7psfcr4r" path="res://UI/planks.png" id="1_52cei"]
+[ext_resource type="Texture2D" uid="uid://dxi1amdh2kjob" path="res://UI/arrow_button.png" id="2_mbgyp"]
+
+[sub_resource type="Environment" id="Environment_uxpjm"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.0
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.5
+glow_bloom = 0.5
+glow_hdr_threshold = 0.9
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agmdt"]
+albedo_texture = ExtResource("1_52cei")
+uv1_scale = Vector3(50, 50, 50)
+
+[sub_resource type="QuadMesh" id="QuadMesh_38i8g"]
+material = SubResource("StandardMaterial3D_agmdt")
+size = Vector2(50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hf55r"]
+atlas = ExtResource("2_mbgyp")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpmme"]
+atlas = ExtResource("2_mbgyp")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2imh1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hf55r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpmme")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_500t5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpmme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hf55r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="HelpMenu" type="Node3D"]
+script = ExtResource("1_0both")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uxpjm")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+layers = 2
+mesh = SubResource("QuadMesh_38i8g")
+skeleton = NodePath("../Page1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 1.19209e-07, 1.05596, 2.00054)
+
+[node name="Buttons" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.951057, -0.309017, 0, 0.309017, 0.951057, 0, 0.893248, -1.44767)
+
+[node name="Left" type="AnimatedSprite3D" parent="Camera3D/Buttons"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.25, 0, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_2imh1")
+autoplay = "default"
+
+[node name="Right" type="AnimatedSprite3D" parent="Camera3D/Buttons"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.25, 0, 0)
+flip_h = true
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_500t5")
+autoplay = "default"
+
+[node name="Page1" type="Node3D" parent="."]
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Page1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.74345, 0)
+spot_range = 10.914
+spot_attenuation = 1e-05
+
+[node name="Label3D" type="Label3D" parent="Page1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, 0.586381, 0.718676)
+billboard = 1
+text = "~ Controls ~
+
+Move  .........  Arrow keys / WASD
+
+Catch/Spin  ......  Space / C / Enter
+"
+
+[node name="Page2" type="Node3D" parent="."]
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Page2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.74345, 0)
+spot_range = 10.914
+spot_attenuation = 1e-05
+
+[node name="Label3D" type="Label3D" parent="Page2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, 0.586381, 0.718676)
+billboard = 1
+no_depth_test = true
+text = "~ Objective ~
+
+Hold spin to charge your power,
+release it to throw.
+Hold it again after throwing to
+get ready to catch!
+"
+
+[node name="Page3" type="Node3D" parent="."]
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Page3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.74345, 0)
+spot_range = 10.914
+spot_attenuation = 1e-05
+
+[node name="Label3D" type="Label3D" parent="Page3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, 0.586381, 0.718676)
+billboard = 1
+no_depth_test = true
+text = "~ Rooms ~
+
+Defeat enemies to unlock power levels.
+Most rooms require you to reach
+a certain power level and
+smash through the wall."
+
+[node name="Page4" type="Node3D" parent="."]
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Page4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.74345, 0)
+spot_range = 10.914
+spot_attenuation = 1e-05
+
+[node name="Label3D" type="Label3D" parent="Page4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, 0.586381, 0.718676)
+billboard = 1
+no_depth_test = true
+text = "Good luck!"

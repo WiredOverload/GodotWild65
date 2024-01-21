@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 TestCamera3dManager="res://autoload/test_camera_3d_manager.gd"
 Globals="*res://autoload/globals.gd"
+MusicMan="*res://autoload/music_man.tscn"
 
 [debug]
 

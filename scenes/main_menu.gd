@@ -16,6 +16,7 @@ var _selected := OPTION_NONE
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	MusicMan.play_menu()
 	_select(OPTION_START)
 
 
@@ -69,4 +70,4 @@ func _start_game():
 
 
 func _help():
-	assert(false) # TODO
+	get_tree().change_scene_to_file("res://scenes/help_menu.tscn")
