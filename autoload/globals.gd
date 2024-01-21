@@ -82,7 +82,7 @@ func give_item(item: PickupItem) -> void:
 		PickupItem.Type.XP_BONUS:
 			xp_multiplier += item.stat_value / 100.0
 		PickupItem.Type.HEAL:
-			health += item.stat_value
+			health = min(item.stat_value, max_health)
 
 
 
