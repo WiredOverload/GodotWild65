@@ -9,6 +9,7 @@ enum EnemyType {
 	STATIC_BOOKSHELF,
 	DESK,
 	STATIC_DESK,
+	LOCKER,
 }
 
 var ENEMY_SCENES := [
@@ -18,6 +19,7 @@ var ENEMY_SCENES := [
 	preload("res://actors/static_bookshelf.tscn"),
 	preload("res://actors/enemy_desk.tscn"),
 	preload("res://actors/static_desk.tscn"),
+	preload("res://actors/enemy_locker.tscn"),
 ]
 
 const PREVIEW_MESHES := [
@@ -27,6 +29,7 @@ const PREVIEW_MESHES := [
 	"res://character_models/meshes/bookshelf_BookshelfMesh.res",
 	"res://character_models/meshes/desk_DeskMesh.res",
 	"res://character_models/meshes/desk_DeskMesh.res",
+	"res://character_models/meshes/locker_LockerMesh.res",
 ]
 
 const DEFAULT_PREVIEW_MESH := "res://character_models/DO_NOT_SHIP/meshes/enemy_preview_EnemyPreviewMesh.res"

@@ -3,6 +3,7 @@ extends Area3D
 
 @onready var fireball_model: Node3D = $FireballModel
 @onready var mesh_instance: MeshInstance3D = $FireballModel/Fireball
+@onready var explosion: GPUParticles3D = $FireballModel/Explosion
 
 var velocity: Vector3
 
@@ -17,7 +18,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	global_position += velocity
+	global_position += velocity * delta
 	rotation.y = Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP)
 
 func _on_flicker_timer_timeout() -> void:
@@ -28,4 +29,7 @@ func _on_flicker_timer_timeout() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Player"):
 		body.deal_damage(1)
+	explosion.reparent(get_parent())
+	explosion.emitting = true
+	explosion.finished.connect(explosion.queue_free)
 	queue_free()
