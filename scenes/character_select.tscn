@@ -1,0 +1,113 @@
+[gd_scene load_steps=11 format=3 uid="uid://bng3tkxn1cd85"]
+
+[ext_resource type="Script" path="res://scenes/character_select.gd" id="1_vqcd5"]
+[ext_resource type="Texture2D" uid="uid://c8wey7psfcr4r" path="res://UI/planks.png" id="2_r1kxa"]
+[ext_resource type="PackedScene" uid="uid://dbbpcvj6kr6fe" path="res://character_models/player_teacher/player_teacher.blend" id="3_k42jd"]
+[ext_resource type="PackedScene" uid="uid://ct7jpvteubghg" path="res://character_models/backpack.blend" id="4_cff3s"]
+[ext_resource type="FontFile" uid="uid://bm7apk44q4vli" path="res://fonts/smallburg-Regular.otf" id="4_dndt2"]
+[ext_resource type="PackedScene" uid="uid://j867lco5k73g" path="res://character_models/player_witch/player_witch.blend" id="4_ueecu"]
+[ext_resource type="PackedScene" uid="uid://d1ho4sfm4p3sm" path="res://character_models/cauldron.blend" id="6_xm88o"]
+
+[sub_resource type="Environment" id="Environment_phkvo"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.2
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.5
+glow_bloom = 0.5
+glow_hdr_threshold = 0.9
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2lmka"]
+albedo_texture = ExtResource("2_r1kxa")
+uv1_scale = Vector3(50, 50, 50)
+
+[sub_resource type="QuadMesh" id="QuadMesh_sy4vl"]
+material = SubResource("StandardMaterial3D_2lmka")
+size = Vector2(50, 50)
+
+[node name="CharacterSelect" type="Node3D"]
+script = ExtResource("1_vqcd5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.999999, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_phkvo")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+layers = 2
+mesh = SubResource("QuadMesh_sy4vl")
+
+[node name="TEACHER" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="Model" parent="TEACHER" instance=ExtResource("3_k42jd")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="TEACHER"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4, 2)
+visible = false
+light_energy = 0.8
+shadow_enabled = true
+spot_range = 13.0261
+spot_attenuation = 1e-05
+spot_angle = 18.1179
+spot_angle_attenuation = 6.72716e-05
+
+[node name="OmniLight3D" type="OmniLight3D" parent="TEACHER/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, -0.545663, -3.32654)
+light_energy = 0.6
+light_cull_mask = 4294967293
+omni_attenuation = 1e-05
+
+[node name="Label3D" type="Label3D" parent="TEACHER/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0.2, -1.23776, -3.56586)
+billboard = 1
+text = "+ Speed
+- Power"
+font = ExtResource("4_dndt2")
+
+[node name="BackpackModel" parent="TEACHER" instance=ExtResource("4_cff3s")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.9, 0.4, -0.5)
+
+[node name="WITCH" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Model" parent="WITCH" instance=ExtResource("4_ueecu")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="WITCH"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4, 2)
+visible = false
+light_energy = 0.8
+shadow_enabled = true
+spot_range = 13.0261
+spot_attenuation = 1e-05
+spot_angle = 18.1179
+spot_angle_attenuation = 6.72716e-05
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WITCH/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, -0.545663, -3.32771)
+light_energy = 0.6
+light_cull_mask = 4294967293
+omni_attenuation = 1e-05
+
+[node name="Label3D" type="Label3D" parent="WITCH/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, -0.285, -1.238, -3.566)
+billboard = 1
+text = "- Speed
++ Power"
+font = ExtResource("4_dndt2")
+
+[node name="CauldronModel" parent="WITCH" instance=ExtResource("6_xm88o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 0, 2.115, 4.309)
+fov = 39.1

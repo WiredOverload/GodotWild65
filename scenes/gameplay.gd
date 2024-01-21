@@ -95,7 +95,7 @@ func create_room() -> void:
 	world.add_child(_stage)
 	
 	_player_root = PLAYER_ROOT_SCENE.instantiate()
-	_player_root.get_node("Player").model_name = player_model_name
+	_player_root.get_node("Player").model_name = Globals.selected_character
 	world.add_child(_player_root)
 	_player_root.global_transform = _stage.player_spawn_point.global_transform
 	

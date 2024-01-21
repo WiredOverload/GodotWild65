@@ -4,6 +4,9 @@ signal stat_changed
 
 const XP_SNAP = 0.01
 
+# persistent
+var selected_character: String = "TEACHER"
+
 # per-run stats
 var health := 3: set = set_health
 var max_health := 5: set = set_max_health
