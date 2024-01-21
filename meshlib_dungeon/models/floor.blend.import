@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://w3sj57nhvsat"
-path="res://.godot/imported/floor.blend-06acac7f299964e69d6a169abb1cbd6e.scn"
+path="res://.godot/imported/floor.blend-2096b59065cdca24e1459930fbd26fd1.scn"
 
 [deps]
 
-source_file="res://mesh_library/models/floor.blend"
-dest_files=["res://.godot/imported/floor.blend-06acac7f299964e69d6a169abb1cbd6e.scn"]
+source_file="res://meshlib_dungeon/models/floor.blend"
+dest_files=["res://.godot/imported/floor.blend-2096b59065cdca24e1459930fbd26fd1.scn"]
 
 [params]
 
@@ -33,7 +33,7 @@ _subresources={
 "materials": {
 "Material": {
 "use_external/enabled": true,
-"use_external/path": "res://mesh_library/models/materials/DungeonTrimMaterial.tres"
+"use_external/path": "res://meshlib_dungeon/materials/DungeonTrimMaterial.tres"
 }
 },
 "meshes": {
@@ -43,9 +43,9 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://mesh_library/models/meshes/floor_Cube.res"
+"save_to_file/path": "res://meshlib_dungeon/models/meshes/floor_Cube.res"
 }
 },
 "nodes": {

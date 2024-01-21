@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://p4fl5tbt4iuq"]
+
+[ext_resource type="PackedScene" uid="uid://w3sj57nhvsat" path="res://meshlib_dungeon/models/floor.blend" id="1_07pqm"]
+[ext_resource type="PackedScene" uid="uid://dxpq80c8n82sj" path="res://meshlib_dungeon/models/wall_corner.blend" id="2_7pebx"]
+[ext_resource type="PackedScene" uid="uid://c0msx8g4v4il" path="res://meshlib_dungeon/models/wall_side.blend" id="3_oskmg"]
+[ext_resource type="PackedScene" uid="uid://dqu0gdyxxuljw" path="res://meshlib_dungeon/models/tunnel_center.blend" id="4_xejp2"]
+[ext_resource type="PackedScene" uid="uid://b2kv846r1ke40" path="res://meshlib_dungeon/models/tunnel_left.blend" id="5_t7gh6"]
+[ext_resource type="PackedScene" uid="uid://byoa7na5fa7x1" path="res://meshlib_dungeon/models/tunnel_right.blend" id="6_dsh0m"]
+
+[node name="MeshLibrary" type="Node3D"]
+
+[node name="floor" parent="." instance=ExtResource("1_07pqm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="wall_corner" parent="." instance=ExtResource("2_7pebx")]
+
+[node name="wall_side" parent="." instance=ExtResource("3_oskmg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="tunnel_center" parent="." instance=ExtResource("4_xejp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="tunnel_left" parent="." instance=ExtResource("5_t7gh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="tunnel_right" parent="." instance=ExtResource("6_dsh0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)

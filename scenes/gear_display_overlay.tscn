@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://3gce77lvyps1"]
+[gd_scene load_steps=27 format=3 uid="uid://3gce77lvyps1"]
 
 [ext_resource type="PackedScene" uid="uid://dn8odo253q0fx" path="res://scenes/gear_display_container.tscn" id="1_lyse4"]
 [ext_resource type="Script" path="res://scenes/gear_display_overlay.gd" id="1_py657"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cjtl5xnxq6hpl" path="res://UI/gear_meter_beam_anim/gear_meter_beam_anim_6.png" id="7_hhqrm"]
 [ext_resource type="Texture2D" uid="uid://die0idnpyyc1j" path="res://UI/gear_meter_beam_anim/gear_meter_beam_anim_7.png" id="8_i0sfe"]
 [ext_resource type="Texture2D" uid="uid://djw0j4myya21s" path="res://UI/gear_meter_beam_anim/gear_meter_beam_anim_8.png" id="9_obkxx"]
+[ext_resource type="FontFile" uid="uid://bm7apk44q4vli" path="res://fonts/smallburg-Regular.otf" id="13_ow041"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yeokq"]
 atlas = ExtResource("5_tp0bs")
@@ -236,11 +237,14 @@ trail_lifetime = 0.2
 [node name="GearLabel" type="Label" parent="MeterContainer/GearDisplayContainer/GearContainer/GearControl"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 10.5
-offset_top = 30.0
-offset_right = 20.5
-offset_bottom = 53.0
+offset_left = 2.0
+offset_top = 33.0
+offset_right = 29.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("13_ow041")
+theme_override_font_sizes/font_size = 20
 text = "5"
+horizontal_alignment = 1
 
 [node name="BeamAnimTimer" type="Timer" parent="."]
 wait_time = 0.01

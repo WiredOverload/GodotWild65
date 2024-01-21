@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://71x1nvfggm0l"]
 
-[ext_resource type="MeshLibrary" uid="uid://dgxh36itpnihl" path="res://mesh_library/mesh_library.tres" id="1_pryxi"]
+[ext_resource type="MeshLibrary" uid="uid://byky8qnrbst77" path="res://meshlib_dungeon/meshlib_dungeon.meshlib" id="1_pryxi"]
 [ext_resource type="Texture2D" uid="uid://dwt3gev6cmlej" path="res://UI/go_arrow.png" id="2_g32h4"]
 [ext_resource type="PackedScene" uid="uid://415jvtm74l3o" path="res://character_models/spikes.blend" id="3_y5e7j"]
 

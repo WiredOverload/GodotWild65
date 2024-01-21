@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b2kv846r1ke40"
-path="res://.godot/imported/tunnel_left.blend-ac5775374802c4c2e448f8e8cfa6506e.scn"
+path="res://.godot/imported/tunnel_left.blend-f47d28bdc23efdde03ec5de04abefc37.scn"
 
 [deps]
 
-source_file="res://mesh_library/models/tunnel_left.blend"
-dest_files=["res://.godot/imported/tunnel_left.blend-ac5775374802c4c2e448f8e8cfa6506e.scn"]
+source_file="res://meshlib_dungeon/models/tunnel_left.blend"
+dest_files=["res://.godot/imported/tunnel_left.blend-f47d28bdc23efdde03ec5de04abefc37.scn"]
 
 [params]
 
@@ -33,7 +33,7 @@ _subresources={
 "materials": {
 "Material": {
 "use_external/enabled": true,
-"use_external/path": "res://mesh_library/models/materials/DungeonTrimMaterial.tres"
+"use_external/path": "res://meshlib_dungeon/materials/DungeonTrimMaterial.tres"
 }
 }
 }

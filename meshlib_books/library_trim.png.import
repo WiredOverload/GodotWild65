@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kp3m3mhdlwpi"
-path="res://.godot/imported/dungeon_trim.png-98675dcbd22ee31a4774bfc1c8752391.ctex"
+uid="uid://bxm7dfyi41q4j"
+path="res://.godot/imported/library_trim.png-227ff10875a8c79b46c2ca190cd413aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mesh_library/models/textures/dungeon_trim.png"
-dest_files=["res://.godot/imported/dungeon_trim.png-98675dcbd22ee31a4774bfc1c8752391.ctex"]
+source_file="res://meshlib_books/library_trim.png"
+dest_files=["res://.godot/imported/library_trim.png-227ff10875a8c79b46c2ca190cd413aa.ctex"]
 
 [params]
 

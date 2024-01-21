@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfunrnabkhtpp"]
+[gd_scene load_steps=6 format=3 uid="uid://cfunrnabkhtpp"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage.gd" id="1_oif10"]
 [ext_resource type="PackedScene" uid="uid://71x1nvfggm0l" path="res://scenes/grid_map_dungeon.tscn" id="2_7k8en"]
+[ext_resource type="MeshLibrary" uid="uid://qx3th66whga1" path="res://meshlib_books/meshlib_library.meshlib" id="3_egym7"]
 [ext_resource type="Script" path="res://node_types/enemy_spawner.gd" id="3_pkd3f"]
 
 [node name="Stage" type="Node3D"]
 script = ExtResource("1_oif10")
 
 [node name="GridMap" parent="." instance=ExtResource("2_7k8en")]
+mesh_library = ExtResource("3_egym7")
 
 [node name="Enemies" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.633058, 0, 0.42774)

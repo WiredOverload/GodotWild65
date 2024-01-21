@@ -4,6 +4,7 @@ extends Node3D
 static var instance: Gameplay
 
 const PLAYER_ROOT_SCENE: PackedScene = preload("res://scenes/player_root.tscn")
+const shockwave := preload("res://UI/shockwave.tscn")
 
 const STAGE_SCENES = [
 	{ weight = 1.0, file = "res://scenes/stages/homeroom_horror.tscn" },
@@ -69,6 +70,11 @@ func hit_stun() -> void:
 		pass
 	slow_motion(1.0, 200.0, 0.2)
 
+func spawn_shock(pos: Vector3) -> void:
+	var shock = shockwave.instantiate()
+	add_child(shock)
+	print("Shock at: " + str(pos + Vector3(0, 1, 0)))
+	shock.position = pos + Vector3(0, 1, 0)
 
 func _enter_tree() -> void:
 	assert(instance == null)
