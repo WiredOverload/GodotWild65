@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c85soy7nt5pny"]
+[gd_scene load_steps=13 format=3 uid="uid://c85soy7nt5pny"]
 
 [ext_resource type="Script" path="res://actors/enemy_book.gd" id="1_cs6ux"]
 [ext_resource type="PackedScene" uid="uid://bpl0evm7bx3y1" path="res://character_models/book.blend" id="1_quin3"]
 [ext_resource type="ArrayMesh" uid="uid://dlfymxsqkt015" path="res://character_models/meshes/book_page_BookPageMesh.res" id="2_3mjw8"]
 [ext_resource type="Script" path="res://node_types/enemy_status.gd" id="2_wpf42"]
 [ext_resource type="Script" path="res://node_types/motion_interpolator_3d.gd" id="4_q2vhb"]
+[ext_resource type="AudioStream" uid="uid://cmuahymb3gsh" path="res://SFX/bookhitdie.wav" id="6_jojsv"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vit8j"]
 height = 1.0
@@ -86,5 +87,8 @@ draw_pass_1 = ExtResource("2_3mjw8")
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="Ouch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_jojsv")
 
 [connection signal="timeout" from="WanderTurnTimer" to="." method="_on_wander_turn_timer_timeout"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_x0cps"]
 [ext_resource type="Texture2D" uid="uid://c8wey7psfcr4r" path="res://UI/planks.png" id="2_37tue"]
-[ext_resource type="ArrayMesh" uid="uid://bca6xprdx6cv0" path="res://character_models/meshes/desk_DeskMesh.res" id="3_4dpdg"]
+[ext_resource type="ArrayMesh" uid="uid://d2d7y138c8bqd" path="res://character_models/meshes/desk_DeskMesh.res" id="3_4dpdg"]
 [ext_resource type="ArrayMesh" uid="uid://7aejyh2esk7k" path="res://character_models/meshes/book_BookMesh.res" id="4_86gid"]
 [ext_resource type="FontFile" uid="uid://bm7apk44q4vli" path="res://fonts/smallburg-Regular.otf" id="5_o0bnm"]
 
