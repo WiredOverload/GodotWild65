@@ -1,25 +1,98 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnlic5ymw4djr"]
+[gd_scene load_steps=12 format=3 uid="uid://dnlic5ymw4djr"]
 
-[ext_resource type="Texture2D" uid="uid://4p5xj8x48tk5" path="res://UI/lose.png" id="1_oem2i"]
 [ext_resource type="Script" path="res://scenes/lose.gd" id="1_wlmvk"]
+[ext_resource type="Texture2D" uid="uid://c8wey7psfcr4r" path="res://UI/planks.png" id="2_sjxe4"]
+[ext_resource type="Texture2D" uid="uid://dacvcghio488i" path="res://UI/button_press.png" id="3_r0v4e"]
+[ext_resource type="FontFile" uid="uid://bm7apk44q4vli" path="res://fonts/smallburg-Regular.otf" id="4_lnndn"]
+[ext_resource type="PackedScene" uid="uid://52jcb7xjec2w" path="res://character_models/book_page.blend" id="4_qqsat"]
+
+[sub_resource type="Environment" id="Environment_8rmqx"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.0
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.5
+glow_bloom = 0.5
+glow_hdr_threshold = 0.9
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4s80"]
+albedo_texture = ExtResource("2_sjxe4")
+uv1_scale = Vector3(50, 50, 50)
+
+[sub_resource type="QuadMesh" id="QuadMesh_hmtee"]
+material = SubResource("StandardMaterial3D_s4s80")
+size = Vector2(50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erigm"]
+atlas = ExtResource("3_r0v4e")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jymb6"]
+atlas = ExtResource("3_r0v4e")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_73qin"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erigm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jymb6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Lose" type="Node3D"]
 script = ExtResource("1_wlmvk")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8rmqx")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.74345, 0)
+spot_range = 10.914
+spot_attenuation = 1e-05
+spot_angle = 17.6
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+layers = 2
+mesh = SubResource("QuadMesh_hmtee")
+skeleton = NodePath("")
+
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 1.19209e-07, 1.05596, 2.00054)
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
-texture = ExtResource("1_oem2i")
+[node name="Buttons" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.951057, -0.309017, 0, 0.309017, 0.951057, 0, 0.893248, -1.44767)
 
-[node name="Buttons" type="BoxContainer" parent="."]
-offset_left = 553.0
-offset_top = 242.0
-offset_right = 603.0
-offset_bottom = 282.0
+[node name="PressMe" type="AnimatedSprite3D" parent="Camera3D/Buttons"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 1.33046e-08, 0, -1.33046e-08, 0.5, 1.15855, -1.23273, 0.736445)
+visible = false
+flip_h = true
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_73qin")
+autoplay = "default"
 
-[node name="Button" type="Button" parent="Buttons"]
-layout_mode = 2
-text = "Retry"
+[node name="Label3D" type="Label3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0024823, 0.371676, -1.04425)
+billboard = 1
+text = "you have lost..."
+font = ExtResource("4_lnndn")
 
-[connection signal="pressed" from="Buttons/Button" to="." method="_on_button_pressed"]
+[node name="BookPage" parent="." instance=ExtResource("4_qqsat")]
+transform = Transform3D(0.5, 0.866025, 0, 3.78552e-08, -2.18557e-08, 1, 0.866025, -0.5, -4.37114e-08, 0, 0.1, -4.37114e-09)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
