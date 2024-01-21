@@ -5,6 +5,8 @@ const PLAYER_MODEL_SCENES: Dictionary = {
 	WITCH = preload("res://character_models/player_witch/player_witch.blend"),
 }
 
+const SPIN_SPEED = 6.0
+
 enum State {
 	NEUTRAL = 0,
 	THROWING = 1,
@@ -54,7 +56,7 @@ var move_speed_throwing: float:
 var _throw_slomo_id: int = 0
 
 var _spin_speed: float:
-	get: return Globals.ball_power * 5.0 * Globals.charge_speed_base * Globals.charge_speed_multiplier
+	get: return Globals.ball_power * SPIN_SPEED * Globals.charge_speed_base * Globals.charge_speed_multiplier
 
 func _ready() -> void:
 	assert(model_name in PLAYER_MODEL_SCENES)

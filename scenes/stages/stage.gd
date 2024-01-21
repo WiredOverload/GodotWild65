@@ -56,7 +56,7 @@ func _ready() -> void:
 		Goal.BREAK_CHAIN:
 			_chains = CHAINS_SCENE.instantiate()
 			_chains.level = chain_locks
-			_chains.position = center_exit_marker.position
+			_chains.transform = center_exit_marker.transform
 			_chains.unlocked.connect(_on_chains_unlocked)
 			add_child(_chains)
 
@@ -84,6 +84,9 @@ func _on_stat_changed() -> void:
 
 func _on_ball_bounce(collision: KinematicCollision3D) -> void:
 	if not _allow_wall_break:
+		return
+	
+	if Globals.current_gear < chain_locks:
 		return
 	
 	if collision.get_collider_shape() == top_wall:
