@@ -48,7 +48,7 @@ var explosion = preload("res://UI/explosion.tscn")
 var mesh
 
 var move_speed: float:
-	get: return base_move_speed * Globals.walk_speed_multiplier
+	get: return base_move_speed * Globals.walk_speed_multiplier * (1 - (int((state == State.NEUTRAL) && (ball.state == 0)) * .5))
 
 var move_speed_throwing: float:
 	get: return base_move_speed_throwing * Globals.walk_speed_multiplier

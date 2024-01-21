@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_5nowm")
 type = 1
-stat_value = 50.0
+stat_value = 15.0
