@@ -17,6 +17,7 @@ var is_held: bool:
 	get: return state == State.HELD
 
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+@onready var motionInterpolator := $MeshInstance3D/MotionInterpolator3D
 
 var current_speed: float:
 	get: return Globals.ball_power * 5.0
@@ -31,6 +32,12 @@ func _physics_process(delta: float) -> void:
 			return
 		State.MOVING:
 			velocity = velocity.normalized() * current_speed
+			if velocity.length() < .01:
+				var offset = Transform3D()
+				offset.origin = Vector3(0, -.5, 0)
+				motionInterpolator.offset_transform = offset
+			else:
+				motionInterpolator.offset_transform = Transform3D()
 			move_and_bounce()
 			rotation.y = Vector3.MODEL_FRONT.signed_angle_to(velocity.normalized(), Vector3.UP)
 
