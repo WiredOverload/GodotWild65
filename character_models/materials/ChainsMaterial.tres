@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c8scts1xgb7e4"]
+
+[ext_resource type="Texture2D" uid="uid://bnwis7aaw4dyf" path="res://character_models/textures/chains.png" id="1_7t1dd"]
+[ext_resource type="Shader" uid="uid://bv4xshpayh14w" path="res://character_models/materials/chains_shader.tres" id="1_n2tsf"]
+
+[resource]
+resource_name = "ChainsMaterial"
+render_priority = 0
+shader = ExtResource("1_n2tsf")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.5
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = ExtResource("1_7t1dd")

@@ -1,8 +1,16 @@
 extends Node
 
 const PICKUP_SCENE: PackedScene = preload("res://actors/pickup.tscn")
+const CHAINS_SCENE: PackedScene = preload("res://actors/chains.tscn")
+
+enum Goal {
+	BREAK_CHAIN,
+}
 
 signal player_exit
+
+@export var goal: Goal
+@export_range(1, 5) var chain_locks: int = 1
 
 var ball
 
@@ -10,9 +18,11 @@ var ball
 @onready var world_border: StaticBody3D = $GridMap/WorldBorder
 @onready var top_wall: CollisionShape3D = $GridMap/WorldBorder/TopWall
 @onready var player_spawn_point: Marker3D = $GridMap/PlayerSpawnPoint
+@onready var center_exit_marker: Marker3D = $GridMap/CenterExitMarker
 @onready var next_room_area: Area3D = $GridMap/NextRoomArea
 @onready var go_arrow: Node3D = $GridMap/GoArrow
 @onready var spikes: Node3D = $GridMap/Spikes
+@onready var chains: Node3D = $GridMap/Chains
 
 @onready var reward_spawns: Array[Node3D] = [
 	$GridMap/RewardPoint1,
@@ -27,8 +37,24 @@ var ball
 
 var _rewards: Array[Node3D] = []
 
+var _chains
+
+var _allow_wall_break := false
+
+
 func _ready() -> void:
 	next_room_area.body_entered.connect(_on_next_room_area_body_entered)
+	
+	match goal:
+		Goal.BREAK_CHAIN:
+			_chains = CHAINS_SCENE.instantiate()
+			_chains.level = chain_locks
+			_chains.position = center_exit_marker.position
+			_chains.unlocked.connect(_on_chains_unlocked)
+			add_child(_chains)
+
+func _on_chains_unlocked():
+	_allow_wall_break = true
 
 func spawn_enemies() -> void:
 
@@ -50,7 +76,7 @@ func _on_stat_changed() -> void:
 	pass
 
 func _on_ball_bounce(collision: KinematicCollision3D) -> void:
-	if Globals.current_gear < 1:
+	if not _allow_wall_break:
 		return
 	
 	if collision.get_collider_shape() == top_wall:
@@ -58,6 +84,8 @@ func _on_ball_bounce(collision: KinematicCollision3D) -> void:
 		_punch_hole(collision.get_position())
 		_spawn_rewards()
 		ball.queue_free()
+		if _chains:
+			_chains.queue_free()
 
 func _on_next_room_area_body_entered(body: Node3D) -> void:
 	if _rewards.is_empty() and body.is_in_group("Player"):
@@ -117,3 +145,4 @@ func _on_reward_taken():
 	_rewards.clear()
 	
 	go_arrow.visible = true
+

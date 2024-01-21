@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfunrnabkhtpp"]
+[gd_scene load_steps=5 format=3 uid="uid://cfunrnabkhtpp"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage.gd" id="1_oif10"]
 [ext_resource type="PackedScene" uid="uid://71x1nvfggm0l" path="res://scenes/grid_map_dungeon.tscn" id="2_7k8en"]
@@ -7,6 +7,7 @@
 
 [node name="Stage" type="Node3D"]
 script = ExtResource("1_oif10")
+chain_locks = 2
 
 [node name="GridMap" parent="." instance=ExtResource("2_7k8en")]
 mesh_library = ExtResource("3_egym7")

@@ -6,6 +6,7 @@
 
 [node name="Stage" type="Node3D"]
 script = ExtResource("1_dtkdf")
+chain_locks = 2
 
 [node name="GridMap" parent="." instance=ExtResource("2_cm8x0")]
 

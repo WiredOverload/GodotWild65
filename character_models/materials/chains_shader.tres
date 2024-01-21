@@ -1,0 +1,14 @@
+[gd_resource type="Shader" format=3 uid="uid://bv4xshpayh14w"]
+
+[resource]
+code = "
+shader_type spatial;
+render_mode blend_mix,unshaded;
+uniform sampler2D texture_albedo : source_color,filter_nearest_mipmap,repeat_enable;
+
+void fragment() {
+	vec4 albedo_tex = texture(texture_albedo,UV);
+	ALBEDO = COLOR.rgb * albedo_tex.rgb * 2.0;
+	ALPHA *= COLOR.a * albedo_tex.a;
+}
+"

@@ -1,0 +1,120 @@
+[gd_scene load_steps=9 format=3 uid="uid://byg02t1yd6jvj"]
+
+[ext_resource type="PackedScene" uid="uid://cvjc0ycrkp6hc" path="res://character_models/chains.blend" id="1_3gt34"]
+[ext_resource type="Script" path="res://actors/chains.gd" id="2_awrx6"]
+[ext_resource type="Texture2D" uid="uid://b8mutriqfbgnc" path="res://character_models/textures/big_lock.png" id="2_ibvmi"]
+[ext_resource type="Material" uid="uid://u3wo0utpxqju" path="res://materials/particle_process/lock_explode.tres" id="3_qort3"]
+[ext_resource type="QuadMesh" uid="uid://c7urn3tg3ssaj" path="res://materials/particle_meshes/lock.tres" id="4_ef3hq"]
+[ext_resource type="SpriteFrames" uid="uid://3wganttam0ko" path="res://character_models/textures/target_indicator_spriteframes.tres" id="6_ntejf"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5kmq5"]
+size = Vector2(0.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2gc70"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("2_ibvmi")
+texture_filter = 0
+
+[node name="Chains" instance=ExtResource("1_3gt34")]
+script = ExtResource("2_awrx6")
+
+[node name="Lock1" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00407839, 0.525489, -0.182736)
+mesh = SubResource("QuadMesh_5kmq5")
+surface_material_override/0 = SubResource("StandardMaterial3D_2gc70")
+
+[node name="Lock2" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.35, -0.192841)
+mesh = SubResource("QuadMesh_5kmq5")
+surface_material_override/0 = SubResource("StandardMaterial3D_2gc70")
+
+[node name="Lock3" type="MeshInstance3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.35, -0.192841)
+mesh = SubResource("QuadMesh_5kmq5")
+surface_material_override/0 = SubResource("StandardMaterial3D_2gc70")
+
+[node name="Lock4" type="MeshInstance3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93715e-07, 0.85, -0.2)
+mesh = SubResource("QuadMesh_5kmq5")
+surface_material_override/0 = SubResource("StandardMaterial3D_2gc70")
+
+[node name="Lock5" type="MeshInstance3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.65, -0.2)
+mesh = SubResource("QuadMesh_5kmq5")
+surface_material_override/0 = SubResource("StandardMaterial3D_2gc70")
+
+[node name="LockBreak1" type="GPUParticles3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00407839, 0.525489, -0.182736)
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource("3_qort3")
+draw_pass_1 = ExtResource("4_ef3hq")
+
+[node name="LockBreak2" type="GPUParticles3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.35, -0.192841)
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource("3_qort3")
+draw_pass_1 = ExtResource("4_ef3hq")
+
+[node name="LockBreak3" type="GPUParticles3D" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.35, -0.192841)
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource("3_qort3")
+draw_pass_1 = ExtResource("4_ef3hq")
+
+[node name="LockBreak4" type="GPUParticles3D" parent="." index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93715e-07, 0.85, -0.2)
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource("3_qort3")
+draw_pass_1 = ExtResource("4_ef3hq")
+
+[node name="LockBreak5" type="GPUParticles3D" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.65, -0.2)
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource("3_qort3")
+draw_pass_1 = ExtResource("4_ef3hq")
+
+[node name="TargetIndicator" type="Node3D" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.147666)
+visible = false
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="TargetIndicator" index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.1, -0.1, 0)
+texture_filter = 0
+sprite_frames = ExtResource("6_ntejf")
+autoplay = "default"
+
+[node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="TargetIndicator" index="1"]
+transform = Transform3D(-2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0, 0.5, 0.1, -0.1, 0)
+texture_filter = 0
+sprite_frames = ExtResource("6_ntejf")
+autoplay = "default"
+
+[node name="AnimatedSprite3D3" type="AnimatedSprite3D" parent="TargetIndicator" index="2"]
+transform = Transform3D(-2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0, 0.5, -0.1, 0.1, 0)
+texture_filter = 0
+sprite_frames = ExtResource("6_ntejf")
+autoplay = "default"
+
+[node name="AnimatedSprite3D4" type="AnimatedSprite3D" parent="TargetIndicator" index="3"]
+transform = Transform3D(-0.5, 4.37114e-08, 0, -4.37114e-08, -0.5, 0, 0, 0, 0.5, 0.1, 0.1, 0)
+texture_filter = 0
+sprite_frames = ExtResource("6_ntejf")
+autoplay = "default"
