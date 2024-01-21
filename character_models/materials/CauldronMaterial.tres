@@ -6,3 +6,5 @@
 resource_name = "CauldronMaterial"
 cull_mode = 2
 albedo_texture = ExtResource("1_jb5oe")
+metallic_specular = 0.0
+texture_filter = 0

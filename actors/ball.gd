@@ -7,7 +7,8 @@ enum State {
 	MOVING,
 }
 
-@export var mesh: Mesh = preload("res://character_models/meshes/backpack_BackpackMesh.res")
+const backpack_mesh: Mesh = preload("res://character_models/meshes/backpack_BackpackMesh.res")
+const cauldron_mesh: Mesh = preload("res://character_models/meshes/cauldron_CauldronMesh.res")
 
 var state: State = State.MOVING: set = set_state
 
@@ -22,8 +23,10 @@ var is_held: bool:
 var current_speed: float:
 	get: return Globals.ball_power * 5.0
 
+var remaining_ricochets: int = 0
+
 func _ready() -> void:
-	mesh_instance_3d.mesh = mesh
+	mesh_instance_3d.mesh = backpack_mesh if Globals.selected_character == "TEACHER" else cauldron_mesh
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -45,7 +48,9 @@ func _physics_process(delta: float) -> void:
 func _on_bounce(collision: KinematicCollision3D) -> void:
 	var normal := collision.get_normal()
 	Gameplay.instance.screen_shake_vel(-Vector2(normal.x, normal.z).normalized() * velocity.length())
-	if not collision.get_collider().is_in_group("Player"):
+	if remaining_ricochets > 0:
+		remaining_ricochets -= 1
+	else:
 		Globals.decay_ball_power()
 
 func _collision(other: PhysicsBody3D) -> void:
@@ -82,4 +87,5 @@ func grab(marker: Node3D) -> void:
 func throw(direction: Vector3) -> void:
 	state = State.MOVING
 	velocity = direction * current_speed
+	remaining_ricochets = Globals.ricochets_base
 	# TODO: sfx yeet

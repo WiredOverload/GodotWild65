@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bng3tkxn1cd85"]
+[gd_scene load_steps=16 format=3 uid="uid://bng3tkxn1cd85"]
 
 [ext_resource type="Script" path="res://scenes/character_select.gd" id="1_vqcd5"]
 [ext_resource type="Texture2D" uid="uid://c8wey7psfcr4r" path="res://UI/planks.png" id="2_r1kxa"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bm7apk44q4vli" path="res://fonts/smallburg-Regular.otf" id="4_dndt2"]
 [ext_resource type="PackedScene" uid="uid://j867lco5k73g" path="res://character_models/player_witch/player_witch.blend" id="4_ueecu"]
 [ext_resource type="PackedScene" uid="uid://d1ho4sfm4p3sm" path="res://character_models/cauldron.blend" id="6_xm88o"]
+[ext_resource type="Texture2D" uid="uid://dxi1amdh2kjob" path="res://UI/arrow_button.png" id="8_1hpdw"]
 
 [sub_resource type="Environment" id="Environment_phkvo"]
 background_mode = 1
@@ -29,14 +30,44 @@ uv1_scale = Vector3(50, 50, 50)
 material = SubResource("StandardMaterial3D_2lmka")
 size = Vector2(50, 50)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hf55r"]
+atlas = ExtResource("8_1hpdw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpmme"]
+atlas = ExtResource("8_1hpdw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vw0wv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hf55r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpmme")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_clr2m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpmme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hf55r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
 [node name="CharacterSelect" type="Node3D"]
 script = ExtResource("1_vqcd5")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.999999, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-visible = false
-light_energy = 0.5
-shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_phkvo")
@@ -47,7 +78,7 @@ layers = 2
 mesh = SubResource("QuadMesh_sy4vl")
 
 [node name="TEACHER" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -1, 0, 0)
 
 [node name="Model" parent="TEACHER" instance=ExtResource("3_k42jd")]
 
@@ -78,7 +109,7 @@ font = ExtResource("4_dndt2")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.9, 0.4, -0.5)
 
 [node name="WITCH" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 1, 0, 0)
 
 [node name="Model" parent="WITCH" instance=ExtResource("4_ueecu")]
 
@@ -111,3 +142,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.2, 0)
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 0, 2.115, 4.309)
 fov = 39.1
+
+[node name="Buttons" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.951057, -0.309017, 0, 0.309017, 0.951057, 0, 0.884, -3.12)
+
+[node name="Left" type="AnimatedSprite3D" parent="Camera3D/Buttons"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.25, 0, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_vw0wv")
+autoplay = "default"
+
+[node name="Right" type="AnimatedSprite3D" parent="Camera3D/Buttons"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.25, 0, 0)
+flip_h = true
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_clr2m")
+autoplay = "default"
